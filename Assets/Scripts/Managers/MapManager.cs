@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class MapManager
 {
-    private Dictionary<Vector2Int, OverlayTile> _mapTiles = new Dictionary<Vector2Int, OverlayTile>();
+    public Dictionary<Vector2Int, OverlayTile> MapTiles = new Dictionary<Vector2Int, OverlayTile>();
     
     public void Init()
     {
@@ -28,14 +28,15 @@ public class MapManager
                 {
                     var tileLocation = new Vector3Int(x, y, z);
                     var tileKey = new Vector2Int(x, y);
-                    if (tileMap.HasTile(tileLocation) && !_mapTiles.ContainsKey(tileKey))
+                    if (tileMap.HasTile(tileLocation) && !MapTiles.ContainsKey(tileKey))
                     {
-                        GameObject overlayTile = GameObject.Instantiate(overlayTilePrefab, overlayContainer.transform);
+                        OverlayTile overlayTile = GameObject.Instantiate(overlayTilePrefab, overlayContainer.transform).GetComponent<OverlayTile>();
                         Vector3 cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
 
                         overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1f);
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
-                        _mapTiles.Add(tileKey, overlayTile.GetComponent<OverlayTile>());
+                        overlayTile.Node.GridLocation = tileLocation;
+                        MapTiles.Add(tileKey, overlayTile.GetComponent<OverlayTile>());
                     }
                 }
             }
