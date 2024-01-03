@@ -39,10 +39,11 @@ public class Managers : MonoBehaviour
 
     private GameManager _game = new GameManager();
     private PoolManager _pool = new PoolManager();
+    // private GridManager _grid = new GridManager();
     
     private static GameManager Game => Instance._game;
     public static PoolManager Pool => Instance._pool;
-    
+    // public static GridManager Grid => Instance._grid;
     
     public static void Clear()
     {
