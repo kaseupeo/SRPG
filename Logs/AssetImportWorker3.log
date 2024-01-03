@@ -1,0 +1,334 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.24f1 (cf10dcf7010d) revision 13570268'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19045) 64bit Professional' Language: 'ko' Physical Memory: 32691 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.24f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker3
+-projectPath
+C:/Unity/SRPG
+-logFile
+Logs/AssetImportWorker3.log
+-srvPort
+51384
+Successfully changed project path to: C:/Unity/SRPG
+C:/Unity/SRPG
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [417796] Host "[IP] 192.168.0.172 [Port] 0 [Flags] 2 [Guid] 3817363646 [EditorId] 3817363646 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-M5IA3T6) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [417796] Host "[IP] 192.168.0.172 [Port] 0 [Flags] 2 [Guid] 3817363646 [EditorId] 3817363646 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-M5IA3T6) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+Refreshing native plugins compatible for Editor in 74.78 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.24f1 (cf10dcf7010d)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.24f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Unity/SRPG/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3060 Ti (ID=0x2489)
+    Vendor:   NVIDIA
+    VRAM:     8038 MB
+    Driver:   31.0.15.3623
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.24f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.24f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.24f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56156
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.24f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.24f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.24f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.006733 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 373 ms
+Refreshing native plugins compatible for Editor in 66.01 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.871 seconds
+Domain Reload Profiling:
+	ReloadAssembly (872ms)
+		BeginReloadAssembly (67ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (0ms)
+		EndReloadAssembly (729ms)
+			LoadAssemblies (63ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (69ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (20ms)
+			SetupLoadedEditorAssemblies (599ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (424ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (66ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (73ms)
+				ProcessInitializeOnLoadMethodAttributes (35ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.007784 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 65.64 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.873 seconds
+Domain Reload Profiling:
+	ReloadAssembly (874ms)
+		BeginReloadAssembly (94ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (17ms)
+		EndReloadAssembly (700ms)
+			LoadAssemblies (74ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (154ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (41ms)
+			SetupLoadedEditorAssemblies (395ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (20ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (66ms)
+				BeforeProcessingInitializeOnLoad (76ms)
+				ProcessInitializeOnLoadAttributes (200ms)
+				ProcessInitializeOnLoadMethodAttributes (24ms)
+				AfterProcessingInitializeOnLoad (9ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 1.27 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4093 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 38 unused Assets / (56.4 KB). Loaded Objects now: 4555.
+Memory consumption went from 156.4 MB to 156.4 MB.
+Total: 2.513900 ms (FindLiveObjects: 0.238300 ms CreateObjectMapping: 0.101100 ms MarkObjects: 2.117400 ms  DeleteObjects: 0.056600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1396197.899242 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Flat/temple-sliced_11.png
+  artifactKey: Guid(c5e8ad2cccaa2304aa67a7665cef06b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Flat/temple-sliced_11.png using Guid(c5e8ad2cccaa2304aa67a7665cef06b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3407fb51085d21865f9f4565d72e871d') in 0.080338 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Weight_Brush@2x.png
+  artifactKey: Guid(17d3bf7425a0748489ce3633e38652db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Weight_Brush@2x.png using Guid(17d3bf7425a0748489ce3633e38652db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '357530af217a6e7650f3151b6fa3556a') in 0.010923 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-sliced_31.png
+  artifactKey: Guid(680f1fa16cdd7174d9bc73ec35cf9514) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-sliced_31.png using Guid(680f1fa16cdd7174d9bc73ec35cf9514) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d005b342e4e31ca1a7d18775841b88b') in 0.010690 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000010 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Weight_Slider@4x.png
+  artifactKey: Guid(4e494ad3b858ecf4fab63aae9075d43d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Weight_Slider@4x.png using Guid(4e494ad3b858ecf4fab63aae9075d43d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c22aa12cd3ca51cbb53b4e9f6b6463ba') in 0.007475 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-border-vertical.png
+  artifactKey: Guid(9f01b32e1265842a8ad55a4483d583c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-border-vertical.png using Guid(9f01b32e1265842a8ad55a4483d583c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce0ac2b2027c812e3f79be131b42f6d0') in 0.006987 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Visibility_Tool@3x.png
+  artifactKey: Guid(ec23e33668eecff4aaec16f735dcc204) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Visibility_Tool@3x.png using Guid(ec23e33668eecff4aaec16f735dcc204) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '921069630da1f91d371d4565ef0c0f8f') in 0.008685 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/FrozenMountain/Decoration/tree_spruce.png
+  artifactKey: Guid(7b4cd8f4a63eb55409cf4e7eb3249066) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/FrozenMountain/Decoration/tree_spruce.png using Guid(7b4cd8f4a63eb55409cf4e7eb3249066) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63ff228996950443d75f3c9590884227') in 0.008284 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-stairs-blue.png
+  artifactKey: Guid(3b9a744b5bcdecd45b5ceaf6b7a21309) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-stairs-blue.png using Guid(3b9a744b5bcdecd45b5ceaf6b7a21309) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1e89fa80b11da7d1cb12ec0e0febbde') in 0.007805 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Visibility_Tool@2x.png
+  artifactKey: Guid(45c995b76b893fd4b9e8d3e0f9f6463b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Visibility_Tool@2x.png using Guid(45c995b76b893fd4b9e8d3e0f9f6463b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b1f73f1cf31f29a01e8ae00b14f3f173') in 0.008304 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Selected/Weight_Brush@2x.png
+  artifactKey: Guid(bb668641abe10a64891e26613cf530ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Selected/Weight_Brush@2x.png using Guid(bb668641abe10a64891e26613cf530ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7041fabc0bb48a5f051f9643230ae83f') in 0.008936 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Selected/Weight_Slider@3x.png
+  artifactKey: Guid(af73899d5803d99448134360f184f348) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Selected/Weight_Slider@3x.png using Guid(af73899d5803d99448134360f184f348) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14c0e5d420d45ef7470dab6c83bbb3a4') in 0.006768 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Selected/Weight_Slider@2x.png
+  artifactKey: Guid(7f64a6e091143c0458506b559165cf72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Selected/Weight_Slider@2x.png using Guid(7f64a6e091143c0458506b559165cf72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75dbed9772f4f60064023b2ade92fe68') in 0.007126 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Visibility_Hidded@2x.png
+  artifactKey: Guid(f3940f64802892746b2ec336d3b0c5f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Visibility_Hidded@2x.png using Guid(f3940f64802892746b2ec336d3b0c5f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ad31732b2767fb41ca2a5a541d832c0') in 0.006273 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Decoration/temple-sliced_69.png
+  artifactKey: Guid(fc8f62277d1e7da43b83534d161efd66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Decoration/temple-sliced_69.png using Guid(fc8f62277d1e7da43b83534d161efd66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a8df62948008e0b1ddd15b94842f0a9') in 0.010184 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-half-1.png
+  artifactKey: Guid(4a84cc2d487664161aacd5a7f6e84df8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-half-1.png using Guid(4a84cc2d487664161aacd5a7f6e84df8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec8a4694129e99921c4e8955254d048c') in 0.007331 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-wall-2.png
+  artifactKey: Guid(2abfa0b69193b46c4b7848a29c8a3c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-wall-2.png using Guid(2abfa0b69193b46c4b7848a29c8a3c6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae17156e75f34d3fda39c841e870ede8') in 0.006718 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-wall-1.png
+  artifactKey: Guid(e308331e58a9f474a89006337eb33d3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-wall-1.png using Guid(e308331e58a9f474a89006337eb33d3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63a3bf2beccb80eac784de711e05f140') in 0.008172 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Flat/temple-sliced_16.png
+  artifactKey: Guid(6eefe7fcd9086c147a1c089c36ca038d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Flat/temple-sliced_16.png using Guid(6eefe7fcd9086c147a1c089c36ca038d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6ce4d43c994ba1816254a0890a2557c') in 0.009960 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/FrozenMountain/Decoration/tree_cypress.png
+  artifactKey: Guid(4d727874cf8168e4586ce060b11ea375) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/FrozenMountain/Decoration/tree_cypress.png using Guid(4d727874cf8168e4586ce060b11ea375) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59754d10fe9704174c2e7a913127bb95') in 0.007092 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000011 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-sliced_34.png
+  artifactKey: Guid(742ffae53647fae438266fae8cc26611) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-sliced_34.png using Guid(742ffae53647fae438266fae8cc26611) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b4d0fe1fed20d12d68aed2ce73021dae') in 0.006609 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/FrozenMountain/Decoration/tree_fir.png
+  artifactKey: Guid(d6810ec48c15cdf469ab2343d9ee15ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/FrozenMountain/Decoration/tree_fir.png using Guid(d6810ec48c15cdf469ab2343d9ee15ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0cb7acb3c134de00bce8e9690a95af48') in 0.007386 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Weight_Slider@3x.png
+  artifactKey: Guid(ec8214d7d416a8746bb342b71e8e4269) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Light/Weight_Slider@3x.png using Guid(ec8214d7d416a8746bb342b71e8e4269) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96dcbd953a03069e72f740293c872a34') in 0.008022 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-sliced_24.png
+  artifactKey: Guid(324f344bdb8d39845b78c5d1c7661a4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-sliced_24.png using Guid(324f344bdb8d39845b78c5d1c7661a4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ea707973a0b066d4fc3b38a84777a71') in 0.006527 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-half-2.png
+  artifactKey: Guid(ed8786350b43746719629d0e1c8d5a45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Colliders/ColliderSprites/tile-half-2.png using Guid(ed8786350b43746719629d0e1c8d5a45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc36f3032966f5a1e36ef223140e7cb9') in 0.006153 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Decoration/temple-sliced_44.png
+  artifactKey: Guid(a8fefdcc5154bcd4eac2f09f26f9f3f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Decoration/temple-sliced_44.png using Guid(a8fefdcc5154bcd4eac2f09f26f9f3f3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b668a812f01a29831aa7702a769c6d64') in 0.006218 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000012 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Flat/temple-sliced_13.png
+  artifactKey: Guid(6ecdbac746e8f654ab77f0f70f36d2cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Flat/temple-sliced_13.png using Guid(6ecdbac746e8f654ab77f0f70f36d2cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7287daee312b77bbe32a96440456c2fc') in 0.007274 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-sliced_38.png
+  artifactKey: Guid(3dee71ae3d9dc64458491b098ccc6111) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tilemaps/Isometric/Sprites/Temple/Raised/temple-sliced_38.png using Guid(3dee71ae3d9dc64458491b098ccc6111) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a11b3afb2b088e2ebc43990ae2c70a2f') in 0.011019 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
