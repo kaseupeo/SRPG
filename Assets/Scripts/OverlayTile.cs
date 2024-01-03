@@ -1,0 +1,24 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class OverlayTile : MonoBehaviour
+{
+    private void Update()
+    {
+        // TODO : 수정필요
+        if (Input.GetMouseButtonDown(0))
+            HideTile();
+    }
+
+    public void ShowTile()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+    }
+
+    public void HideTile()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+    }
+}
