@@ -23,7 +23,7 @@ public class PathFinding
             if (currentOverlayTile == end)
                 return GetFinishedList(start, end);
             
-            foreach (OverlayTile tile in GetNeighbourNodes(currentOverlayTile))
+            foreach (OverlayTile tile in GetNeighbourTiles(currentOverlayTile))
             {
                 // 1은 넘어갈수 있는 타일 높이
                 if (tile.IsBlocked || closedList.Contains(tile) ||
@@ -47,7 +47,7 @@ public class PathFinding
         return new List<OverlayTile>() ;
     }
 
-    private static List<OverlayTile> GetNeighbourNodes(OverlayTile currentOverlayTile)
+    private static List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile)
     {
         Dictionary<Vector2Int, OverlayTile> map = Managers.Map.MapTiles;
         List<OverlayTile> neighbours = new List<OverlayTile>();
