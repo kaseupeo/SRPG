@@ -10,7 +10,6 @@ public class MouseController : MonoBehaviour
     private GameObject _cursor;
 
     // TODO : CharacterController 및 CharacterPrefab 완성 후 GameManager로 옮기기
-    public GameObject characterPrefab;
     private Creature _creature;
     
     private List<Tile> _path;

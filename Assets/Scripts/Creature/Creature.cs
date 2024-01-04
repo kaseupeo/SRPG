@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,16 +7,20 @@ using UnityEngine.Serialization;
 public abstract class Creature : MonoBehaviour
 {
     protected string name;
-    protected Stat stat;
+    protected int level;
+    protected List<Stat> statList;
+    protected List<Skill> skills;
     protected Define.CreatureState state;
     protected Tile currentTile;
     
     public string Name { get => name; set => name = value; }
-    public Stat Stat { get => stat; set => stat = value; }
+    public int Level { get => level; set => level = value; }
+    public List<Stat> Stat { get => statList; set => statList = value; }
+    public List<Skill> Skills { get => skills; set => skills = value; }
     public Define.CreatureState State { get => state; set => state = value; }
     public Tile CurrentTile { get => currentTile; set => currentTile = value; }
 
-    public void Init()
+    public virtual void Init()
     {
         state = Define.CreatureState.Idle;
     }

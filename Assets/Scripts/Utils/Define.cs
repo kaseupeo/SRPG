@@ -13,6 +13,20 @@
         Consumption,
     }
     
+    public enum EquipType
+    {
+        Weapon,
+        
+    }
+    
+    public enum SkillType
+    {
+        None,
+        Helmet,
+        Armor,
+        Shoes,
+    }
+    
     public enum CreatureState
     {
         Idle,

@@ -30,5 +30,10 @@ public class GameManager
         }
 
     }
+
+    public void Clear()
+    {
+        _playerCharacters.Clear();
+    }
     
 }
