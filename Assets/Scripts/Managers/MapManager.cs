@@ -5,11 +5,21 @@ using UnityEngine.Tilemaps;
 
 public class MapManager
 {
-    public Dictionary<Vector2Int, OverlayTile> MapTiles = new Dictionary<Vector2Int, OverlayTile>();
-    
+    private Dictionary<Vector2Int, OverlayTile> _mapTiles = new Dictionary<Vector2Int, OverlayTile>();
+    public Dictionary<Vector2Int, OverlayTile> MapTiles => _mapTiles;
+
     public void Init()
     {
         
+    }
+    
+    // TODO : TileMap을 여러개로 받을때도 가능하게 만들기
+    public void GenerateOverlayTile(List<Tilemap> tileMaps)
+    {
+        foreach (Tilemap tile in tileMaps)
+        {
+            GenerateOverlayTile(tile);
+        }
     }
     
     public void GenerateOverlayTile(Tilemap tileMap)
@@ -26,17 +36,19 @@ public class MapManager
             {
                 for (int x = bounds.min.x; x < bounds.max.x; x++)
                 {
-                    var tileLocation = new Vector3Int(x, y, z);
-                    var tileKey = new Vector2Int(x, y);
-                    if (tileMap.HasTile(tileLocation) && !MapTiles.ContainsKey(tileKey))
+                    Vector3Int tileLocation = new Vector3Int(x, y, z);
+                    Vector2Int tileKey = new Vector2Int(x, y);
+                    
+                    if (tileMap.HasTile(tileLocation) && !_mapTiles.ContainsKey(tileKey))
                     {
-                        OverlayTile overlayTile = GameObject.Instantiate(overlayTilePrefab, overlayContainer.transform).GetComponent<OverlayTile>();
+                        GameObject overlayTile = GameObject.Instantiate(overlayTilePrefab, overlayContainer.transform);
                         Vector3 cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
 
                         overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 1f);
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
-                        overlayTile.Node.GridLocation = tileLocation;
-                        MapTiles.Add(tileKey, overlayTile.GetComponent<OverlayTile>());
+                        overlayTile.GetComponent<OverlayTile>().GridLocation = new Vector3Int(x, y, z);
+                            
+                        _mapTiles.Add(tileKey, overlayTile.GetComponent<OverlayTile>());
                     }
                 }
             }

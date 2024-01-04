@@ -5,7 +5,12 @@ using UnityEngine;
 
 public class OverlayTile : MonoBehaviour
 {
-    public Node Node;
+    public int G;
+    public int H;
+    public int F => G + H;
+    public bool IsBlocked;
+    public OverlayTile Previous;
+    public Vector3Int GridLocation;
     
     private void Update()
     {
@@ -23,14 +28,4 @@ public class OverlayTile : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
-}
-
-public class Node
-{
-    public int G;
-    public int H;
-    public int F => G + H;
-    public bool IsBlocked;
-    public OverlayTile Previous;
-    public Vector3Int GridLocation;
 }
