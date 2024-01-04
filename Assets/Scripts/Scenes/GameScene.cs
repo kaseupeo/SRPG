@@ -8,12 +8,17 @@ public class GameScene : MonoBehaviour
 {
     [SerializeField] private GameObject mapPrefab;
 
-    private Tilemap _tileMap;
+    private Tilemap[] _tileMaps;
     
-    private void Awake()
+    private void Start()
     {
-        _tileMap = mapPrefab.GetComponentInChildren<Tilemap>();
+        _tileMaps = mapPrefab.GetComponentsInChildren<Tilemap>();
         
-        Managers.Map.GenerateOverlayTile(_tileMap);
+        Managers.Map.GenerateOverlayTile(_tileMaps);
+    }
+
+    private void Update()
+    {
+        
     }
 }

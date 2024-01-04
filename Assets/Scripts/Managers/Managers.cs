@@ -38,11 +38,13 @@ public class Managers : MonoBehaviour
 
     #endregion
 
+    private SceneLoadManager _scene = new SceneLoadManager();
     private GameManager _game = new GameManager();
     private PoolManager _pool = new PoolManager();
     private MapManager _map = new MapManager();
-    
-    private static GameManager Game => Instance._game;
+
+    public static SceneLoadManager Scene => Instance._scene;
+    public static GameManager Game => Instance._game;
     public static PoolManager Pool => Instance._pool;
     public static MapManager Map => Instance._map;
 

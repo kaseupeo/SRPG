@@ -2,13 +2,22 @@
 {
     public enum SceneType
     {
-        Lobby,
-        Game,
+        LobbyScene,
+        GenerateCharacterScene,
+        GameScene,
     }
     
     public enum ItemType
     {
         Equipment,
         Consumption,
+    }
+    
+    public enum CreatureState
+    {
+        Idle,
+        Move,
+        Attack,
+        Dead,
     }
 }

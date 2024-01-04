@@ -11,45 +11,23 @@ public class MouseController : MonoBehaviour
 
     // TODO : CharacterController 및 CharacterPrefab 완성 후 GameManager로 옮기기
     public GameObject characterPrefab;
-    private CharacterController _character;
+    private Creature _creature;
     
-    private List<OverlayTile> _path;
+    private List<Tile> _path;
+
+    private List<PlayerCharacter> _playerCharacterPrefabs;
 
     private void Start()
     {
         GenerateCursor();
-        _path = new List<OverlayTile>();
+        _path = new List<Tile>();
+        _playerCharacterPrefabs = Managers.Game.PlayerCharacters;
+        
     }
 
     private void LateUpdate()
     {
-        RaycastHit2D? hit = GetFocusedOnTile();
-
-        if (hit.HasValue)
-        {
-            OverlayTile tile = hit.Value.collider.GetComponent<OverlayTile>();
-            
-            _cursor.transform.position = tile.transform.position;
-            _cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
-            
-            if (Input.GetMouseButtonDown(0))
-            {
-                tile.ShowTile();
-
-                // TODO : GameManager에서 GenerateCharacter()로 만들어서 옮기고 수정하기
-                if (_character == null)
-                {
-                    _character = Instantiate(characterPrefab).GetComponent<CharacterController>();
-                    PositionCharacterOnLine(tile);
-                    _character.standingOnTile = tile;
-                }
-                else
-                {
-                    _path = PathFinding.FindPath(_character.standingOnTile, tile);
-                    tile.HideTile();
-                }
-            }
-        }
+        MouseClick();
 
         if (_path.Count > 0)
             MoveAlongPath();
@@ -67,6 +45,37 @@ public class MouseController : MonoBehaviour
 
         _cursor = go;
     }
+
+    private void MouseClick()
+    {
+        RaycastHit2D? hit = GetFocusedOnTile();
+
+        if (hit.HasValue)
+        {
+            Tile tile = hit.Value.collider.GetComponent<Tile>();
+            
+            _cursor.transform.position = tile.transform.position;
+            _cursor.gameObject.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                tile.ShowTile();
+
+                // TODO : GameManager에서 GenerateCharacter()로 만들어서 옮기고 수정하기
+                if (_creature == null)
+                {
+                    _creature = Instantiate(_playerCharacterPrefabs[0]).GetComponent<Creature>();
+                    PositionCharacterOnLine(tile);
+                    _creature.CurrentTile = tile;
+                }
+                else
+                {
+                    _path = PathFinding.FindPath(_creature.CurrentTile, tile);
+                    tile.HideTile();
+                }
+            }
+        }
+    }
     
     private RaycastHit2D? GetFocusedOnTile()
     {
@@ -80,12 +89,12 @@ public class MouseController : MonoBehaviour
         return null;
     }
 
-    private void PositionCharacterOnLine(OverlayTile tile)
+    private void PositionCharacterOnLine(Tile tile)
     {
-        _character.transform.position =
+        _creature.transform.position =
             new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
-        _character.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
-        _character.standingOnTile = tile;
+        _creature.GetComponent<SpriteRenderer>().sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+        _creature.CurrentTile = tile;
     }
 
     private void MoveAlongPath()
@@ -93,12 +102,12 @@ public class MouseController : MonoBehaviour
         float step = 5 * Time.deltaTime;
         float zIndex = _path[0].transform.position.z;
 
-        _character.transform.position =
-            Vector2.MoveTowards(_character.transform.position, _path[0].transform.position, step);
-        _character.transform.position =
-            new Vector3(_character.transform.position.x, _character.transform.position.y, zIndex);
+        _creature.transform.position =
+            Vector2.MoveTowards(_creature.transform.position, _path[0].transform.position, step);
+        _creature.transform.position =
+            new Vector3(_creature.transform.position.x, _creature.transform.position.y, zIndex);
 
-        if (Vector2.Distance(_character.transform.position, _path[0].transform.position) < 0.00001f)
+        if (Vector2.Distance(_creature.transform.position, _path[0].transform.position) < 0.00001f)
         {
             PositionCharacterOnLine(_path[0]);
             _path.RemoveAt(0);

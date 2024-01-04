@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverlayTile : MonoBehaviour
+public class Tile : MonoBehaviour
 {
     public int G;
     public int H;
     public int F => G + H;
     public bool IsBlocked;
-    public OverlayTile Previous;
+    public Tile Previous;
     public Vector3Int GridLocation;
     
     private void Update()
