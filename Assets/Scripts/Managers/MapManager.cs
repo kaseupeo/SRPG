@@ -17,7 +17,7 @@ public class MapManager
     
     public void GenerateOverlayTile(Tilemap[] tileMaps)
     {
-        _overlayTilePrefab = Resources.Load("Prefabs/OverlayTile") as GameObject;
+        _overlayTilePrefab = Resources.Load("Prefabs/UI/OverlayTile") as GameObject;
         
         foreach (Tilemap tile in tileMaps)
         {
@@ -55,6 +55,29 @@ public class MapManager
         }
     }
 
+    public List<Tile> GetSurroundingTiles(Vector2Int originTile)
+    {
+        List<Tile> surroundingTiles = new List<Tile>();
+        
+        Vector2Int tileToCheck = new Vector2Int(originTile.x + 1, originTile.y);
+        if (_mapTiles.ContainsKey(tileToCheck) && Mathf.Abs(_mapTiles[tileToCheck].transform.position.z - _mapTiles[originTile].transform.position.z) <= 1)
+            surroundingTiles.Add(_mapTiles[tileToCheck]);
+
+        tileToCheck = new Vector2Int(originTile.x - 1, originTile.y);
+        if (_mapTiles.ContainsKey(tileToCheck) && Mathf.Abs(_mapTiles[tileToCheck].transform.position.z - _mapTiles[originTile].transform.position.z) <= 1)
+            surroundingTiles.Add(_mapTiles[tileToCheck]);
+
+        tileToCheck = new Vector2Int(originTile.x, originTile.y + 1);
+        if (_mapTiles.ContainsKey(tileToCheck) && Mathf.Abs(_mapTiles[tileToCheck].transform.position.z - _mapTiles[originTile].transform.position.z) <= 1)
+            surroundingTiles.Add(_mapTiles[tileToCheck]);
+
+        tileToCheck = new Vector2Int(originTile.x, originTile.y - 1);
+        if (_mapTiles.ContainsKey(tileToCheck) && Mathf.Abs(_mapTiles[tileToCheck].transform.position.z - _mapTiles[originTile].transform.position.z) <= 1)
+            surroundingTiles.Add(_mapTiles[tileToCheck]);
+
+        return surroundingTiles;
+    }
+    
     public void Clear()
     {
         _mapTiles.Clear();

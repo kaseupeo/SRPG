@@ -626,7 +626,7 @@ Transform:
   - {fileID: 1892821358}
   - {fileID: 180341612}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351761027
 GameObject:
@@ -1958,7 +1958,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1930471415
 MonoBehaviour:
@@ -1984,7 +1984,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9443b0cdc7854568a044ca95da9008da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSpeed: 100
-  shiftAdd: 250
-  maxShift: 1000
-  camSens: 0.25
+  cameraSpeed: 0.5
