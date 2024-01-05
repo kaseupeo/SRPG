@@ -3,37 +3,77 @@ using UnityEngine;
 
 public class GameManager
 {
-    private GameObject _character;
+    private bool _isBeforeStart;
+    
+    private PlayerCharacter _playerCharacter;
+    private List<PlayerCharacter> _playerCharacterPrefabs;
     private List<PlayerCharacter> _playerCharacters;
-    public GameObject Character { get => _character; set => _character = value; }
-    public List<PlayerCharacter> PlayerCharacters
-    {
-        get
-        {
-            if (_playerCharacters == null)
-            {
-                GenerateCharacters();
-            }
-            return _playerCharacters;
-        }
-        set => _playerCharacters = value;
-    }
+    private int _maxPlayerCharacter;
 
-    public void GenerateCharacters()
+    public bool IsPlacingCharacter { get => _isBeforeStart; set => _isBeforeStart = value; }
+    public PlayerCharacter PlayerCharacter { get => _playerCharacter; set => _playerCharacter = value; }
+    public List<PlayerCharacter> PlayerCharacterPrefabs { get => _playerCharacterPrefabs; set => _playerCharacterPrefabs = value; }
+    public List<PlayerCharacter> PlayerCharacters { get => _playerCharacters; set => _playerCharacters = value; }
+    public int MaxPlayerCharacter { get => _maxPlayerCharacter; set => _maxPlayerCharacter = value; }
+    
+    
+    public void Init()
     {
+        _isBeforeStart = true;
+        LoadCharacters();
         _playerCharacters = new List<PlayerCharacter>();
+        _maxPlayerCharacter = 2;
+    }
+    
+    private void LoadCharacters()
+    {
+        _playerCharacterPrefabs = new List<PlayerCharacter>();
         
-        foreach (var obj in Resources.LoadAll("Prefabs/Creatures/PlayerCharacter"))
+        foreach (GameObject go in Resources.LoadAll("Prefabs/Creatures/PlayerCharacter"))
         {
-            var gameObject = (GameObject)obj;
-            _playerCharacters.Add(gameObject.GetComponent<PlayerCharacter>());
+            _playerCharacterPrefabs.Add(go.GetComponent<PlayerCharacter>());
         }
-
+    }
+    
+    public void GeneratePlayerCharacter(PlayerCharacter playerCharacter, Tile tile)
+    {
+        if (!_playerCharacterPrefabs.Contains(playerCharacter))
+        {
+            Debug.Log("오류 : 없는 캐릭터");
+            return;
+        }
+        
+        PlayerCharacter pc = GameObject.Instantiate(playerCharacter.gameObject).GetComponent<PlayerCharacter>();
+        pc.Init();
+        pc.CharacterPositionOnTile(tile);
+        
+        _playerCharacters.Add(pc);
+        _playerCharacterPrefabs.Remove(_playerCharacter);
     }
 
+    
+    
+    public PlayerCharacter SelectedPlayerCharacter(Tile selectTile)
+    {
+        foreach (PlayerCharacter playerCharacter in _playerCharacters)
+        {
+            if (playerCharacter.CurrentTile == selectTile)
+            {
+                return playerCharacter;
+            }
+        }
+
+        return null;
+    }
+
+    public void MoveAlongPath(PlayerCharacter playerCharacter)
+    {
+        // playerCharacter.Move();
+    }
+    
     public void Clear()
     {
-        _playerCharacters.Clear();
+        _playerCharacterPrefabs.Clear();
     }
     
 }

@@ -13,7 +13,7 @@ public class Monster : NonPlayerCharacter
     {
         base.Init();
     }
-
+    
     public override void Dead()
     {
         Drop();

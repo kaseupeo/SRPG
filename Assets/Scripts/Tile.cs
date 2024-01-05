@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ArrowDirection = Define.ArrowDirection;
 
 public class Tile : MonoBehaviour
 {
@@ -12,27 +13,78 @@ public class Tile : MonoBehaviour
     public Tile Previous { get; set; }
     public Vector3Int GridLocation { get; set; }
     public Vector2Int Grid2DLocation => new Vector2Int(GridLocation.x, GridLocation.y);
-    public List<Sprite> arrows;
     
+    [SerializeField]
+    private List<Sprite> arrows;
+
+    private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _childSpriteRenderer;
+
+    private void Start()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _childSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
+    }
+
     public void ShowTile()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        _spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
     public void HideTile()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
-        GetComponentsInChildren<SpriteRenderer>()[1].color = new Color(1, 1, 1, 0);
+        _spriteRenderer.color = new Color(1, 1, 1, 0);
+        _childSpriteRenderer.color = new Color(1, 1, 1, 0);
     }
-    
-    public void SetSprite(Define.ArrowDirection dir)
+
+    public void SetSprite(ArrowDirection dir)
     {
-        if (dir == Define.ArrowDirection.None)
-            GetComponentsInChildren<SpriteRenderer>()[1].color = new Color(1, 1, 1, 0);
+        if (dir == ArrowDirection.None)
+            _childSpriteRenderer.color = new Color(1, 1, 1, 0);
         else
         {
-            GetComponentsInChildren<SpriteRenderer>()[1].color = new Color(1, 1, 1, 1);
-            GetComponentsInChildren<SpriteRenderer>()[1].sprite = arrows[(int)dir];
-            GetComponentsInChildren<SpriteRenderer>()[1].sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+            _childSpriteRenderer.color = new Color(1, 1, 1, 1);
+            _childSpriteRenderer.sprite = arrows[(int)dir];
+            _childSpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder;
         }
-    }}
+    }
+
+    public ArrowDirection TranslateDirection(Tile prevTile, Tile nextTile)
+    {
+        bool isFinal = nextTile == null;
+
+        Vector2Int pastDirection = prevTile != null
+            ? (Vector2Int)(GridLocation - prevTile.GridLocation)
+            : new Vector2Int(0, 0);
+        Vector2Int nextDirection = nextTile != null
+            ? (Vector2Int)(nextTile.GridLocation - GridLocation)
+            : new Vector2Int(0, 0);
+        Vector2Int direction = pastDirection != nextDirection ? pastDirection + nextDirection : nextDirection;
+        
+        if (direction == new Vector2(0,1))
+            return isFinal ? ArrowDirection.UpFinished : ArrowDirection.Up;
+
+        if (direction == new Vector2(0,-1))
+            return isFinal ? ArrowDirection.DownFinished : ArrowDirection.Down;
+
+        if (direction == new Vector2(1,0))
+            return isFinal ? ArrowDirection.RightFinished : ArrowDirection.Right;
+
+        if (direction == new Vector2(-1, 0))
+            return isFinal ? ArrowDirection.LeftFinished : ArrowDirection.Left;
+
+        if (direction == new Vector2(1, 1))
+            return pastDirection.y < nextDirection.y ? ArrowDirection.BottomLeft : ArrowDirection.TopRight;
+
+        if (direction == new Vector2(-1, 1))
+            return pastDirection.y < nextDirection.y ? ArrowDirection.BottomRight : ArrowDirection.TopLeft;
+
+        if (direction == new Vector2(1, -1))
+            return pastDirection.y > nextDirection.y ? ArrowDirection.TopLeft : ArrowDirection.BottomRight;
+
+        if (direction == new Vector2(-1, -1))
+            return pastDirection.y > nextDirection.y ? ArrowDirection.TopRight : ArrowDirection.BottomLeft;
+
+        return ArrowDirection.None;
+    }
+}
