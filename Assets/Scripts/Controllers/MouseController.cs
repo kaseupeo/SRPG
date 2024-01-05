@@ -20,6 +20,8 @@ public class MouseController : MonoBehaviour
     private PlayerCharacter _playerCharacter;
     private List<PlayerCharacter> _playerCharacterPrefabs;
     
+    // TODO : 경로 변수 옮길지 고민하기, 플레이어 변수 삭제 필요
+    
     private void Start()
     {
         GenerateCursor();
@@ -93,7 +95,7 @@ public class MouseController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (clickTile != null)
+            if (clickTile == null)
                 return;
             
             
@@ -112,6 +114,8 @@ public class MouseController : MonoBehaviour
                 GetInRangeTiles(_playerCharacter);
             }
             
+            
+            // TODO : 널 오류 뜸 수정 필요
             if (clickTile != _playerCharacter.CurrentTile && _isSelectedPlayerCharacter)
             {
                 _isSelectedPlayerCharacter = false;
@@ -122,11 +126,15 @@ public class MouseController : MonoBehaviour
                     {
                         _isMoving = true;
                         _isSelectedPlayerCharacter = true;
+                        
+                        // MoveAlongPath(_playerCharacter);
                     }
                     findingTile.HideTile();
             
                 }
             }
+            
+            
         }
     }
     
@@ -187,4 +195,6 @@ public class MouseController : MonoBehaviour
             }
         }
     }
+    
+    // private void Check
 }

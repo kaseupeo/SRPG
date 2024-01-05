@@ -5,13 +5,13 @@ public class GameManager
 {
     private bool _isBeforeStart;
     
-    private PlayerCharacter _playerCharacter;
+    private PlayerCharacter _selectedCharacter;
     private List<PlayerCharacter> _playerCharacterPrefabs;
     private List<PlayerCharacter> _playerCharacters;
     private int _maxPlayerCharacter;
 
     public bool IsPlacingCharacter { get => _isBeforeStart; set => _isBeforeStart = value; }
-    public PlayerCharacter PlayerCharacter { get => _playerCharacter; set => _playerCharacter = value; }
+    public PlayerCharacter SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
     public List<PlayerCharacter> PlayerCharacterPrefabs { get => _playerCharacterPrefabs; set => _playerCharacterPrefabs = value; }
     public List<PlayerCharacter> PlayerCharacters { get => _playerCharacters; set => _playerCharacters = value; }
     public int MaxPlayerCharacter { get => _maxPlayerCharacter; set => _maxPlayerCharacter = value; }
@@ -48,7 +48,6 @@ public class GameManager
         pc.CharacterPositionOnTile(tile);
         
         _playerCharacters.Add(pc);
-        _playerCharacterPrefabs.Remove(_playerCharacter);
     }
 
     
@@ -59,6 +58,8 @@ public class GameManager
         {
             if (playerCharacter.CurrentTile == selectTile)
             {
+                _selectedCharacter = playerCharacter;
+                
                 return playerCharacter;
             }
         }
