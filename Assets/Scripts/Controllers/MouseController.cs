@@ -9,6 +9,8 @@ using ArrowDirection = Define.ArrowDirection;
 
 public class MouseController : MonoBehaviour
 {
+    private PlayerActions _playerActions;
+    
     [CanBeNull] private Tile _focusTile;
     private Cursor _cursor;
     private List<Tile> _path;
@@ -17,30 +19,38 @@ public class MouseController : MonoBehaviour
     private bool _isSelectedPlayerCharacter;
     
     // TODO : CharacterController 및 CharacterPrefab 완성 후 GameManager로 옮기기
-    private PlayerCharacter _playerCharacter;
-    private List<PlayerCharacter> _playerCharacterPrefabs;
-    
-    // TODO : 경로 변수 옮길지 고민하기, 플레이어 변수 삭제 필요
-    
+    private PlayerCharacter _selectedPlayerCharacter;
+
+    private void Awake()
+    {
+        _playerActions = new PlayerActions();
+        GenerateCursor();
+    }
+
     private void Start()
     {
-        GenerateCursor();
+        _playerActions.Mouse.Click.performed += _ => MouseClick();
         _path = new List<Tile>();
         _rangeFindingTiles = new List<Tile>();
         _isMoving = false;
-        
-        _playerCharacterPrefabs = Managers.Game.PlayerCharacterPrefabs;
     }
 
     private void LateUpdate()
     {
-        _focusTile = GetFocusedOnTile();
-
-        SetCursor(_focusTile);
-        MouseClick(_focusTile);
+        // MouseClick(_focusTile);
 
         if (_path.Count > 0 && _isMoving)
-            MoveAlongPath(_playerCharacter);
+            MoveAlongPath(_selectedPlayerCharacter);
+        
+
+        // 정리 중인 코드
+        _focusTile = GetMousePositionOnTile();
+        SetCursor(_focusTile);
+        //
+        // if (_focusTile == null)
+        //     return;
+
+
     }
 
     // 커서 생성 메소드
@@ -58,22 +68,20 @@ public class MouseController : MonoBehaviour
     }
     
     // 마우스있는 곳에 위치한 타일 찾는 메소드
-    [CanBeNull]
-    private Tile GetFocusedOnTile()
+    private Tile GetMousePositionOnTile()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2D, Vector2.zero);
+        Vector2 mousePosition = _playerActions.Mouse.Position.ReadValue<Vector2>();
+        RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(mousePosition), Vector2.zero);
 
-        if (hits.Length <= 0) 
+        if (hits.Length <= 0)
             return null;
-        
+
         RaycastHit2D? hit = hits.OrderByDescending(i => i.collider.transform.position.z).First();
         Tile tile = hit.Value.collider.GetComponent<Tile>();
-            
+
         return tile;
     }
-
+    
     // 마우스 위치에 커서 표시 메소드 
     private void SetCursor(Tile focusTile)
     {
@@ -88,9 +96,37 @@ public class MouseController : MonoBehaviour
         _cursor.ShowCursor();
     }
 
-    private int testCheck = 0;
     
     // 마우스
+    private void MouseClick()
+    {
+        switch (Managers.Game.GameMode)
+        {
+            case Define.GameMode.Preparation:
+                
+                
+                
+                Managers.Game.GeneratePlayerCharacter(Managers.Game.LoadPlayerCharacters[0], _focusTile);
+                break;
+            case Define.GameMode.Battle:
+                break;
+            
+        }
+    }
+    
+
+    
+    // 전투 준비 중
+    // 타일 클릭 시 -> 캐릭터 배치
+    // 배치된 캐릭터 선택 후 다른 타일 클릭시 재배치
+    
+    // 전투 중
+    // 맵에 있는 캐릭터 선택 -> 기본으로 이동범위 표시
+    // 캐릭터 선택 상태에서
+    // -> 다른 캐릭터 선택시 해당 캐릭터 선택
+    // -> 캐릭터 이동 범위 내 선택시 이동
+    // -> 캐릭터 이동 범위 외 선택시 캐릭터 선택 취소
+    private int testCheck = 0;
     private void MouseClick(Tile clickTile)
     {
         if (Input.GetMouseButtonDown(0))
@@ -102,21 +138,21 @@ public class MouseController : MonoBehaviour
             // TODO : 전투(게임) 시작전에 캐릭터 배치 하는 메소드 따로 만들어서 관리하기
             if (testCheck < 2)
             {
-                Managers.Game.GeneratePlayerCharacter(_playerCharacterPrefabs[testCheck], clickTile);
+                Managers.Game.GeneratePlayerCharacter(Managers.Game.LoadPlayerCharacters[testCheck], clickTile);
                 testCheck++;
                 return;
             }
             
             if (!_isSelectedPlayerCharacter)
             {
-                _playerCharacter = Managers.Game.SelectedPlayerCharacter(clickTile);
+                // _selectedPlayerCharacter = Managers.Game.SelectedPlayerCharacter(clickTile);
                 _isSelectedPlayerCharacter = true;
-                GetInRangeTiles(_playerCharacter);
+                GetInRangeTiles(_selectedPlayerCharacter);
             }
             
             
             // TODO : 널 오류 뜸 수정 필요
-            if (clickTile != _playerCharacter.CurrentTile && _isSelectedPlayerCharacter)
+            if (clickTile != _selectedPlayerCharacter.CurrentTile && _isSelectedPlayerCharacter)
             {
                 _isSelectedPlayerCharacter = false;
 
@@ -135,6 +171,19 @@ public class MouseController : MonoBehaviour
             }
             
             
+        }
+    }
+
+    private bool CheckCreatureOnTile(Tile tile)
+    {
+        return tile.CreatureOnTile != null;
+    }
+
+    private void SelectedTileInfo(Tile clickedTile)
+    {
+        foreach (PlayerCharacter playerCharacter in Managers.Game.PlayerCharacters)
+        {
+            _selectedPlayerCharacter = playerCharacter;
         }
     }
     
@@ -197,4 +246,33 @@ public class MouseController : MonoBehaviour
     }
     
     // private void Check
+
+    private void OnEnable()
+    {
+        _playerActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerActions.Disable();
+    }
 }
+
+
+/*
+ *     [CanBeNull]
+    private Tile GetFocusedOnTile()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(mousePos2D, Vector2.zero);
+
+        if (hits.Length <= 0) 
+            return null;
+        
+        RaycastHit2D? hit = hits.OrderByDescending(i => i.collider.transform.position.z).First();
+        Tile tile = hit.Value.collider.GetComponent<Tile>();
+            
+        return tile;
+    }
+ */

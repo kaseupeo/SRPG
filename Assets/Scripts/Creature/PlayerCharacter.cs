@@ -41,6 +41,7 @@ public class PlayerCharacter : Creature
         transform.position =
             new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
         _spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+        tile.CreatureOnTile = this;
         currentTile = tile;
     }
     public override void Dead() { }

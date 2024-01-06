@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 // TODO
 public abstract class Creature : MonoBehaviour
 {
+    [SerializeField]
     protected string name;
     protected int level;
     protected float moveSpeed;

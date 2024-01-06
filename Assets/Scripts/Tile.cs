@@ -20,10 +20,22 @@ public class Tile : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _childSpriteRenderer;
 
+    private Creature _creatureOnTile;
+    
+    public Creature CreatureOnTile { get => _creatureOnTile; set => _creatureOnTile = value; }
+
+    private int _saveZ;
+    
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _childSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
+        _saveZ = GridLocation.z;
+    }
+
+    private void Update()
+    {
+        ChangeZPosition();
     }
 
     public void ShowTile()
@@ -46,6 +58,22 @@ public class Tile : MonoBehaviour
             _childSpriteRenderer.color = new Color(1, 1, 1, 1);
             _childSpriteRenderer.sprite = arrows[(int)dir];
             _childSpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder;
+        }
+    }
+
+    private void ChangeZPosition()
+    {
+        if (_creatureOnTile == null)
+        {
+            var i = GridLocation;
+            i.z = _saveZ;
+            GridLocation = i;
+        }
+        else
+        {
+            var i = GridLocation;
+            i.z = -1;
+            GridLocation = i;
         }
     }
 

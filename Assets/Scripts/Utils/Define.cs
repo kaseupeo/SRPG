@@ -2,6 +2,12 @@
 
 public class Define
 {
+    public enum GameMode
+    {
+        Preparation,
+        Battle,
+    }
+    
     public enum SceneType
     {
         LobbyScene,
