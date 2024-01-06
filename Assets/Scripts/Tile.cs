@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using ArrowDirection = Define.ArrowDirection;
 
@@ -20,9 +21,9 @@ public class Tile : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _childSpriteRenderer;
 
-    private Creature _creatureOnTile;
+    private bool _isOnTile;
     
-    public Creature CreatureOnTile { get => _creatureOnTile; set => _creatureOnTile = value; }
+    public bool IsOnTile { get => _isOnTile; set => _isOnTile = value; }
 
     private int _saveZ;
     
@@ -63,18 +64,9 @@ public class Tile : MonoBehaviour
 
     private void ChangeZPosition()
     {
-        if (_creatureOnTile == null)
-        {
-            var i = GridLocation;
-            i.z = _saveZ;
-            GridLocation = i;
-        }
-        else
-        {
-            var i = GridLocation;
-            i.z = -1;
-            GridLocation = i;
-        }
+        var i = GridLocation;
+        i.z = _isOnTile ? -1 : _saveZ;
+        GridLocation = i;
     }
 
     public ArrowDirection TranslateDirection(Tile prevTile, Tile nextTile)

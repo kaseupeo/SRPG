@@ -45,4 +45,11 @@ public class CharacterSelectPanelUI : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        foreach (CharacterToggleUI toggle in _characterToggles)
+        {
+            Destroy(toggle.gameObject);
+        }
+    }
 }

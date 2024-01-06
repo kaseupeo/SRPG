@@ -24,4 +24,9 @@ public class GameScene : MonoBehaviour
     {
         
     }
+
+    public void GameModeChange()
+    {
+        Managers.Game.GameMode = Define.GameMode.Battle;
+    }
 }

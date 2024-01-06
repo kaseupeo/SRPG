@@ -40,24 +40,34 @@ public class GameManager
     }
     
     // 캐릭터 생성 메소드
-    public void GeneratePlayerCharacter(PlayerCharacter playerCharacter, Tile tile)
+    public void GeneratePlayerCharacter(Tile tile)
     {
-        if (!_loadPlayerCharacters.Contains(playerCharacter))
-        {
-            Debug.Log("오류 : 없는 캐릭터");
+        if (!_loadPlayerCharacters.Contains(_selectedCharacter) || tile == null || tile.IsOnTile)
             return;
+
+
+        PlayerCharacter find = _playerCharacters.Find(x => x.Name == _selectedCharacter.Name);
+        if (find != null)
+        {
+            var gameObject = GameObject.Find(find.Name);
+            _playerCharacters.Remove(gameObject.GetComponent<PlayerCharacter>());
+            // Debug.Log($"{gameObject}");
+            GameObject.Destroy(gameObject);
         }
 
-        if (tile == null)
+     
+        if (_maxPlayerCharacter <= _playerCharacters.Count)
         {
+            // _gameMode = Define.GameMode.Battle;
             return;
         }
         
-        PlayerCharacter pc = GameObject.Instantiate(playerCharacter.gameObject).GetComponent<PlayerCharacter>();
+        PlayerCharacter pc = GameObject.Instantiate(_selectedCharacter.gameObject).GetComponent<PlayerCharacter>();
         pc.Init();
         pc.CharacterPositionOnTile(tile);
         
         _playerCharacters.Add(pc);
+        
     }
 
     

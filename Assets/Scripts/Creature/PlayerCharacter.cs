@@ -12,14 +12,9 @@ public class PlayerCharacter : Creature
 
     private SpriteRenderer _spriteRenderer;
 
-    private void Awake()
-    {
-    }
-
     public override void Init()
     {
         // 임시
-        name = "character";
         moveSpeed = 10;
         gameObject.name = name;
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -31,7 +26,7 @@ public class PlayerCharacter : Creature
     {
         float step = moveSpeed * Time.deltaTime;
         float zIndex = targetTile.transform.position.z;
-
+        
         transform.position = Vector2.MoveTowards(transform.position, targetTile.transform.position, step);
         transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
     }
@@ -41,8 +36,13 @@ public class PlayerCharacter : Creature
         transform.position =
             new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
         _spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
-        tile.CreatureOnTile = this;
+        tile.IsOnTile = true;
         currentTile = tile;
     }
     public override void Dead() { }
+
+    private void OnDestroy()
+    {
+        currentTile.IsOnTile = false;
+    }
 }
