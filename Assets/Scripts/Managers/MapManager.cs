@@ -9,7 +9,7 @@ public class MapManager
     
     private Dictionary<Vector2Int, Tile> _mapTiles = new Dictionary<Vector2Int, Tile>();
     public Dictionary<Vector2Int, Tile> MapTiles => _mapTiles;
-    
+
     public void Init()
     {
         
@@ -25,6 +25,7 @@ public class MapManager
         }
     }
     
+    // 움직일수 있는 타일 생성
     private void GenerateOverlayTile(Tilemap tileMap)
     {
         BoundsInt bounds = tileMap.cellBounds;
@@ -55,6 +56,9 @@ public class MapManager
         }
     }
 
+    
+    
+    // 중심 타일에서 한 칸 간격으로 이동 가능한 타일 리스트(십자가모양)
     public List<Tile> GetSurroundingTiles(Vector2Int originTile)
     {
         List<Tile> surroundingTiles = new List<Tile>();
@@ -76,6 +80,11 @@ public class MapManager
             surroundingTiles.Add(_mapTiles[tileToCheck]);
 
         return surroundingTiles;
+    }
+
+    public void UpdateTileInfo(Tile tile)
+    {
+        _mapTiles[tile.Grid2DLocation].GridLocation = tile.GridLocation;
     }
     
     public void Clear()

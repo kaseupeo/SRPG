@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     public int G { get; set; }
     public int H { get; set; }
     public int F => G + H;
-    public bool IsBlocked { get; set; }
+    // public bool IsBlocked { get; set; }
     public Tile Previous { get; set; }
     public Vector3Int GridLocation { get; set; }
     public Vector2Int Grid2DLocation => new Vector2Int(GridLocation.x, GridLocation.y);
@@ -21,9 +21,9 @@ public class Tile : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _childSpriteRenderer;
 
-    private bool _isOnTile;
+    private bool _isBlocked;
     
-    public bool IsOnTile { get => _isOnTile; set => _isOnTile = value; }
+    public bool IsBlocked { get => _isBlocked; set => _isBlocked = value; }
 
     private int _saveZ;
     
@@ -31,12 +31,11 @@ public class Tile : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _childSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
-        _saveZ = GridLocation.z;
     }
 
     private void Update()
     {
-        ChangeZPosition();
+        // ChangeZPosition();
     }
 
     public void ShowTile()
@@ -65,8 +64,13 @@ public class Tile : MonoBehaviour
     private void ChangeZPosition()
     {
         var i = GridLocation;
-        i.z = _isOnTile ? -1 : _saveZ;
+        i.z = _isBlocked ? -100 : _saveZ;
         GridLocation = i;
+
+        // Managers.Map.UpdateTileInfo(this);
+        // var vector3 = transform.position;
+        // vector3.z = _isOnTile ? -100 : _saveZ;
+        // transform.position = vector3;
     }
 
     public ArrowDirection TranslateDirection(Tile prevTile, Tile nextTile)

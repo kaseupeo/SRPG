@@ -39,8 +39,8 @@ public class PathFinding
             
             foreach (Tile tile in GetNeighbourTiles(currentTile))
             {
-                // 1은 넘어갈수 있는 타일 높이
-                if (tile.IsBlocked || closedList.Contains(tile) || Mathf.Abs(currentTile.transform.position.z - tile.transform.position.z) > 1)
+                // 1은 넘어갈수 있는 최대 타일 높이
+                if (closedList.Contains(tile) || IsCheckToPassTile(currentTile, tile, 1))
                     continue;
                 
                 tile.G = GetManhattanDistance(start, tile);
@@ -58,6 +58,11 @@ public class PathFinding
         return new List<Tile>() ;
     }
 
+    public static bool IsCheckToPassTile(Tile startTile, Tile endTile, int height = 1)
+    {
+        return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height || endTile.IsBlocked;
+    }
+    
     private static List<Tile> GetFinishedList(Tile start, Tile end)
     {
         List<Tile> finishedList = new List<Tile>();
@@ -106,6 +111,4 @@ public class PathFinding
         return Mathf.Abs(start.GridLocation.x - tile.GridLocation.x) +
                Mathf.Abs(start.GridLocation.y - tile.GridLocation.y);
     }
-
-
 }

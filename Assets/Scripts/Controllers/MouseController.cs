@@ -121,13 +121,12 @@ public class MouseController : MonoBehaviour
                 }
                 
                 break;
-            
         }
     }
     
     private void SelectedTileInfo(Tile tile)
     {
-        if (tile == null || !tile.IsOnTile)
+        if (tile == null || !tile.IsBlocked)
             return;
 
         foreach (var playerCharacter in Managers.Game.PlayerCharacters.Where(playerCharacter => playerCharacter.CurrentTile == tile))
@@ -158,7 +157,10 @@ public class MouseController : MonoBehaviour
             }
 
             if (_path.Count <= 0 || !_isMoving)
+            {
+                _path.Clear();
                 yield break;
+            }
         }
     }
 

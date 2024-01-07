@@ -26,6 +26,7 @@ public class PlayerCharacter : Creature
     {
         float step = moveSpeed * Time.deltaTime;
         float zIndex = targetTile.transform.position.z;
+        currentTile.IsBlocked = false;
         
         transform.position = Vector2.MoveTowards(transform.position, targetTile.transform.position, step);
         transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
@@ -36,13 +37,13 @@ public class PlayerCharacter : Creature
         transform.position =
             new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
         _spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
-        tile.IsOnTile = true;
+        tile.IsBlocked = true;
         currentTile = tile;
     }
     public override void Dead() { }
 
     private void OnDestroy()
     {
-        currentTile.IsOnTile = false;
+        currentTile.IsBlocked = false;
     }
 }

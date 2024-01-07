@@ -42,7 +42,7 @@ public class GameManager
     // 캐릭터 생성 메소드
     public void GeneratePlayerCharacter(Tile tile)
     {
-        if (!_loadPlayerCharacters.Contains(_selectedCharacter) || tile == null || tile.IsOnTile)
+        if (!_loadPlayerCharacters.Contains(_selectedCharacter) || tile == null || tile.IsBlocked)
             return;
 
 
@@ -69,9 +69,6 @@ public class GameManager
         _playerCharacters.Add(pc);
         
     }
-
-    
-    
     
     public void MoveAlongPath(PlayerCharacter playerCharacter)
     {
