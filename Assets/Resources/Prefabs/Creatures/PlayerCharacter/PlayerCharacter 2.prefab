@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: qwe
-  statsList:
+  stats:
   - level: 0
     healthPoint: 0
     attack: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
     contact: 0
     defence: 0
     turnSpeed: 0
-    turnCost: 3
+    turnCost: 5
 --- !u!212 &7177215609808941839
 SpriteRenderer:
   m_ObjectHideFlags: 0

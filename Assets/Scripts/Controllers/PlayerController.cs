@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
         _focusTile = GetMousePositionOnTile();
         SetCursor(_focusTile);
         ShowFindPath(_focusTile, _selectedPlayerCharacter);
-
     }
 
     // 커서 생성 메소드
@@ -147,10 +146,12 @@ public class PlayerController : MonoBehaviour
         
         // TODO : 캐릭터 
         // 이동 범위
-        _rangeFindingTiles = PathFinding.GetTilesInRange(playerCharacter.CurrentTile.Grid2DLocation, playerCharacter.Stats[0].TurnCost);
+        _rangeFindingTiles = PathFinding.GetTilesInRange(playerCharacter.CurrentTile.Grid2DLocation, playerCharacter.CurrentTurnCost);
 
-        foreach (Tile tile in _rangeFindingTiles) 
+        foreach (Tile tile in _rangeFindingTiles)
             tile.ShowTile();
+        
+        playerCharacter.CurrentTile.HideTile();
     }
 
     private void CheckMove()

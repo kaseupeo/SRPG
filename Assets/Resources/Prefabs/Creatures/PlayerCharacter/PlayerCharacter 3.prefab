@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: asd
-  statsList:
+  stats:
   - level: 0
     healthPoint: 0
     attack: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
     contact: 0
     defence: 0
     turnSpeed: 0
-    turnCost: 5
+    turnCost: 1
 --- !u!212 &97120361
 SpriteRenderer:
   m_ObjectHideFlags: 0

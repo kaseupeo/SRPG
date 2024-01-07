@@ -11,7 +11,7 @@ public abstract class Creature : MonoBehaviour
     protected int level;
     protected float moveSpeed;
     [SerializeField]
-    protected List<Stat> statsList;
+    protected List<Stat> stats;
     protected List<Skill> skills;
     protected Define.CreatureState state;
     protected Tile currentTile;
@@ -19,7 +19,7 @@ public abstract class Creature : MonoBehaviour
     public string Name { get => name; set => name = value; }
     public int Level { get => level; set => level = value; }
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    public List<Stat> Stats { get => statsList; set => statsList = value; }
+    public List<Stat> Stats { get => stats; set => stats = value; }
     public List<Skill> Skills { get => skills; set => skills = value; }
     public Define.CreatureState State { get => state; set => state = value; }
     public Tile CurrentTile { get => currentTile; set => currentTile = value; }
@@ -37,6 +37,8 @@ public abstract class Creature : MonoBehaviour
     public abstract void Move(Tile targetTile);
     public abstract void Dead();
 
+
+    
 }
 
 [Serializable]

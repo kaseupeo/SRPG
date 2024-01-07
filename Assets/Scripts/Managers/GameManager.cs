@@ -44,8 +44,7 @@ public class GameManager
     {
         if (!_loadPlayerCharacters.Contains(_selectedCharacter) || tile == null || tile.IsBlocked)
             return;
-
-
+        
         PlayerCharacter find = _playerCharacters.Find(x => x.Name == _selectedCharacter.Name);
         if (find != null)
         {
@@ -54,8 +53,7 @@ public class GameManager
             // Debug.Log($"{gameObject}");
             GameObject.Destroy(gameObject);
         }
-
-     
+        
         if (_maxPlayerCharacter <= _playerCharacters.Count)
         {
             // _gameMode = Define.GameMode.Battle;
@@ -69,6 +67,15 @@ public class GameManager
         _playerCharacters.Add(pc);
         
     }
+
+    public void ResetTurn()
+    {
+        foreach (PlayerCharacter playerCharacter in _playerCharacters)
+        {
+            playerCharacter.ResetTurnCost();
+        }
+    }
+    
     
     public void Clear()
     {

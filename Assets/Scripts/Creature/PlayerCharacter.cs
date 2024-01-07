@@ -6,9 +6,11 @@ public class PlayerCharacter : Creature
 {
     protected int exp;
     protected List<Equipment> equipments;
+    protected int currentTurnCost;
 
     public int Exp { get => exp; set => exp = value; }
     public List<Equipment> Equipments { get => equipments; set => equipments = value; }
+    public int CurrentTurnCost { get => currentTurnCost; set => currentTurnCost = value; }
 
     private SpriteRenderer _spriteRenderer;
 
@@ -18,6 +20,7 @@ public class PlayerCharacter : Creature
         moveSpeed = 10;
         gameObject.name = name;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        ResetTurnCost();
     
         base.Init();
     }
@@ -32,6 +35,11 @@ public class PlayerCharacter : Creature
         transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
     }
 
+    public void ResetTurnCost()
+    {
+        currentTurnCost = stats[level].TurnCost;
+    }
+    
     public void CharacterPositionOnTile(Tile tile)
     {
         transform.position =
@@ -39,6 +47,7 @@ public class PlayerCharacter : Creature
         _spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
         tile.IsBlocked = true;
         currentTile = tile;
+        currentTurnCost--;
     }
     public override void Dead() { }
 

@@ -7,7 +7,6 @@ using UnityEngine.Tilemaps;
 public class GameScene : MonoBehaviour
 {
     [SerializeField] private GameObject mapPrefab;
-    [SerializeField] private GameObject startTile;
 
     private Tilemap[] _tileMaps;
     private Tilemap _startTile;
@@ -15,7 +14,6 @@ public class GameScene : MonoBehaviour
     private void Start()
     {
         _tileMaps = mapPrefab.GetComponentsInChildren<Tilemap>();
-        // _startTile = 
         Managers.Game.Init();
         Managers.Map.GenerateOverlayTile(_tileMaps);
     }
@@ -33,5 +31,12 @@ public class GameScene : MonoBehaviour
     public void FinishedPlayerTurn()
     {
         Managers.Game.GameMode = Define.GameMode.MonsterTurn;
+    }
+
+    public void FinishMonsterTurn()
+    {
+        Managers.Game.GameMode = Define.GameMode.PlayerTurn;
+        
+        Managers.Game.ResetTurn();
     }
 }

@@ -21,9 +21,7 @@ public class Tile : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _childSpriteRenderer;
 
-    private bool _isBlocked;
-    
-    public bool IsBlocked { get => _isBlocked; set => _isBlocked = value; }
+    public bool IsBlocked { get; set; }
 
     private int _saveZ;
     
@@ -31,11 +29,6 @@ public class Tile : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _childSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
-    }
-
-    private void Update()
-    {
-        // ChangeZPosition();
     }
 
     public void ShowTile()
@@ -59,18 +52,6 @@ public class Tile : MonoBehaviour
             _childSpriteRenderer.sprite = arrows[(int)dir];
             _childSpriteRenderer.sortingOrder = _spriteRenderer.sortingOrder;
         }
-    }
-
-    private void ChangeZPosition()
-    {
-        var i = GridLocation;
-        i.z = _isBlocked ? -100 : _saveZ;
-        GridLocation = i;
-
-        // Managers.Map.UpdateTileInfo(this);
-        // var vector3 = transform.position;
-        // vector3.z = _isOnTile ? -100 : _saveZ;
-        // transform.position = vector3;
     }
 
     public ArrowDirection TranslateDirection(Tile prevTile, Tile nextTile)
