@@ -7,7 +7,9 @@ public class Define
     public enum GameMode
     {
         Preparation,
-        Battle,
+        PlayerTurn,
+        MonsterTurn,
+        PedestrianTurn,
     }
     
     public enum SceneType

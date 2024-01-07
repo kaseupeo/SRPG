@@ -62,27 +62,12 @@ public class PlayerController : MonoBehaviour
             case Define.GameMode.Preparation:
                 Managers.Game.GeneratePlayerCharacter(_focusTile);
                 break;
-            case Define.GameMode.Battle:
+            case Define.GameMode.PlayerTurn:
 
                 SelectedTileInfo(_focusTile);
                 GetInRangeTiles(_selectedPlayerCharacter);
 
-
-                if (_selectedPlayerCharacter != null && _focusTile != _selectedPlayerCharacter.CurrentTile)
-                {
-                    foreach (Tile findingTile in _rangeFindingTiles)
-                    {
-                        if (_focusTile == findingTile)
-                        {
-                            _isMoving = true;
-
-                            StartCoroutine(MoveAlongPath(_selectedPlayerCharacter));
-                            break;
-                        }
-                    }
-                    HideRangeTiles();
-                    _selectedPlayerCharacter = null;
-                }
+                CheckMove();
                 
                 break;
         }
@@ -162,10 +147,24 @@ public class PlayerController : MonoBehaviour
         
         // TODO : 캐릭터 
         // 이동 범위
-        _rangeFindingTiles = PathFinding.GetTilesInRange(playerCharacter.CurrentTile.Grid2DLocation, 4);
+        _rangeFindingTiles = PathFinding.GetTilesInRange(playerCharacter.CurrentTile.Grid2DLocation, playerCharacter.Stats[0].TurnCost);
 
         foreach (Tile tile in _rangeFindingTiles) 
             tile.ShowTile();
+    }
+
+    private void CheckMove()
+    {
+        if (_selectedPlayerCharacter == null || _focusTile == _selectedPlayerCharacter.CurrentTile) return;
+        if (_rangeFindingTiles.Any(findingTile => _focusTile == findingTile))
+        {
+            _isMoving = true;
+
+            StartCoroutine(MoveAlongPath(_selectedPlayerCharacter));
+        }
+        
+        HideRangeTiles();
+        _selectedPlayerCharacter = null;
     }
     
     // 캐릭터 이동 메소드

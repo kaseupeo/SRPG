@@ -70,11 +70,6 @@ public class GameManager
         
     }
     
-    public void MoveAlongPath(PlayerCharacter playerCharacter)
-    {
-        // playerCharacter.Move();
-    }
-    
     public void Clear()
     {
         _loadPlayerCharacters.Clear();

@@ -46,6 +46,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 123
+  statsList:
+  - level: 0
+    healthPoint: 0
+    attack: 0
+    block: 0
+    contact: 0
+    defence: 0
+    turnSpeed: 0
+    turnCost: 1
 --- !u!212 &4404284186053881636
 SpriteRenderer:
   m_ObjectHideFlags: 0

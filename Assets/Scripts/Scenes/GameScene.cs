@@ -27,6 +27,11 @@ public class GameScene : MonoBehaviour
 
     public void GameModeChange()
     {
-        Managers.Game.GameMode = Define.GameMode.Battle;
+        Managers.Game.GameMode = Define.GameMode.PlayerTurn;
+    }
+
+    public void FinishedPlayerTurn()
+    {
+        Managers.Game.GameMode = Define.GameMode.MonsterTurn;
     }
 }
