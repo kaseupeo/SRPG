@@ -129,7 +129,6 @@ public class PathFinding
 
         return finishedList;
     }
-    
 
     // ASTAR 방법 (맨해튼거리법)
     private static int GetManhattanDistance(Tile start, Tile tile)

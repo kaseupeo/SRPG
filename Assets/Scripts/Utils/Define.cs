@@ -2,6 +2,8 @@
 
 public class Define
 {
+    public const int Height = 1;
+    
     public enum GameMode
     {
         Preparation,

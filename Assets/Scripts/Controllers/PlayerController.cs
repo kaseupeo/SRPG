@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour
     private List<Tile> _path;
     private List<Tile> _rangeFindingTiles;
     private bool _isMoving;
-    
-    // TODO : CharacterController 및 CharacterPrefab 완성 후 GameManager로 옮기기
     private PlayerCharacter _selectedPlayerCharacter;
 
     private void Awake()
