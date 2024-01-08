@@ -9,7 +9,7 @@
         base.Init();
     }
     
-    public override void Move(Tile targetTile)
+    public void Move(Tile targetTile)
     {
         // TODO : 타겟으로 이동 로직 및 공격
     }

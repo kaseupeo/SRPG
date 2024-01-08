@@ -23,9 +23,10 @@ public class GameScene : MonoBehaviour
         
     }
 
-    public void GameModeChange()
+    public void BattleStart()
     {
         Managers.Game.GameMode = Define.GameMode.PlayerTurn;
+        Managers.Game.GenerateRandomMonster();
     }
 
     public void FinishedPlayerTurn()

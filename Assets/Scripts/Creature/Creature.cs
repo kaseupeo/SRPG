@@ -24,6 +24,10 @@ public abstract class Creature : MonoBehaviour
     public Define.CreatureState State { get => state; set => state = value; }
     public Tile CurrentTile { get => currentTile; set => currentTile = value; }
     
+    protected SpriteRenderer spriteRenderer;
+    protected Animator animator;
+
+    
     private void Start()
     {
         Init();
@@ -31,10 +35,55 @@ public abstract class Creature : MonoBehaviour
 
     public virtual void Init()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+
         state = Define.CreatureState.Idle;
     }
+    
+    /*
+     * 좌하단 방향 : -x, -y
+     * 좌상단 방향 : -x, +y
+     */
+    public void Move(Tile targetTile)
+    {
+        float step = moveSpeed * Time.deltaTime;
+        float zIndex = targetTile.transform.position.z;
+        currentTile.IsBlocked = false;
+        
+        transform.position = Vector2.MoveTowards(transform.position, targetTile.transform.position, step);
+        transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
 
-    public abstract void Move(Tile targetTile);
+        Vector2 dir = targetTile.transform.position - transform.position;
+        
+        // 이동 애니메이션
+        if (dir.x != 0 || dir.y != 0)
+        {
+            animator.SetFloat("X", dir.x);
+            animator.SetFloat("Y", dir.y);
+            animator.SetBool("Walk", true);
+        }
+        else
+        {
+            animator.SetBool("Walk", false);
+        }
+    }
+    
+    public virtual void CharacterPositionOnTile(Tile tile)
+    {
+        transform.position =
+            new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
+        spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+        tile.IsBlocked = true;
+        currentTile = tile;
+    }
+    
+    public void Attack()
+    {
+        animator.SetTrigger("Slash");
+        // TODO : 공격
+    }
+    
     public abstract void Dead();
 
 

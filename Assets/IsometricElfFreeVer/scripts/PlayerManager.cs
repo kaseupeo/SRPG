@@ -5,11 +5,11 @@ using System;
 
 public class PlayerManager : MonoBehaviour
 {
-    public Transform ItenPoint;//ƒAƒCƒeƒ€‚Ì•\¦ŠJn“_
-    public Transform ShotPoint;//Ëo•Ší‚ÌŠJn“_
-    public GameObject ItemPrefab;//ƒAƒCƒeƒ€‚ÌPrefabƒXƒƒbƒg
-    public GameObject ThrowPrefab;//“Š“K—p‚ÌPrefabƒXƒƒbƒg
-    public GameObject BowPrefab;//‹|i–îj‚ÌPrefabƒXƒƒbƒg
+    public Transform ItenPoint;//ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½Ì•\ï¿½ï¿½ï¿½Jï¿½nï¿½_
+    public Transform ShotPoint;//ï¿½Ëoï¿½ï¿½ï¿½ï¿½ÌŠJï¿½nï¿½_
+    public GameObject ItemPrefab;//ï¿½Aï¿½Cï¿½eï¿½ï¿½ï¿½ï¿½Prefabï¿½Xï¿½ï¿½ï¿½bï¿½g
+    public GameObject ThrowPrefab;//ï¿½ï¿½ï¿½Kï¿½pï¿½ï¿½Prefabï¿½Xï¿½ï¿½ï¿½bï¿½g
+    public GameObject BowPrefab;//ï¿½|ï¿½iï¿½ï¿½jï¿½ï¿½Prefabï¿½Xï¿½ï¿½ï¿½bï¿½g
     Rigidbody2D rb;
     Animator animator;
     public float moveSpeed = 1f;
@@ -25,15 +25,15 @@ public class PlayerManager : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-    void Update()//•ûŒüƒL[‚ÅŒü‚«‚ğŒˆ‚ß‚Ä‰Ÿ‚µ‘±‚¯‚½‚çWalk‚É•\¦
+    void Update()//ï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½[ï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚Ä‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Walkï¿½É•\ï¿½ï¿½
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = (x == 0) ? Input.GetAxisRaw("Vertical") : 0.0f;
             
         if (x != 0 || y != 0)
         {
-            animator.SetFloat("x", x);
-            animator.SetFloat("y", y);
+            animator.SetFloat("X", x);
+            animator.SetFloat("Y", y);
             animator.SetBool("Walk", true);
         }
         else
@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
         StartCoroutine(Action());
         StartCoroutine(Shot());
     }
-    IEnumerator Action()//Šes“®‚ğƒL[‚ÅÄ¶
+    IEnumerator Action()//ï¿½eï¿½sï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½[ï¿½ÅÄï¿½
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -58,7 +58,7 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            animator.SetTrigger("Item");//Še•ûŒü‚Å“®‚«‚É‡‚í‚¹‚Ä–ò•r‚ğã‚É‚ ‚°‚é
+            animator.SetTrigger("Item");//ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½Å“ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½í‚¹ï¿½Ä–ï¿½rï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½ï¿½ï¿½
             Instantiate(ItemPrefab, ItenPoint.position, transform.rotation);
         }
                               
@@ -78,14 +78,14 @@ public class PlayerManager : MonoBehaviour
             this.transform.position = Vector2.zero;
         }
     }
-    IEnumerator Shot()//Ëo•Ší‚Ì‘I‘ğ‚Æ•\¦
+    IEnumerator Shot()//ï¿½Ëoï¿½ï¿½ï¿½ï¿½Ì‘Iï¿½ï¿½ï¿½Æ•\ï¿½ï¿½
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
             animator.SetTrigger("Throw");
             for (var i = 0; i < 30; i++)
             {
-                // ƒRƒ‹[ƒ`ƒ“
+                // ï¿½Rï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½
                 yield return null;
             }
             Instantiate(ThrowPrefab, Vector2.zero, Quaternion.identity, shotPointTransform);

@@ -6,38 +6,36 @@ using UnityEngine.UI;
 
 public class CharacterSelectPanelUI : MonoBehaviour
 {
-    [SerializeField] private CharacterToggleUI characterTogglePrefab;
+    [SerializeField] private Toggle togglePrefab;
 
-    private Button _button;
     private ToggleGroup _toggleGroup;
 
     private List<PlayerCharacter> _playerCharacters;
-    private List<CharacterToggleUI> _characterToggles;
+    private List<CharacterToggleUI> _toggles;
 
 
     private void OnEnable()
     {
-        _button = GetComponentInChildren<Button>();
         _toggleGroup = GetComponentInChildren<ToggleGroup>();
         _playerCharacters = new List<PlayerCharacter>();
-        _characterToggles = new List<CharacterToggleUI>();
+        _toggles = new List<CharacterToggleUI>();
 
         _playerCharacters = Managers.Game.LoadPlayerCharacters;
         
         for (int i = 0; i < _playerCharacters.Count; i++)
         {
-            var toggle = Instantiate(characterTogglePrefab, _toggleGroup.transform);
+            var toggle = Instantiate(togglePrefab, _toggleGroup.transform).gameObject.AddComponent<CharacterToggleUI>();
             toggle.SetPlayerCharacter(_playerCharacters[i]);
-            _characterToggles.Add(toggle);
+            _toggles.Add(toggle);
             toggle.GetComponent<Toggle>().group = _toggleGroup;
         }
     }
 
     private void Update()
     {
-        for (int i = 0; i < _characterToggles.Count; i++)
+        for (int i = 0; i < _toggles.Count; i++)
         {
-            if (_characterToggles[i].GetComponent<Toggle>().isOn)
+            if (_toggles[i].GetComponent<Toggle>().isOn)
             {
                 Managers.Game.SelectedCharacter = _playerCharacters[i];
                 break;
@@ -47,7 +45,7 @@ public class CharacterSelectPanelUI : MonoBehaviour
 
     private void OnDisable()
     {
-        foreach (CharacterToggleUI toggle in _characterToggles)
+        foreach (CharacterToggleUI toggle in _toggles)
         {
             Destroy(toggle.gameObject);
         }

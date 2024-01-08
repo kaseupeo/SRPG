@@ -148,8 +148,8 @@ TextureImporter:
         y: 144
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -169,8 +169,8 @@ TextureImporter:
         y: 144
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,8 +190,8 @@ TextureImporter:
         y: 144
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -211,8 +211,8 @@ TextureImporter:
         y: 144
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -232,8 +232,8 @@ TextureImporter:
         y: 144
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,8 +253,8 @@ TextureImporter:
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -274,8 +274,8 @@ TextureImporter:
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -295,8 +295,8 @@ TextureImporter:
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -316,8 +316,8 @@ TextureImporter:
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -337,8 +337,8 @@ TextureImporter:
         y: 96
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -358,8 +358,8 @@ TextureImporter:
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -379,8 +379,8 @@ TextureImporter:
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -400,8 +400,8 @@ TextureImporter:
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -421,8 +421,8 @@ TextureImporter:
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -442,8 +442,8 @@ TextureImporter:
         y: 48
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -463,8 +463,8 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -484,8 +484,8 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -505,8 +505,8 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -526,8 +526,8 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -547,8 +547,8 @@ TextureImporter:
         y: 0
         width: 48
         height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -571,26 +571,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      elf_slash_0: 1749108372
+      elf_slash_1: 294942314
+      elf_slash_10: 1318061683
+      elf_slash_11: -1154385139
       elf_slash_12: -508917824
+      elf_slash_13: -1625514443
+      elf_slash_14: -1946668833
+      elf_slash_15: 1746091166
+      elf_slash_16: 634747706
+      elf_slash_17: -223300150
+      elf_slash_18: -1872505563
       elf_slash_19: 136146636
       elf_slash_2: -1827702807
-      elf_slash_18: -1872505563
-      elf_slash_15: 1746091166
-      elf_slash_8: 996297795
-      elf_slash_13: -1625514443
-      elf_slash_9: -1815231109
-      elf_slash_10: 1318061683
-      elf_slash_17: -223300150
-      elf_slash_7: -675018174
-      elf_slash_0: 1749108372
       elf_slash_3: -1270499190
-      elf_slash_1: 294942314
-      elf_slash_11: -1154385139
-      elf_slash_16: 634747706
-      elf_slash_5: -1333310518
       elf_slash_4: 1449885492
+      elf_slash_5: -1333310518
       elf_slash_6: -1745676517
-      elf_slash_14: -1946668833
+      elf_slash_7: -675018174
+      elf_slash_8: 996297795
+      elf_slash_9: -1815231109
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

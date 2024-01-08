@@ -62,11 +62,21 @@ public class PlayerController : MonoBehaviour
                 Managers.Game.GeneratePlayerCharacter(_focusTile);
                 break;
             case Define.GameMode.PlayerTurn:
-
-                SelectedTileInfo(_focusTile);
-                GetInRangeTiles(_selectedPlayerCharacter);
-
-                CheckMove();
+                switch (Managers.Game.State)
+                {
+                    case Define.State.Move:
+                        Debug.Log($"{Managers.Game.State}");
+                        SelectedTileInfo(_focusTile);
+                        GetInRangeTiles(_selectedPlayerCharacter);
+                        CheckMove();
+                        break;
+                    case Define.State.Attack:
+                        Debug.Log($"{Managers.Game.State}");
+                        break;
+                    case Define.State.Dead:
+                        Debug.Log($"{Managers.Game.State}");
+                        break;
+                }
                 
                 break;
         }
@@ -127,7 +137,7 @@ public class PlayerController : MonoBehaviour
     // 선택한 타일 정보(캐릭터) 
     private void SelectedTileInfo(Tile tile)
     {
-        if (tile == null || !tile.IsBlocked)
+        if (tile == null || !tile.IsBlocked || _isMoving)
             return;
 
         foreach (var playerCharacter in Managers.Game.PlayerCharacters.Where(playerCharacter => playerCharacter.CurrentTile == tile))

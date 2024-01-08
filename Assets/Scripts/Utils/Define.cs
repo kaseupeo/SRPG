@@ -12,6 +12,13 @@ public class Define
         PedestrianTurn,
     }
     
+    public enum State
+    {
+        Move,
+        Attack,
+        Dead,
+    }
+    
     public enum SceneType
     {
         LobbyScene,
