@@ -78,10 +78,16 @@ public abstract class Creature : MonoBehaviour
         currentTile = tile;
     }
     
-    public void Attack()
+    public virtual void Attack(Tile targetTile)
     {
-        animator.SetTrigger("Slash");
         // TODO : 공격
+        Vector2 dir = targetTile.transform.position - transform.position;
+
+        animator.SetFloat("X", dir.x);
+        animator.SetFloat("Y", dir.y);
+
+        animator.SetTrigger("Slash");
+        
     }
     
     public abstract void Dead();

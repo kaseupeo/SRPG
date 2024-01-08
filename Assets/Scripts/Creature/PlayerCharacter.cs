@@ -7,11 +7,12 @@ public class PlayerCharacter : Creature
     protected int exp;
     protected List<Equipment> equipments;
     protected int currentTurnCost;
+    protected int currentAttackCost;
 
     public int Exp { get => exp; set => exp = value; }
     public List<Equipment> Equipments { get => equipments; set => equipments = value; }
     public int CurrentTurnCost { get => currentTurnCost; set => currentTurnCost = value; }
-
+    public int CurrentAttackCost { get => currentAttackCost; set => currentAttackCost = value; }
 
     public override void Init()
     {
@@ -32,6 +33,12 @@ public class PlayerCharacter : Creature
     {
         base.CharacterPositionOnTile(tile);
         currentTurnCost--;
+    }
+
+    public override void Attack(Tile targetTile)
+    {
+        base.Attack(targetTile);
+        currentAttackCost--;
     }
     
     public override void Dead() { }

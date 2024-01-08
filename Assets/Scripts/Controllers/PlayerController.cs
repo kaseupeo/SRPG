@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
     private List<Tile> _path;
     private List<Tile> _rangeFindingTiles;
     private bool _isMoving;
+    private bool _isAttack;
     private PlayerCharacter _selectedPlayerCharacter;
+    private Monster _selectedMonster;
 
     private void Awake()
     {
@@ -30,13 +32,26 @@ public class PlayerController : MonoBehaviour
         _path = new List<Tile>();
         _rangeFindingTiles = new List<Tile>();
         _isMoving = false;
+        _isAttack = false;
     }
 
     private void LateUpdate()
     {
         _focusTile = GetMousePositionOnTile();
         SetCursor(_focusTile);
-        ShowFindPath(_focusTile, _selectedPlayerCharacter);
+
+        switch (Managers.Game.State)
+        {
+            case Define.State.Move:
+                GetInRangeTiles(_selectedPlayerCharacter);
+                ShowFindPath(_focusTile, _selectedPlayerCharacter);
+                break;
+            case Define.State.Attack:
+                GetInAttackRangeTiles(_selectedPlayerCharacter);
+                break;
+            case Define.State.Dead:
+                break;
+        }
     }
 
     // 커서 생성 메소드
@@ -62,16 +77,18 @@ public class PlayerController : MonoBehaviour
                 Managers.Game.GeneratePlayerCharacter(_focusTile);
                 break;
             case Define.GameMode.PlayerTurn:
+                
+                SelectedTileInfo(_focusTile);
+
                 switch (Managers.Game.State)
                 {
                     case Define.State.Move:
                         Debug.Log($"{Managers.Game.State}");
-                        SelectedTileInfo(_focusTile);
-                        GetInRangeTiles(_selectedPlayerCharacter);
-                        CheckMove();
+                        MoveCheck();
                         break;
                     case Define.State.Attack:
                         Debug.Log($"{Managers.Game.State}");
+                        MonsterCheck();
                         break;
                     case Define.State.Dead:
                         Debug.Log($"{Managers.Game.State}");
@@ -144,9 +161,14 @@ public class PlayerController : MonoBehaviour
         {
             _selectedPlayerCharacter = playerCharacter;
         }
+
+        foreach (var monster in Managers.Game.Monsters.Where(monster => monster.CurrentTile == tile))
+        {
+            _selectedMonster = monster;
+        }
     }
 
-    // 캐릭터의 이동 범위 찾고 보여주는 메소드
+    // 캐릭터의 이동 범위 또는 공격 범위 찾고 보여주는 메소드
     private void GetInRangeTiles(PlayerCharacter playerCharacter)
     {
         HideRangeTiles();
@@ -154,9 +176,8 @@ public class PlayerController : MonoBehaviour
         if (playerCharacter == null)
             return;
         
-        // TODO : 캐릭터 
-        // 이동 범위
         _rangeFindingTiles = PathFinding.GetTilesInRange(playerCharacter.CurrentTile.Grid2DLocation, playerCharacter.CurrentTurnCost);
+
 
         foreach (Tile tile in _rangeFindingTiles)
             tile.ShowTile();
@@ -164,7 +185,24 @@ public class PlayerController : MonoBehaviour
         playerCharacter.CurrentTile.HideTile();
     }
 
-    private void CheckMove()
+    private void GetInAttackRangeTiles(PlayerCharacter playerCharacter)
+    {
+        HideRangeTiles();
+
+        if (playerCharacter == null)
+            return;
+
+        // TODO : 캐릭터의 공격 범위 가져오기
+        _rangeFindingTiles = PathFinding.GetTilesInRange(playerCharacter.CurrentTile.Grid2DLocation, 1);
+
+        foreach (Tile tile in _rangeFindingTiles) 
+            tile.ShowAttackTile();
+        
+        playerCharacter.CurrentTile.HideTile();
+    }
+    
+    // 이동 체크 후 이동
+    private void MoveCheck()
     {
         if (_selectedPlayerCharacter == null || _focusTile == _selectedPlayerCharacter.CurrentTile) return;
         if (_rangeFindingTiles.Any(findingTile => _focusTile == findingTile))
@@ -175,7 +213,7 @@ public class PlayerController : MonoBehaviour
         }
         
         HideRangeTiles();
-        _selectedPlayerCharacter = null;
+        // _selectedPlayerCharacter = null;
     }
     
     // 캐릭터 이동 메소드
@@ -195,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
             if (_path.Count == 0)
             {
-                _selectedPlayerCharacter = null;
+                // _selectedPlayerCharacter = null;
                 _isMoving = false;
             }
 
@@ -207,6 +245,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // 몬스터 체크
+    private void MonsterCheck()
+    {
+        if (_selectedPlayerCharacter == null || _selectedMonster == null || _focusTile == _selectedPlayerCharacter.CurrentTile)
+            return;
+        foreach (var tile in _rangeFindingTiles.Where(tile => tile == _selectedMonster.CurrentTile))
+        {
+            _selectedPlayerCharacter.Attack(tile);
+            _selectedMonster = null;
+        }
+    }
+    
     // 범위 타일 숨기기
     private void HideRangeTiles()
     {

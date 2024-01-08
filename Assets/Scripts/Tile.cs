@@ -42,6 +42,11 @@ public class Tile : MonoBehaviour
         _childSpriteRenderer.color = new Color(1, 1, 1, 0);
     }
 
+    public void ShowAttackTile()
+    {
+        _spriteRenderer.color = new Color(0, 0, 1, 1);
+    }
+
     public void SetSprite(ArrowDirection dir)
     {
         if (dir == ArrowDirection.None)

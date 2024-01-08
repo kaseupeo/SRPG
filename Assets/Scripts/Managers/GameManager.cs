@@ -11,6 +11,7 @@ public class GameManager
     private List<PlayerCharacter> _loadPlayerCharacters;
     private List<Monster> _loadMonsters;
     private List<PlayerCharacter> _playerCharacters;
+    private List<Monster> _monsters;
     private int _maxPlayerCharacter;
     
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
@@ -20,6 +21,7 @@ public class GameManager
     public List<PlayerCharacter> LoadPlayerCharacters { get => _loadPlayerCharacters; set => _loadPlayerCharacters = value; }
     public List<Monster> LoadMonsters { get => _loadMonsters; set => _loadMonsters = value; }
     public List<PlayerCharacter> PlayerCharacters { get => _playerCharacters; set => _playerCharacters = value; }
+    public List<Monster> Monsters { get => _monsters; set => _monsters = value; }
     public int MaxPlayerCharacter { get => _maxPlayerCharacter; set => _maxPlayerCharacter = value; }
     
     
@@ -29,6 +31,7 @@ public class GameManager
         _isBeforeStart = true;
         LoadCharacters();
         _playerCharacters = new List<PlayerCharacter>();
+        _monsters = new List<Monster>();
         _maxPlayerCharacter = 2;
     }
     
@@ -85,6 +88,7 @@ public class GameManager
             Monster monster = GameObject.Instantiate(loadMonster.gameObject).GetComponent<Monster>();
             monster.Init();
             monster.CharacterPositionOnTile(tiles[Random.Range(0, tiles.Count)]);
+            _monsters.Add(monster);
         }
     }
     

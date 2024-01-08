@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -61,7 +62,15 @@ public class PathFinding
     // 시작 타일에서 도착 타일을 갈 수 있는지 확인하는 
     public static bool IsCheckToPassTile(Tile startTile, Tile endTile, int height = 1)
     {
-        return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height || endTile.IsBlocked;
+        switch (Managers.Game.State)
+        { 
+            case Define.State.Attack:
+                return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height;
+            case Define.State.Move:
+            case Define.State.Dead:
+            default:
+                return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height || endTile.IsBlocked;
+        }
     }
     
     // 범위 내 타일들 찾기
