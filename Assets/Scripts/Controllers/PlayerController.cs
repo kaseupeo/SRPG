@@ -40,14 +40,25 @@ public class PlayerController : MonoBehaviour
         _focusTile = GetMousePositionOnTile();
         SetCursor(_focusTile);
 
+        HideRangeTiles();
+        
+        if (_selectedPlayerCharacter == null)
+            return;
+        
         switch (Managers.Game.State)
         {
             case Define.State.Move:
-                GetInRangeTiles(_selectedPlayerCharacter);
+                _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter, _selectedPlayerCharacter.CurrentTurnCost);
+                Managers.Map.ShowTile(_rangeFindingTiles, Color.white);
+                _selectedPlayerCharacter.CurrentTile.HideTile();
                 ShowFindPath(_focusTile, _selectedPlayerCharacter);
                 break;
             case Define.State.Attack:
-                GetInAttackRangeTiles(_selectedPlayerCharacter);
+                if (_selectedPlayerCharacter.CurrentAttackCost <= 0)
+                    return;
+                _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter, _selectedPlayerCharacter.Stats[_selectedPlayerCharacter.Level].MaxAttackRange, _selectedPlayerCharacter.Stats[_selectedPlayerCharacter.Level].MinAttackRange);
+                Managers.Map.ShowTile(_rangeFindingTiles, Color.blue);
+                _selectedPlayerCharacter.CurrentTile.HideTile();
                 break;
             case Define.State.Dead:
                 break;
@@ -167,49 +178,16 @@ public class PlayerController : MonoBehaviour
             _selectedMonster = monster;
         }
     }
-
-    // 캐릭터의 이동 범위 또는 공격 범위 찾고 보여주는 메소드
-    private void GetInRangeTiles(PlayerCharacter playerCharacter)
-    {
-        HideRangeTiles();
-        
-        if (playerCharacter == null)
-            return;
-        
-        _rangeFindingTiles = PathFinding.GetTilesInRange(playerCharacter.CurrentTile.Grid2DLocation, playerCharacter.CurrentTurnCost);
-
-
-        foreach (Tile tile in _rangeFindingTiles)
-            tile.ShowTile();
-        
-        playerCharacter.CurrentTile.HideTile();
-    }
-
-    private void GetInAttackRangeTiles(PlayerCharacter playerCharacter)
-    {
-        HideRangeTiles();
-
-        if (playerCharacter == null)
-            return;
-
-        // TODO : 캐릭터의 공격 범위 가져오기
-        _rangeFindingTiles = PathFinding.GetTilesInRange(playerCharacter.CurrentTile.Grid2DLocation, 1);
-
-        foreach (Tile tile in _rangeFindingTiles) 
-            tile.ShowAttackTile();
-        
-        playerCharacter.CurrentTile.HideTile();
-    }
     
     // 이동 체크 후 이동
     private void MoveCheck()
     {
-        if (_selectedPlayerCharacter == null || _focusTile == _selectedPlayerCharacter.CurrentTile) return;
+        if (_isMoving || _selectedPlayerCharacter == null || _focusTile == _selectedPlayerCharacter.CurrentTile) return;
         if (_rangeFindingTiles.Any(findingTile => _focusTile == findingTile))
         {
             _isMoving = true;
 
-            StartCoroutine(MoveAlongPath(_selectedPlayerCharacter));
+            StartCoroutine(CoMoveAlongPath(_selectedPlayerCharacter));
         }
         
         HideRangeTiles();
@@ -217,7 +195,7 @@ public class PlayerController : MonoBehaviour
     }
     
     // 캐릭터 이동 메소드
-    private IEnumerator MoveAlongPath(PlayerCharacter playerCharacter)
+    private IEnumerator CoMoveAlongPath(PlayerCharacter playerCharacter)
     {
         while (true)
         {
@@ -248,12 +226,14 @@ public class PlayerController : MonoBehaviour
     // 몬스터 체크
     private void MonsterCheck()
     {
-        if (_selectedPlayerCharacter == null || _selectedMonster == null || _focusTile == _selectedPlayerCharacter.CurrentTile)
+        if (_selectedPlayerCharacter == null || _selectedMonster == null || _focusTile == _selectedPlayerCharacter.CurrentTile || _rangeFindingTiles == null)
             return;
+        
         foreach (var tile in _rangeFindingTiles.Where(tile => tile == _selectedMonster.CurrentTile))
         {
             _selectedPlayerCharacter.Attack(tile);
             _selectedMonster = null;
+            break;
         }
     }
     

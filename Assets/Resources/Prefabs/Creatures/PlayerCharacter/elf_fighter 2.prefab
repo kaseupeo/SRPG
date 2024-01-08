@@ -53,11 +53,12 @@ MonoBehaviour:
   - level: 0
     healthPoint: 0
     attack: 0
-    block: 0
-    contact: 0
     defence: 0
     turnSpeed: 0
     turnCost: 7
+    attackCost: 1
+    minAttackRange: 0
+    maxAttackRange: 2
 --- !u!212 &2989262492310327135
 SpriteRenderer:
   m_ObjectHideFlags: 0

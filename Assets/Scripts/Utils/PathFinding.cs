@@ -65,7 +65,7 @@ public class PathFinding
         switch (Managers.Game.State)
         { 
             case Define.State.Attack:
-                return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height;
+                return false;
             case Define.State.Move:
             case Define.State.Dead:
             default:
@@ -81,7 +81,9 @@ public class PathFinding
         List<Tile> tilesForPreviousStep = new List<Tile>();
         int stepCount = 0;
 
-        inRangeTile.Add(startTile);
+        if (range != 0) 
+            inRangeTile.Add(startTile);
+        
         tilesForPreviousStep.Add(startTile);
 
         while (stepCount < range)
@@ -100,7 +102,7 @@ public class PathFinding
     }
     
     // 해당 타일에서 갈 수 있는 타일 리스트
-    public static List<Tile> GetSurroundingTiles(Vector2Int originTile, Dictionary<Vector2Int, Tile> mapTiles)
+    private static List<Tile> GetSurroundingTiles(Vector2Int originTile, Dictionary<Vector2Int, Tile> mapTiles)
     {
         List<Tile> surroundingTiles = new List<Tile>();
         

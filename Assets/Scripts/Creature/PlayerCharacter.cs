@@ -27,6 +27,7 @@ public class PlayerCharacter : Creature
     public void ResetTurnCost()
     {
         currentTurnCost = stats[level].TurnCost;
+        currentAttackCost = stats[level].AttackCost;
     }
     
     public override void CharacterPositionOnTile(Tile tile)
@@ -37,6 +38,9 @@ public class PlayerCharacter : Creature
 
     public override void Attack(Tile targetTile)
     {
+        if (currentAttackCost <= 0)
+            return;
+        
         base.Attack(targetTile);
         currentAttackCost--;
     }

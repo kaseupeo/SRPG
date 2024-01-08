@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager
@@ -92,6 +93,50 @@ public class GameManager
         }
     }
     
+    public List<Tile> GetRangeTiles(Creature creature, int maxRange, int minRange = 0)
+    {
+        if (creature == null)
+            return null;
+
+        List<Tile> rangeFindingTiles = PathFinding.GetTilesInRange(creature.CurrentTile.Grid2DLocation, maxRange);
+
+        foreach (Tile tile in PathFinding.GetTilesInRange(creature.CurrentTile.Grid2DLocation, minRange))
+            rangeFindingTiles.Remove(tile);
+        
+        return rangeFindingTiles;
+    }
+
+    public void MonsterMovement()
+    {
+        foreach (Monster monster in _monsters)
+        {
+            List<Tile> rangeFindingTiles = GetRangeTiles(monster, monster.Stats[monster.Level].TurnCost);
+            
+            
+            
+        }
+    }
+
+    public IEnumerator CoMovement(Creature creature, List<Tile> path)
+    {
+        while (true)
+        {
+            yield return null;
+            
+            creature.Move(path[0]);
+
+            if (Vector2.Distance(creature.transform.position, path[0].transform.position) < 0.00001f)
+            {
+                creature.CharacterPositionOnTile(path[0]);
+                path.RemoveAt(0);
+            }
+
+            if (path.Count == 0)
+            {
+                
+            }
+        }
+    }
     
     public void ResetTurn()
     {
@@ -101,7 +146,7 @@ public class GameManager
         }
     }
     
-    
+
     
     
     public void Clear()

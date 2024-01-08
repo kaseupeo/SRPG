@@ -102,18 +102,20 @@ public class Stat
     [SerializeField] private int level;
     [SerializeField] private int healthPoint;
     [SerializeField] private int attack;
-    [SerializeField] private int block;
-    [SerializeField] private int contact;
     [SerializeField] private int defence;
     [SerializeField] private int turnSpeed;
     [SerializeField] private int turnCost;
+    [SerializeField] private int attackCost;
+    [SerializeField] private int minAttackRange;
+    [SerializeField] private int maxAttackRange;
 
     public int Level { get => level; set => level = value; }
     public int HealthPoint { get => healthPoint; set => healthPoint = value; }
     public int Attack { get => attack; set => attack = value; }
-    public int Block { get => block; set => block = value; }
-    public int Contact { get => contact; set => contact = value; }
     public int Defence { get => defence; set => defence = value; }
     public int TurnSpeed { get => turnSpeed; set => turnSpeed = value; }
     public int TurnCost { get => turnCost; set => turnCost = value; }
+    public int AttackCost { get => attackCost; set => attackCost = value; }
+    public int MinAttackRange { get => minAttackRange; set => minAttackRange = value; }
+    public int MaxAttackRange { get => maxAttackRange; set => maxAttackRange = value; }
 }

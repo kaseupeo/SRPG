@@ -31,20 +31,15 @@ public class Tile : MonoBehaviour
         _childSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
     }
 
-    public void ShowTile()
+    public void ShowTile(Color color)
     {
-        _spriteRenderer.color = new Color(1, 1, 1, 1);
+        _spriteRenderer.color = color;
     }
 
     public void HideTile()
     {
         _spriteRenderer.color = new Color(1, 1, 1, 0);
         _childSpriteRenderer.color = new Color(1, 1, 1, 0);
-    }
-
-    public void ShowAttackTile()
-    {
-        _spriteRenderer.color = new Color(0, 0, 1, 1);
     }
 
     public void SetSprite(ArrowDirection dir)

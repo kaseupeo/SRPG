@@ -56,7 +56,11 @@ public class MapManager
         }
     }
 
-    
+    public void ShowTile(List<Tile> rangeTile, Color color)
+    {
+        foreach (Tile tile in rangeTile)
+            tile.ShowTile(color);
+    }
     
     // 중심 타일에서 한 칸 간격으로 이동 가능한 타일 리스트(십자가모양)
     public List<Tile> GetSurroundingTiles(Vector2Int originTile)
