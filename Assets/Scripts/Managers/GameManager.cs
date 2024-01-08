@@ -106,6 +106,10 @@ public class GameManager
         return rangeFindingTiles;
     }
 
+    // 몬스터의 공격 범위 만큼 플레이어 중심으로 타일 찾기
+    // 찾은 타일들에서 몬스터까지 길찾기해서 가장 잛은 경로 저장
+    // -> 몬스터까지 거리가 된다면 그곳으로
+    // -> 되지 않는다면 다시 길찾기해서 가장 가까운곳으로
     public void MonsterMovement()
     {
         foreach (Monster monster in _monsters)
