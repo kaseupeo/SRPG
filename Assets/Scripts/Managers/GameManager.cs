@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager
 {
     private Define.GameMode _gameMode;
-    private Define.State _playerState;
     private Define.State _monsterState;
     
     private PlayerCharacter _selectedCharacter;
@@ -16,7 +15,6 @@ public class GameManager
     private int _maxPlayerCharacter;
     
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
-    public Define.State PlayerState { get => _playerState; set => _playerState = value; }
     public Define.State MonsterState { get => _monsterState; set => _monsterState = value; }
     public PlayerCharacter SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
     public List<PlayerCharacter> LoadPlayerCharacters { get => _loadPlayerCharacters; set => _loadPlayerCharacters = value; }
@@ -33,6 +31,7 @@ public class GameManager
         _playerCharacters = new List<PlayerCharacter>();
         _monsters = new List<Monster>();
         _maxPlayerCharacter = 2;
+        _monsterState = Define.State.Idle;
     }
     
     // 플레이어캐릭터 & 몬스터 프리팹 로드 메소드
@@ -114,47 +113,58 @@ public class GameManager
     // 찾은 타일들에서 몬스터까지 길찾기해서 가장 잛은 경로 저장
     // -> 몬스터까지 거리가 된다면 그곳으로
     // -> 되지 않는다면 다시 길찾기해서 가장 가까운곳으로
-    public List<Tile> MonsterMovement(Creature monster, Creature target)
+    private List<Tile> MonsterMovement(Creature monster, List<PlayerCharacter> targets, out Creature target)
     {
-        _monsterState = Define.State.Move;
+        List<Tile> shortestTiles = PathFinding.FindPath(monster.CurrentTile,
+            targets[Random.Range(0, targets.Count)].CurrentTile, new List<Tile>());
+        List<Tile> attackRangeTiles = new List<Tile>();
+        target = null;
         
-        // 1. 몬스터의 공격 범위만큼 타겟 중심으로 타일 찾기
-        List<Tile> attackRangeTiles = GetRangeTiles(target.CurrentTile, monster.Stats[monster.Level].MaxAttackRange);
-
-        // List<Tile> monsterMoveTiles = GetRangeTiles(monster.CurrentTile, 1000/* monster.Stats[monster.Level].TurnCost*/);
-
-        List<Tile> shortestTiles = new List<Tile>();
-        foreach (Tile attackRangeTile in attackRangeTiles)
+        foreach (PlayerCharacter playerCharacter in targets)
         {
-            if (attackRangeTile == target.CurrentTile)
-                continue;
+            attackRangeTiles = GetRangeTiles(playerCharacter.CurrentTile, monster.Stats[monster.Level].MaxAttackRange);
             
-            List<Tile> path = PathFinding.FindPath(monster.CurrentTile, attackRangeTile, new List<Tile>());
-
-            if (shortestTiles.Count == 0)
+            foreach (Tile attackRangeTile in attackRangeTiles)
             {
-                shortestTiles = path;
-            }
+                if (attackRangeTile == playerCharacter.CurrentTile)
+                    continue;
+            
+                List<Tile> path = PathFinding.FindPath(monster.CurrentTile, attackRangeTile, new List<Tile>());
 
-            if (shortestTiles.Count > path.Count && path.Count <= monster.Stats[monster.Level].TurnCost)
-            {
-                shortestTiles = path;
+                if (shortestTiles.Count == 0)
+                {
+                    shortestTiles = path;
+                    target = playerCharacter;
+                }
+
+                if (shortestTiles.Count > path.Count && path.Count <= monster.Stats[monster.Level].TurnCost)
+                {
+                    shortestTiles = path;
+                    target = playerCharacter;
+                }
             }
         }
-
+        
         return shortestTiles;
     }
     
-    public IEnumerator CoMovePath(Creature creature, Creature target)
+    public IEnumerator CoMovePath(Creature creature, List<PlayerCharacter> targets)
     {
-        List<Tile> path = MonsterMovement(creature, target);
+        _monsterState = Define.State.Move;
+        List<Tile> path = MonsterMovement(creature, targets, out var target);
         int cost = creature.Stats[creature.Level].TurnCost;
         while (true)
         {
+            if (creature.State == Define.State.Attack)
+                continue;
+            
             yield return null;
             
             if (path.Count <= 0 || cost == 0)
             {
+                if (target == null)
+                    break;
+                
                 _monsterState = Define.State.Attack;
                 List<Tile> attackRangeTiles = GetRangeTiles(creature.CurrentTile, creature.Stats[creature.Level].MaxAttackRange, creature.Stats[creature.Level].MinAttackRange, false);
 
@@ -163,7 +173,7 @@ public class GameManager
                     if (tile == target.CurrentTile)
                     {
                         creature.Attack(target.CurrentTile);
-                        // break;
+                        break;
                     }
                 }
 
@@ -185,19 +195,6 @@ public class GameManager
     }
 
     
-    
-    public void MonsterMoveCheck()
-    {
-        if (_playerCharacters == null || _monsters == null)
-            return;
-
-        var target = _playerCharacters[Random.Range(0, _maxPlayerCharacter)];
-        
-        
-    }
-    
-    
-    
     public void ResetTurn()
     {
         foreach (PlayerCharacter playerCharacter in _playerCharacters)
@@ -206,12 +203,79 @@ public class GameManager
         }
     }
     
-
-    
-    
     public void Clear()
     {
         _loadPlayerCharacters.Clear();
     }
-    
 }
+
+
+    // private List<Tile> MonsterMovement(Creature monster, Creature target)
+    // {
+    //     _monsterState = Define.State.Move;
+    //     
+    //     // 1. 몬스터의 공격 범위만큼 타겟 중심으로 타일 찾기
+    //     List<Tile> attackRangeTiles = GetRangeTiles(target.CurrentTile, monster.Stats[monster.Level].MaxAttackRange);
+    //
+    //     // List<Tile> monsterMoveTiles = GetRangeTiles(monster.CurrentTile, 1000/* monster.Stats[monster.Level].TurnCost*/);
+    //
+    //     List<Tile> shortestTiles = new List<Tile>();
+    //     foreach (Tile attackRangeTile in attackRangeTiles)
+    //     {
+    //         if (attackRangeTile == target.CurrentTile)
+    //             continue;
+    //         
+    //         List<Tile> path = PathFinding.FindPath(monster.CurrentTile, attackRangeTile, new List<Tile>());
+    //
+    //         if (shortestTiles.Count == 0)
+    //         {
+    //             shortestTiles = path;
+    //         }
+    //
+    //         if (shortestTiles.Count > path.Count && path.Count <= monster.Stats[monster.Level].TurnCost)
+    //         {
+    //             shortestTiles = path;
+    //         }
+    //     }
+    //
+    //     return shortestTiles;
+    // }
+    //
+    // public IEnumerator CoMovePath(Creature creature, Creature target)
+    // {
+    //     List<Tile> path = MonsterMovement(creature, target);
+    //     int cost = creature.Stats[creature.Level].TurnCost;
+    //     while (true)
+    //     {
+    //         yield return null;
+    //         
+    //         if (path.Count <= 0 || cost == 0)
+    //         {
+    //             _monsterState = Define.State.Attack;
+    //             List<Tile> attackRangeTiles = GetRangeTiles(creature.CurrentTile, creature.Stats[creature.Level].MaxAttackRange, creature.Stats[creature.Level].MinAttackRange, false);
+    //
+    //             foreach (Tile tile in attackRangeTiles)
+    //             {
+    //                 if (tile == target.CurrentTile)
+    //                 {
+    //                     creature.Attack(target.CurrentTile);
+    //                     break;
+    //                 }
+    //             }
+    //
+    //             _monsterState = Define.State.Idle;
+    //             Managers.Game.GameMode = Define.GameMode.PlayerTurn;
+    //             Managers.Game.ResetTurn();
+    //             yield break;
+    //         }
+    //
+    //         creature.Move(path[0]);
+    //         
+    //         if (Vector2.Distance(creature.transform.position, path[0].transform.position) < 0.00001f)
+    //         {
+    //             creature.CharacterPositionOnTile(path[0]);
+    //             path.RemoveAt(0);
+    //             cost--;
+    //         }
+    //     }
+    // }

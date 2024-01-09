@@ -6,8 +6,19 @@ using ArrowDirection = Define.ArrowDirection;
 
 public class MonsterController : MonoBehaviour
 {
-    private void Awake()
+    private List<Monster> _monsters;
+    private List<PlayerCharacter> _playerCharacters;
+    
+    
+    public void MonsterMoveCheck()
     {
+        if (_playerCharacters == null || _monsters == null)
+            return;
+
+        foreach (Monster monster in _monsters)
+        {
+            
+        }
         
     }
 }

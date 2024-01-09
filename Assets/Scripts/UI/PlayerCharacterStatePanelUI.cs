@@ -39,7 +39,7 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
         {
             if (_toggles[i].GetComponent<Toggle>().isOn)
             {
-                Managers.Game.PlayerState = _toggles[i].State;
+                Managers.Game.SelectedCharacter.State = _toggles[i].State;
                 break;
             }
         }

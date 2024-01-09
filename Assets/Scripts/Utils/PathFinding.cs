@@ -62,7 +62,7 @@ public class PathFinding
     // 시작 타일에서 도착 타일을 갈 수 있는지 확인하는 
     public static bool IsCheckToPassTile(Tile startTile, Tile endTile, int height = 1)
     {
-        if (Managers.Game.PlayerState == Define.State.Attack || Managers.Game.MonsterState == Define.State.Attack)
+        if (Managers.Game.SelectedCharacter.State == Define.State.Attack || Managers.Game.MonsterState == Define.State.Attack)
             return false;
         
         return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height ||

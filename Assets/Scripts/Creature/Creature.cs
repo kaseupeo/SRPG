@@ -13,7 +13,7 @@ public abstract class Creature : MonoBehaviour
     [SerializeField]
     protected List<Stat> stats;
     protected List<Skill> skills;
-    protected Define.CreatureState state;
+    protected Define.State state;
     protected Tile currentTile;
     
     public string Name { get => name; set => name = value; }
@@ -21,7 +21,7 @@ public abstract class Creature : MonoBehaviour
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public List<Stat> Stats { get => stats; set => stats = value; }
     public List<Skill> Skills { get => skills; set => skills = value; }
-    public Define.CreatureState State { get => state; set => state = value; }
+    public Define.State State { get => state; set => state = value; }
     public Tile CurrentTile { get => currentTile; set => currentTile = value; }
     
     protected SpriteRenderer spriteRenderer;
@@ -38,7 +38,7 @@ public abstract class Creature : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
-        state = Define.CreatureState.Idle;
+        state = Define.State.Idle;
         moveSpeed = 1;
         gameObject.name = name;
     }

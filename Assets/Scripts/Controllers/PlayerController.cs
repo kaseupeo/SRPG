@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         if (_selectedPlayerCharacter == null)
             return;
         
-        switch (Managers.Game.PlayerState)
+        switch (_selectedPlayerCharacter.State)
         {
             case Define.State.Move:
                 _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter.CurrentTile, _selectedPlayerCharacter.CurrentTurnCost);
@@ -95,7 +95,10 @@ public class PlayerController : MonoBehaviour
                 
                 SelectedTileInfo(_focusTile);
 
-                switch (Managers.Game.PlayerState)
+                if (_selectedPlayerCharacter == null)
+                    return;
+
+                switch (_selectedPlayerCharacter.State)
                 {
                     case Define.State.Idle:
                         foreach (Tile tile in _rangeFindingTiles)
@@ -104,15 +107,15 @@ public class PlayerController : MonoBehaviour
                         }
                         break;
                     case Define.State.Move:
-                        Debug.Log($"{Managers.Game.PlayerState}");
+                        Debug.Log($"{_selectedPlayerCharacter.State}");
                         MoveCheck();
                         break;
                     case Define.State.Attack:
-                        Debug.Log($"{Managers.Game.PlayerState}");
+                        Debug.Log($"{_selectedPlayerCharacter.State}");
                         MonsterCheck();
                         break;
                     case Define.State.Dead:
-                        Debug.Log($"{Managers.Game.PlayerState}");
+                        Debug.Log($"{_selectedPlayerCharacter.State}");
                         break;
                 }
                 
@@ -185,6 +188,7 @@ public class PlayerController : MonoBehaviour
         foreach (var playerCharacter in Managers.Game.PlayerCharacters.Where(playerCharacter => playerCharacter.CurrentTile == tile))
         {
             _selectedPlayerCharacter = playerCharacter;
+            Managers.Game.SelectedCharacter = _selectedPlayerCharacter;
         }
 
         foreach (var monster in Managers.Game.Monsters.Where(monster => monster.CurrentTile == tile))

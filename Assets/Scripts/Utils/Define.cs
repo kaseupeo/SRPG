@@ -46,14 +46,6 @@ public class Define
         Armor,
         Shoes,
     }
-    
-    public enum CreatureState
-    {
-        Idle,
-        Move,
-        Attack,
-        Dead,
-    }
 
     public enum ArrowDirection
     {
