@@ -12,7 +12,7 @@ public class PathFinding
     // 길찾기
     public static List<Tile> FindPath(Tile start, Tile end, List<Tile> inRangeTiles)
     {
-        _searchableTiles = new Dictionary<Vector2Int, Tile>();
+         _searchableTiles = new Dictionary<Vector2Int, Tile>();
         
         List<Tile> openList = new List<Tile>();
         List<Tile> closedList = new List<Tile>();
@@ -56,21 +56,17 @@ public class PathFinding
             }
         }
 
-        return new List<Tile>() ;
+        return new List<Tile>();
     }
 
     // 시작 타일에서 도착 타일을 갈 수 있는지 확인하는 
     public static bool IsCheckToPassTile(Tile startTile, Tile endTile, int height = 1)
     {
-        switch (Managers.Game.State)
-        { 
-            case Define.State.Attack:
-                return false;
-            case Define.State.Move:
-            case Define.State.Dead:
-            default:
-                return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height || endTile.IsBlocked;
-        }
+        if (Managers.Game.PlayerState == Define.State.Attack || Managers.Game.MonsterState == Define.State.Attack)
+            return false;
+        
+        return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height ||
+               endTile.IsBlocked;
     }
     
     // 범위 내 타일들 찾기
@@ -81,8 +77,8 @@ public class PathFinding
         List<Tile> tilesForPreviousStep = new List<Tile>();
         int stepCount = 0;
 
-        if (range != 0) 
-            inRangeTile.Add(startTile);
+        // if (range != 0) 
+        //     inRangeTile.Add(startTile);
         
         tilesForPreviousStep.Add(startTile);
 

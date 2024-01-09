@@ -5,8 +5,8 @@ using UnityEngine;
 public class GameManager
 {
     private Define.GameMode _gameMode;
-    private Define.State _state;
-    private bool _isBeforeStart;
+    private Define.State _playerState;
+    private Define.State _monsterState;
     
     private PlayerCharacter _selectedCharacter;
     private List<PlayerCharacter> _loadPlayerCharacters;
@@ -16,8 +16,8 @@ public class GameManager
     private int _maxPlayerCharacter;
     
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
-    public Define.State State { get => _state; set => _state = value; }
-    public bool IsPlacingCharacter { get => _isBeforeStart; set => _isBeforeStart = value; }
+    public Define.State PlayerState { get => _playerState; set => _playerState = value; }
+    public Define.State MonsterState { get => _monsterState; set => _monsterState = value; }
     public PlayerCharacter SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
     public List<PlayerCharacter> LoadPlayerCharacters { get => _loadPlayerCharacters; set => _loadPlayerCharacters = value; }
     public List<Monster> LoadMonsters { get => _loadMonsters; set => _loadMonsters = value; }
@@ -29,7 +29,6 @@ public class GameManager
     public void Init()
     {
         _gameMode = Define.GameMode.Preparation;
-        _isBeforeStart = true;
         LoadCharacters();
         _playerCharacters = new List<PlayerCharacter>();
         _monsters = new List<Monster>();
@@ -80,6 +79,7 @@ public class GameManager
         _playerCharacters.Add(pc);
     }
 
+    // 몬스터 랜덤 위치에 생성
     public void GenerateRandomMonster()
     {
         List<Tile> tiles = new List<Tile>(Managers.Map.MapTiles.Values);
@@ -93,54 +93,110 @@ public class GameManager
         }
     }
     
-    public List<Tile> GetRangeTiles(Creature creature, int maxRange, int minRange = 0)
+    // 최소 ~ 최대 범위 타일 리스트
+    public List<Tile> GetRangeTiles(Tile startTile, int maxRange, int minRange = 0, bool isMoving = true)
     {
-        if (creature == null)
+        if (startTile == null)
             return null;
 
-        List<Tile> rangeFindingTiles = PathFinding.GetTilesInRange(creature.CurrentTile.Grid2DLocation, maxRange);
+        List<Tile> rangeFindingTiles = PathFinding.GetTilesInRange(startTile.Grid2DLocation, maxRange);
 
-        foreach (Tile tile in PathFinding.GetTilesInRange(creature.CurrentTile.Grid2DLocation, minRange))
+        foreach (Tile tile in PathFinding.GetTilesInRange(startTile.Grid2DLocation, minRange))
             rangeFindingTiles.Remove(tile);
-        
+
+        if (isMoving) 
+            rangeFindingTiles.Add(startTile);
+
         return rangeFindingTiles;
     }
 
-    // 몬스터의 공격 범위 만큼 플레이어 중심으로 타일 찾기
+    // 1. 몬스터의 공격 범위 만큼 플레이어 중심으로 타일 찾기
     // 찾은 타일들에서 몬스터까지 길찾기해서 가장 잛은 경로 저장
     // -> 몬스터까지 거리가 된다면 그곳으로
     // -> 되지 않는다면 다시 길찾기해서 가장 가까운곳으로
-    public void MonsterMovement()
+    public List<Tile> MonsterMovement(Creature monster, Creature target)
     {
-        foreach (Monster monster in _monsters)
-        {
-            List<Tile> rangeFindingTiles = GetRangeTiles(monster, monster.Stats[monster.Level].TurnCost);
-            
-            
-            
-        }
-    }
+        _monsterState = Define.State.Move;
+        
+        // 1. 몬스터의 공격 범위만큼 타겟 중심으로 타일 찾기
+        List<Tile> attackRangeTiles = GetRangeTiles(target.CurrentTile, monster.Stats[monster.Level].MaxAttackRange);
 
-    public IEnumerator CoMovement(Creature creature, List<Tile> path)
+        // List<Tile> monsterMoveTiles = GetRangeTiles(monster.CurrentTile, 1000/* monster.Stats[monster.Level].TurnCost*/);
+
+        List<Tile> shortestTiles = new List<Tile>();
+        foreach (Tile attackRangeTile in attackRangeTiles)
+        {
+            if (attackRangeTile == target.CurrentTile)
+                continue;
+            
+            List<Tile> path = PathFinding.FindPath(monster.CurrentTile, attackRangeTile, new List<Tile>());
+
+            if (shortestTiles.Count == 0)
+            {
+                shortestTiles = path;
+            }
+
+            if (shortestTiles.Count > path.Count && path.Count <= monster.Stats[monster.Level].TurnCost)
+            {
+                shortestTiles = path;
+            }
+        }
+
+        return shortestTiles;
+    }
+    
+    public IEnumerator CoMovePath(Creature creature, Creature target)
     {
+        List<Tile> path = MonsterMovement(creature, target);
+        int cost = creature.Stats[creature.Level].TurnCost;
         while (true)
         {
             yield return null;
             
-            creature.Move(path[0]);
+            if (path.Count <= 0 || cost == 0)
+            {
+                _monsterState = Define.State.Attack;
+                List<Tile> attackRangeTiles = GetRangeTiles(creature.CurrentTile, creature.Stats[creature.Level].MaxAttackRange, creature.Stats[creature.Level].MinAttackRange, false);
 
+                foreach (Tile tile in attackRangeTiles)
+                {
+                    if (tile == target.CurrentTile)
+                    {
+                        creature.Attack(target.CurrentTile);
+                        // break;
+                    }
+                }
+
+                _monsterState = Define.State.Idle;
+                Managers.Game.GameMode = Define.GameMode.PlayerTurn;
+                Managers.Game.ResetTurn();
+                yield break;
+            }
+
+            creature.Move(path[0]);
+            
             if (Vector2.Distance(creature.transform.position, path[0].transform.position) < 0.00001f)
             {
                 creature.CharacterPositionOnTile(path[0]);
                 path.RemoveAt(0);
-            }
-
-            if (path.Count == 0)
-            {
-                
+                cost--;
             }
         }
     }
+
+    
+    
+    public void MonsterMoveCheck()
+    {
+        if (_playerCharacters == null || _monsters == null)
+            return;
+
+        var target = _playerCharacters[Random.Range(0, _maxPlayerCharacter)];
+        
+        
+    }
+    
+    
     
     public void ResetTurn()
     {

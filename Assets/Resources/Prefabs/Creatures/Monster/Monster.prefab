@@ -107,7 +107,7 @@ MonoBehaviour:
     defence: 0
     turnSpeed: 0
     turnCost: 3
-    attackCost: 0
+    attackCost: 1
     minAttackRange: 0
     maxAttackRange: 1
 --- !u!95 &2989262492310327132

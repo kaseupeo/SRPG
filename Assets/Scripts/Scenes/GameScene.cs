@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class GameScene : MonoBehaviour
 {
@@ -18,11 +19,6 @@ public class GameScene : MonoBehaviour
         Managers.Map.GenerateOverlayTile(_tileMaps);
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void BattleStart()
     {
         Managers.Game.GameMode = Define.GameMode.PlayerTurn;
@@ -31,7 +27,10 @@ public class GameScene : MonoBehaviour
 
     public void FinishedPlayerTurn()
     {
+        Managers.Game.PlayerState = Define.State.Idle;
         Managers.Game.GameMode = Define.GameMode.MonsterTurn;
+
+        StartCoroutine(Managers.Game.CoMovePath(Managers.Game.Monsters[0], Managers.Game.PlayerCharacters[0]));
     }
 
     public void FinishMonsterTurn()

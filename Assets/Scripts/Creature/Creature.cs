@@ -39,6 +39,8 @@ public abstract class Creature : MonoBehaviour
         animator = GetComponent<Animator>();
 
         state = Define.CreatureState.Idle;
+        moveSpeed = 1;
+        gameObject.name = name;
     }
     
     /*
@@ -87,13 +89,9 @@ public abstract class Creature : MonoBehaviour
         animator.SetFloat("Y", dir.y);
 
         animator.SetTrigger("Slash");
-        
     }
     
     public abstract void Dead();
-
-
-    
 }
 
 [Serializable]

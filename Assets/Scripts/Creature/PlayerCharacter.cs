@@ -15,10 +15,7 @@ public class PlayerCharacter : Creature
     public int CurrentAttackCost { get => currentAttackCost; set => currentAttackCost = value; }
 
     public override void Init()
-    {
-        // 임시
-        moveSpeed = 1;
-        gameObject.name = name;
+    { 
         ResetTurnCost();
     
         base.Init();

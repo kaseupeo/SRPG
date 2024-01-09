@@ -16,12 +16,18 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
     {
         _toggleGroup = GetComponent<ToggleGroup>();
         _toggles = new List<StateToggleUI>();
-
-
-        for (int i = 0; i < Enum.GetValues(typeof(Define.State)).Length; i++)
+        
+        // MOVE
         {
             var toggle = Instantiate(togglePrefab, _toggleGroup.transform).gameObject.AddComponent<StateToggleUI>();
-            toggle.SetCharacterState((Define.State)i);
+            toggle.SetCharacterState(Define.State.Move);
+            _toggles.Add(toggle);
+            toggle.GetComponent<Toggle>().group = _toggleGroup;
+        }
+        // ATTACK
+        {
+            var toggle = Instantiate(togglePrefab, _toggleGroup.transform).gameObject.AddComponent<StateToggleUI>();
+            toggle.SetCharacterState(Define.State.Attack);
             _toggles.Add(toggle);
             toggle.GetComponent<Toggle>().group = _toggleGroup;
         }
@@ -33,7 +39,7 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
         {
             if (_toggles[i].GetComponent<Toggle>().isOn)
             {
-                Managers.Game.State = _toggles[i].State;
+                Managers.Game.PlayerState = _toggles[i].State;
                 break;
             }
         }

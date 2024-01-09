@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 using ArrowDirection = Define.ArrowDirection;
 
@@ -45,10 +46,10 @@ public class PlayerController : MonoBehaviour
         if (_selectedPlayerCharacter == null)
             return;
         
-        switch (Managers.Game.State)
+        switch (Managers.Game.PlayerState)
         {
             case Define.State.Move:
-                _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter, _selectedPlayerCharacter.CurrentTurnCost);
+                _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter.CurrentTile, _selectedPlayerCharacter.CurrentTurnCost);
                 Managers.Map.ShowTile(_rangeFindingTiles, Color.white);
                 _selectedPlayerCharacter.CurrentTile.HideTile();
                 ShowFindPath(_focusTile, _selectedPlayerCharacter);
@@ -56,9 +57,8 @@ public class PlayerController : MonoBehaviour
             case Define.State.Attack:
                 if (_selectedPlayerCharacter.CurrentAttackCost <= 0)
                     return;
-                _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter, _selectedPlayerCharacter.Stats[_selectedPlayerCharacter.Level].MaxAttackRange, _selectedPlayerCharacter.Stats[_selectedPlayerCharacter.Level].MinAttackRange);
+                _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter.CurrentTile, _selectedPlayerCharacter.Stats[_selectedPlayerCharacter.Level].MaxAttackRange, _selectedPlayerCharacter.Stats[_selectedPlayerCharacter.Level].MinAttackRange, false);
                 Managers.Map.ShowTile(_rangeFindingTiles, Color.blue);
-                _selectedPlayerCharacter.CurrentTile.HideTile();
                 break;
             case Define.State.Dead:
                 break;
@@ -82,6 +82,10 @@ public class PlayerController : MonoBehaviour
     // 마우스
     private void MouseClick()
     {
+        // UI 클릭시 다른 오브젝트 클릭 방지
+        if(EventSystem.current.IsPointerOverGameObject())
+            return;
+        
         switch (Managers.Game.GameMode)
         {
             case Define.GameMode.Preparation:
@@ -91,21 +95,30 @@ public class PlayerController : MonoBehaviour
                 
                 SelectedTileInfo(_focusTile);
 
-                switch (Managers.Game.State)
+                switch (Managers.Game.PlayerState)
                 {
+                    case Define.State.Idle:
+                        foreach (Tile tile in _rangeFindingTiles)
+                        {
+                            tile.HideTile();
+                        }
+                        break;
                     case Define.State.Move:
-                        Debug.Log($"{Managers.Game.State}");
+                        Debug.Log($"{Managers.Game.PlayerState}");
                         MoveCheck();
                         break;
                     case Define.State.Attack:
-                        Debug.Log($"{Managers.Game.State}");
+                        Debug.Log($"{Managers.Game.PlayerState}");
                         MonsterCheck();
                         break;
                     case Define.State.Dead:
-                        Debug.Log($"{Managers.Game.State}");
+                        Debug.Log($"{Managers.Game.PlayerState}");
                         break;
                 }
                 
+                break;
+            case Define.GameMode.MonsterTurn:
+
                 break;
         }
     }
@@ -137,6 +150,7 @@ public class PlayerController : MonoBehaviour
         _cursor.transform.position = focusTile.transform.position;
         _cursor.GetComponent<SpriteRenderer>().sortingOrder = focusTile.GetComponent<SpriteRenderer>().sortingOrder;
         _cursor.ShowCursor();
+        
     }
     
     // 찾은 경로 보여주기
@@ -176,6 +190,11 @@ public class PlayerController : MonoBehaviour
         foreach (var monster in Managers.Game.Monsters.Where(monster => monster.CurrentTile == tile))
         {
             _selectedMonster = monster;
+
+            // if (_selectedPlayerCharacter == null)
+            // {
+            //     Managers.Map.ShowTile(Managers.Game.GetRangeTiles(monster.CurrentTile, monster.Stats[monster.Level].TurnCost), Color.red);
+            // }
         }
     }
     
