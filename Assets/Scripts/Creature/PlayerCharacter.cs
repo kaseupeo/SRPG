@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,16 +34,16 @@ public class PlayerCharacter : Creature
         currentTurnCost--;
     }
 
-    public override void Attack(Tile targetTile)
+    public override void Attack(Creature target)
     {
         if (currentAttackCost <= 0)
             return;
         
-        base.Attack(targetTile);
+        base.Attack(target);
         currentAttackCost--;
     }
-    
-    public override void Dead() { }
+
+    // protected override IEnumerator Dead() { }
 
     private void OnDestroy()
     {

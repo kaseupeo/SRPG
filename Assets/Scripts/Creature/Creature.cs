@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -80,18 +81,41 @@ public abstract class Creature : MonoBehaviour
         currentTile = tile;
     }
     
-    public virtual void Attack(Tile targetTile)
+    public virtual void Attack(Creature target)
     {
         // TODO : 공격
-        Vector2 dir = targetTile.transform.position - transform.position;
+        Vector2 dir = target.currentTile.transform.position - transform.position;
 
         animator.SetFloat("X", dir.x);
         animator.SetFloat("Y", dir.y);
 
         animator.SetTrigger("Slash");
+
+        int damage = stats[level].Attack - target.Stats[target.level].Defence;
+
+        damage = damage > 0 ? damage : 0;
+
+        target.stats[target.level].HealthPoint -= damage;
+        Debug.Log($"{target.name} take damage : {damage}\nremaining hp : {target.stats[level].HealthPoint}");
+
+        if (target.stats[target.level].HealthPoint <= 0)
+        {
+            StartCoroutine(target.Dead());
+        }
     }
-    
-    public abstract void Dead();
+
+    protected virtual IEnumerator Dead()
+    {
+        animator.SetTrigger("Dead");
+        transform.position = new Vector2(transform.position.x + 0f, transform.position.y -0.12f);
+        
+        for (var i = 0; i < 64; i++)
+        {
+            yield return null;
+        }
+        
+        // Destroy(gameObject);
+    }
 }
 
 [Serializable]
@@ -101,7 +125,6 @@ public class Stat
     [SerializeField] private int healthPoint;
     [SerializeField] private int attack;
     [SerializeField] private int defence;
-    [SerializeField] private int turnSpeed;
     [SerializeField] private int turnCost;
     [SerializeField] private int attackCost;
     [SerializeField] private int minAttackRange;
@@ -111,7 +134,6 @@ public class Stat
     public int HealthPoint { get => healthPoint; set => healthPoint = value; }
     public int Attack { get => attack; set => attack = value; }
     public int Defence { get => defence; set => defence = value; }
-    public int TurnSpeed { get => turnSpeed; set => turnSpeed = value; }
     public int TurnCost { get => turnCost; set => turnCost = value; }
     public int AttackCost { get => attackCost; set => attackCost = value; }
     public int MinAttackRange { get => minAttackRange; set => minAttackRange = value; }

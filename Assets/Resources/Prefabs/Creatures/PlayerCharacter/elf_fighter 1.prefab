@@ -51,9 +51,9 @@ MonoBehaviour:
   name: elf1
   stats:
   - level: 0
-    healthPoint: 0
-    attack: 0
-    defence: 0
+    healthPoint: 50
+    attack: 20
+    defence: 10
     turnSpeed: 0
     turnCost: 7
     attackCost: 1

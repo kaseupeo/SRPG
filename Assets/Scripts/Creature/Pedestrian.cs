@@ -5,8 +5,8 @@
         base.Init();
     }
     
-    public override void Dead()
-    {
-        
-    }
+    // public override void Dead()
+    // {
+    //     
+    // }
 }

@@ -198,7 +198,7 @@ public class GameManager
                             {
                                 Debug.Log($"{monster.name} attack");
                                 monster.State = Define.State.Attack;
-                                monster.Attack(target.CurrentTile);
+                                monster.Attack(target);
                                 monster.State = Define.State.Idle;
                                 break;
                             }

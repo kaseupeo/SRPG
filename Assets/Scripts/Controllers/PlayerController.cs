@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour
         
         foreach (var tile in _rangeFindingTiles.Where(tile => tile == _selectedMonster.CurrentTile))
         {
-            _selectedPlayerCharacter.Attack(tile);
+            _selectedPlayerCharacter.Attack(_selectedMonster);
             _selectedMonster = null;
             break;
         }

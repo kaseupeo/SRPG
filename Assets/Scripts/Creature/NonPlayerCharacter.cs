@@ -9,5 +9,5 @@
         base.Init();
     }
 
-    public abstract override void Dead();
+    // public abstract override void Dead();
 }

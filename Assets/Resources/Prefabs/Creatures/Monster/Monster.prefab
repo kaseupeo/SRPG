@@ -102,10 +102,9 @@ MonoBehaviour:
   name: Monster
   stats:
   - level: 0
-    healthPoint: 0
-    attack: 0
+    healthPoint: 100
+    attack: 20
     defence: 0
-    turnSpeed: 0
     turnCost: 3
     attackCost: 1
     minAttackRange: 0

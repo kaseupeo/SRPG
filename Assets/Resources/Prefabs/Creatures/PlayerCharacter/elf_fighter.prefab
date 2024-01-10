@@ -51,10 +51,9 @@ MonoBehaviour:
   name: elf
   stats:
   - level: 0
-    healthPoint: 0
-    attack: 0
+    healthPoint: 100
+    attack: 100
     defence: 0
-    turnSpeed: 0
     turnCost: 7
     attackCost: 2
     minAttackRange: 2
