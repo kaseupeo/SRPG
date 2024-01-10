@@ -25,6 +25,7 @@ public class Monster : NonPlayerCharacter
             yield return null;
         }
 
+        Managers.Game.Monsters.Remove(this);
         currentTile.IsBlocked = false;
         Drop();
         Destroy(gameObject);

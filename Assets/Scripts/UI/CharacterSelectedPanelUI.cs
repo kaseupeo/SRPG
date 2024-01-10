@@ -28,20 +28,21 @@ public class CharacterSelectedPanelUI : MonoBehaviour
             toggle.SetPlayerCharacter(_playerCharacters[i]);
             _toggles.Add(toggle);
             toggle.GetComponent<Toggle>().group = _toggleGroup;
+            toggle.GetComponent<Toggle>().isOn = false;
         }
     }
 
-    private void Update()
-    {
-        for (int i = 0; i < _toggles.Count; i++)
-        {
-            if (_toggles[i].GetComponent<Toggle>().isOn)
-            {
-                Managers.Game.SelectedCharacter = _playerCharacters[i];
-                break;
-            }
-        }
-    }
+    // private void Update()
+    // {
+    //     for (int i = 0; i < _toggles.Count; i++)
+    //     {
+    //         if (_toggles[i].GetComponent<Toggle>().isOn)
+    //         {
+    //             Managers.Game.SelectedCharacter = _playerCharacters[i];
+    //             break;
+    //         }
+    //     }
+    // }
 
     private void OnDisable()
     {

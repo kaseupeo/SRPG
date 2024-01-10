@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -23,6 +25,7 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
             toggle.SetCharacterState(Define.State.Move);
             _toggles.Add(toggle);
             toggle.GetComponent<Toggle>().group = _toggleGroup;
+            toggle.GetComponent<Toggle>().isOn = false;
         }
         // ATTACK
         {
@@ -30,21 +33,12 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
             toggle.SetCharacterState(Define.State.Attack);
             _toggles.Add(toggle);
             toggle.GetComponent<Toggle>().group = _toggleGroup;
+            toggle.GetComponent<Toggle>().isOn = false;
         }
     }
 
-    private void Update()
-    {
-        for (int i = 0; i < _toggles.Count; i++)
-        {
-            if (_toggles[i].GetComponent<Toggle>().isOn)
-            {
-                Managers.Game.SelectedCharacter.State = _toggles[i].State;
-                break;
-            }
-        }
-    }
-
+    
+    
     private void OnDisable()
     {
         foreach (StateToggleUI toggle in _toggles)

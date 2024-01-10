@@ -9,20 +9,20 @@ public class InfoPanelUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text1;
     [SerializeField] private TextMeshProUGUI text2;
 
-    private PlayerCharacter _playerCharacter;
-    private int _level;
-
     private void Update()
     {
-        _playerCharacter = Managers.Game.SelectedCharacter;
-        _level = _playerCharacter.Level;
-        UpdateInfo();
+        UpdateInfo(Managers.Game.SelectedCharacter);
     }
 
-    private void UpdateInfo()
+    public void UpdateInfo(Creature creature)
     {
+        if (creature == null)
+            return;
+        
+        int level = creature.Level;
+        
         image = image;
-        text1.text = $"이름 : {_playerCharacter.Name}\n이동력 : {_playerCharacter.Stats[_level].TurnCost}\n공격횟수 : {_playerCharacter.Stats[_level].AttackCost}";
-        text2.text = $"체력 : {_playerCharacter.Stats[_level].HealthPoint}\n공격력 : {_playerCharacter.Stats[_level].Attack}\n방어력 : {_playerCharacter.Stats[_level].Defence}";
+        text1.text = $"이름 : {creature.Name}\n이동력 : {creature.Stats[level].TurnCost}\n공격횟수 : {creature.Stats[level].AttackCost}";
+        text2.text = $"체력 : {creature.Stats[level].HealthPoint}\n공격력 : {creature.Stats[level].Attack}\n방어력 : {creature.Stats[level].Defence}";
     }
 }
