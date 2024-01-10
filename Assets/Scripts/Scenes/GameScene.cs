@@ -23,7 +23,6 @@ public class GameScene : MonoBehaviour
     {
         Managers.Game.GameMode = Define.GameMode.PlayerTurn;
         Managers.Game.GenerateRandomMonster();
-        Managers.Game.GenerateRandomMonster();
     }
 
     public void FinishedPlayerTurn()
@@ -32,35 +31,36 @@ public class GameScene : MonoBehaviour
             playerCharacter.State = Define.State.Idle;
         
         Managers.Game.GameMode = Define.GameMode.MonsterTurn;
-        
+        StartCoroutine(Managers.Game.CoMovePath(Managers.Game.Monsters, Managers.Game.PlayerCharacters));
+
         // foreach (Monster monster in Managers.Game.Monsters)
         // {
         //     StartCoroutine(Managers.Game.CoMovePath(monster, Managers.Game.PlayerCharacters));
         //
         // }
 
-        int i = 0;
-        while (true)
-        {
-            // bool isIdle = true;
-            // foreach (Monster monster in Managers.Game.Monsters)
-            // {
-            //     if (monster.State != Define.State.Move)
-            //         continue;
-            //     isIdle = false;
-            //     break;
-            // }
-            
-            // var monster = Managers.Game.Monsters[i];
-            if (Managers.Game.MonsterState == Define.State.Idle)
-            {
-                StartCoroutine(Managers.Game.CoMovePath(Managers.Game.Monsters[i], Managers.Game.PlayerCharacters));
-                i++;
-            }
-        
-            if (i == Managers.Game.Monsters.Count)
-                break;
-        }
+        // int i = 0;
+        // while (true)
+        // {
+        //     // bool isIdle = true;
+        //     // foreach (Monster monster in Managers.Game.Monsters)
+        //     // {
+        //     //     if (monster.State != Define.State.Move)
+        //     //         continue;
+        //     //     isIdle = false;
+        //     //     break;
+        //     // }
+        //     
+        //     // var monster = Managers.Game.Monsters[i];
+        //     if (Managers.Game.MonsterState == Define.State.Idle)
+        //     {
+        //         StartCoroutine(Managers.Game.CoMovePath(Managers.Game.Monsters, Managers.Game.PlayerCharacters));
+        //         i++;
+        //     }
+        //
+        //     if (i == Managers.Game.Monsters.Count)
+        //         break;
+        // }
     }
 
     public void FinishMonsterTurn()

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,7 +9,22 @@ public class MapManager
     private GameObject _overlayTilePrefab;
     
     private Dictionary<Vector2Int, Tile> _mapTiles = new Dictionary<Vector2Int, Tile>();
+    private Dictionary<Vector2Int, Tile> _updateMapTiles = new Dictionary<Vector2Int, Tile>();
     public Dictionary<Vector2Int, Tile> MapTiles => _mapTiles;
+    public Dictionary<Vector2Int, Tile> UpdateMapTiles
+    {
+        get
+        {
+            _updateMapTiles.Clear();
+            
+            foreach (var tile in _mapTiles.Values.Where(tile => !tile.IsBlocked))
+            {
+                _updateMapTiles.Add(tile.Grid2DLocation, tile);
+            }
+            
+            return _updateMapTiles;
+        }
+    }
 
     public void Init()
     {
@@ -48,7 +64,8 @@ public class MapManager
                         overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z);
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
                         overlayTile.GetComponent<Tile>().GridLocation = new Vector3Int(x, y, z);
-                            
+                        overlayTile.name = $"{overlayTile.GetComponent<Tile>().Grid2DLocation}";
+
                         _mapTiles.Add(tileKey, overlayTile.GetComponent<Tile>());
                     }
                 }

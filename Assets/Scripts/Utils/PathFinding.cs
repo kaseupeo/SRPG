@@ -62,43 +62,46 @@ public class PathFinding
     // 시작 타일에서 도착 타일을 갈 수 있는지 확인하는 
     public static bool IsCheckToPassTile(Tile startTile, Tile endTile, int height = 1)
     {
-        if (Managers.Game.SelectedCharacter.State == Define.State.Attack || Managers.Game.MonsterState == Define.State.Attack)
+        if (Managers.Game.SelectedCharacter.State == Define.State.Attack)
             return false;
-        
+
+        if (Managers.Game.Monster != null && Managers.Game.Monster.State == Define.State.Attack)
+            return false;
+
         return Mathf.Abs(startTile.transform.position.z - endTile.transform.position.z) > height ||
                endTile.IsBlocked;
     }
     
     // 범위 내 타일들 찾기
-    public static List<Tile> GetTilesInRange(Vector2Int location, int range)
-    {
-        Tile startTile = Managers.Map.MapTiles[location];
-        List<Tile> inRangeTile = new List<Tile>();
-        List<Tile> tilesForPreviousStep = new List<Tile>();
-        int stepCount = 0;
-
-        // if (range != 0) 
-        //     inRangeTile.Add(startTile);
-        
-        tilesForPreviousStep.Add(startTile);
-
-        while (stepCount < range)
-        {
-            List<Tile> surroundingTiles = new List<Tile>();
-            
-            foreach (Tile tile in tilesForPreviousStep)
-                surroundingTiles.AddRange(GetSurroundingTiles(new Vector2Int(tile.GridLocation.x, tile.GridLocation.y), Managers.Map.MapTiles));
-
-            inRangeTile.AddRange(surroundingTiles);
-            tilesForPreviousStep = surroundingTiles.Distinct().ToList();
-            stepCount++;
-        }
-
-        return inRangeTile.Distinct().ToList();
-    }
+    // public static List<Tile> GetTilesInRange(Vector2Int location, int range)
+    // {
+    //     Tile startTile = Managers.Map.MapTiles[location];
+    //     List<Tile> inRangeTile = new List<Tile>();
+    //     List<Tile> tilesForPreviousStep = new List<Tile>();
+    //     int stepCount = 0;
+    //
+    //     // if (range != 0) 
+    //     //     inRangeTile.Add(startTile);
+    //     
+    //     tilesForPreviousStep.Add(startTile);
+    //
+    //     while (stepCount < range)
+    //     {
+    //         List<Tile> surroundingTiles = new List<Tile>();
+    //         
+    //         foreach (Tile tile in tilesForPreviousStep)
+    //             surroundingTiles.AddRange(GetSurroundingTiles(new Vector2Int(tile.GridLocation.x, tile.GridLocation.y), Managers.Map.MapTiles));
+    //
+    //         inRangeTile.AddRange(surroundingTiles);
+    //         tilesForPreviousStep = surroundingTiles.Distinct().ToList();
+    //         stepCount++;
+    //     }
+    //
+    //     return inRangeTile.Distinct().ToList();
+    // }
     
     // 해당 타일에서 갈 수 있는 타일 리스트
-    private static List<Tile> GetSurroundingTiles(Vector2Int originTile, Dictionary<Vector2Int, Tile> mapTiles)
+    public static List<Tile> GetSurroundingTiles(Vector2Int originTile, Dictionary<Vector2Int, Tile> mapTiles)
     {
         List<Tile> surroundingTiles = new List<Tile>();
         
@@ -117,6 +120,39 @@ public class PathFinding
         tileToCheck = new Vector2Int(originTile.x, originTile.y - 1);
         if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], 1))
             surroundingTiles.Add(mapTiles[tileToCheck]);
+        
+        return surroundingTiles;
+    }
+
+    public static List<Tile> GetAttackSurroundingTiles(Vector2Int originTile, Dictionary<Vector2Int, Tile> mapTiles, int range)
+    {
+        List<Tile> surroundingTiles = new List<Tile>();
+
+        for (int y = -range; y <= range; y++)
+        {
+            for (int x = -range; x <= range; x++)
+            {
+                Vector2Int tileToCheck = new Vector2Int(originTile.x + x, originTile.y + y);
+                if (mapTiles.TryGetValue(tileToCheck, out var tile))
+                    surroundingTiles.Add(tile);
+            }
+        }
+        
+        // Vector2Int tileToCheck = new Vector2Int(originTile.x + 1, originTile.y);
+        // if (mapTiles.TryGetValue(tileToCheck, out var tile))
+        //     surroundingTiles.Add(tile);
+        //
+        // tileToCheck = new Vector2Int(originTile.x - 1, originTile.y);
+        // if (mapTiles.TryGetValue(tileToCheck, out tile))
+        //     surroundingTiles.Add(tile);
+        //
+        // tileToCheck = new Vector2Int(originTile.x, originTile.y + 1);
+        // if (mapTiles.TryGetValue(tileToCheck, out tile))
+        //     surroundingTiles.Add(mapTiles[tileToCheck]);
+        //
+        // tileToCheck = new Vector2Int(originTile.x, originTile.y - 1);
+        // if (mapTiles.TryGetValue(tileToCheck, out tile))
+        //     surroundingTiles.Add(mapTiles[tileToCheck]);
         
         return surroundingTiles;
     }
