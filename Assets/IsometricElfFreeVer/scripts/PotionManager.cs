@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class PotionManager : MonoBehaviour
 {
-    Animator animator;
-    float speed = 0.2f;
-    Rigidbody2D rb;
+    private Animator _animator;
+    private Rigidbody2D _rigidbody2D;
+    private float _speed = 0.2f;
     public float leftTime;
     
-    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.up * speed;
-        Destroy(gameObject, leftTime);
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Use()
     {
-        
+        _animator.SetTrigger("Use");
+        _rigidbody2D.velocity = transform.up * _speed;
+        Destroy(gameObject, leftTime);
     }
 }

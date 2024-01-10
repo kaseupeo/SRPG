@@ -7,23 +7,30 @@ public class GameManager
 {
     private Define.GameMode _gameMode;
     
-    private PlayerCharacter _selectedCharacter;
-    private Monster _monster;
     private List<PlayerCharacter> _loadPlayerCharacters;
-    private List<Monster> _loadMonsters;
     private List<PlayerCharacter> _playerCharacters;
-    private List<Monster> _monsters;
+    private PlayerCharacter _selectedCharacter;
     private int _maxPlayerCharacter;
     
+    private List<Monster> _loadMonsters;
+    private List<Monster> _monsters;
+    private Monster _monster;
+
+    private List<Item> _fieldItems;
+    private List<Item> _items;
+    
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
-    public PlayerCharacter SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
-    public Monster Monster { get => _monster; set => _monster = value; }
+    
     public List<PlayerCharacter> LoadPlayerCharacters { get => _loadPlayerCharacters; set => _loadPlayerCharacters = value; }
-    public List<Monster> LoadMonsters { get => _loadMonsters; set => _loadMonsters = value; }
     public List<PlayerCharacter> PlayerCharacters { get => _playerCharacters; set => _playerCharacters = value; }
-    public List<Monster> Monsters { get => _monsters; set => _monsters = value; }
     public int MaxPlayerCharacter { get => _maxPlayerCharacter; set => _maxPlayerCharacter = value; }
     
+    public PlayerCharacter SelectedCharacter { get => _selectedCharacter; set => _selectedCharacter = value; }
+    public List<Monster> LoadMonsters { get => _loadMonsters; set => _loadMonsters = value; }
+    public List<Monster> Monsters { get => _monsters; set => _monsters = value; }
+    public Monster Monster { get => _monster; set => _monster = value; }
+    
+    public List<Item> FieldItems { get => _fieldItems; set => _fieldItems = value; }
     
     public void Init()
     {
@@ -31,6 +38,8 @@ public class GameManager
         LoadCharacters();
         _playerCharacters = new List<PlayerCharacter>();
         _monsters = new List<Monster>();
+        _fieldItems = new List<Item>();
+        
         _maxPlayerCharacter = 3;
     }
     

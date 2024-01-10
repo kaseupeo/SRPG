@@ -54,7 +54,6 @@ MonoBehaviour:
     healthPoint: 50
     attack: 20
     defence: 10
-    turnSpeed: 0
     turnCost: 7
     attackCost: 1
     minAttackRange: 0
@@ -99,7 +98,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1959512401, guid: 7465ef4f8274330419bdc1abe808b291, type: 3}
   m_Color: {r: 0.50726134, g: 0.9056604, b: 0.38020647, a: 1}
   m_FlipX: 0

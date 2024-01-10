@@ -106,15 +106,17 @@ public abstract class Creature : MonoBehaviour
 
     protected virtual IEnumerator Dead()
     {
+        state = Define.State.Dead;
         animator.SetTrigger("Dead");
-        transform.position = new Vector2(transform.position.x + 0f, transform.position.y -0.12f);
+        Vector2 currentPosition = transform.position;
+        transform.position = new Vector2(currentPosition.x, currentPosition.y -0.12f);
         
         for (var i = 0; i < 64; i++)
         {
             yield return null;
         }
-        
-        // Destroy(gameObject);
+
+        transform.position = currentPosition;
     }
 }
 
