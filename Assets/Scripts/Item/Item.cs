@@ -3,6 +3,7 @@
 public class Item : MonoBehaviour
 {
     protected int id;
+    [SerializeField]
     protected string name;
     protected Define.ItemType itemType;
     protected Tile currentTile;
@@ -16,5 +17,10 @@ public class Item : MonoBehaviour
     public void Init()
     {
         
+    }
+    
+    public void Destroy()
+    {
+        Destroy(gameObject);
     }
 }

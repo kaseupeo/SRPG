@@ -108,15 +108,12 @@ public class PlayerController : MonoBehaviour
                         }
                         break;
                     case Define.State.Move:
-                        Debug.Log($"{_selectedPlayerCharacter.State}");
                         MoveCheck();
                         break;
                     case Define.State.Attack:
-                        Debug.Log($"{_selectedPlayerCharacter.State}");
                         MonsterCheck();
                         break;
                     case Define.State.Dead:
-                        Debug.Log($"{_selectedPlayerCharacter.State}");
                         break;
                 }
                 

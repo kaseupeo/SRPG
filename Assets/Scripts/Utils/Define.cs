@@ -18,6 +18,7 @@ public class Define
         Move,
         Attack,
         Dead,
+        Inventory,
     }
     
     public enum SceneType

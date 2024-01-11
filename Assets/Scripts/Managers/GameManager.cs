@@ -179,6 +179,12 @@ public class GameManager
     
     public IEnumerator CoMovePath(List<Monster> monsters, List<PlayerCharacter> targets)
     {
+        if (monsters == null)
+        {
+            Managers.Game.GameMode = Define.GameMode.PlayerTurn;
+            yield break;
+        }
+        
         Debug.Log("CoMovePath");
         foreach (Monster monster in monsters)
         {

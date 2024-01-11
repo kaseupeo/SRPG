@@ -28,6 +28,9 @@ public class StateToggleUI : MonoBehaviour, IPointerClickHandler
             case Define.State.Attack:
                 _stateName = "공격";
                 break;
+            case Define.State.Inventory:
+                _stateName = "가방";
+                break;
         }
         
         _toggle = GetComponent<Toggle>();
@@ -43,5 +46,14 @@ public class StateToggleUI : MonoBehaviour, IPointerClickHandler
 
         if (eventData.button == PointerEventData.InputButton.Left)
             Managers.Game.SelectedCharacter.State = _toggle.isOn ? _state : Define.State.Idle;
+
+        if (_state == Define.State.Inventory)
+        {
+            foreach (var item in Managers.Game.SelectedCharacter.Items)
+            {
+                Debug.Log($"{item.Name}");
+
+            }
+        }
     }
 }

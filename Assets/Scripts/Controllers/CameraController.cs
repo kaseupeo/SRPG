@@ -1,31 +1,44 @@
 ﻿using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraController : MonoBehaviour
 {
     private Camera _camera;
 
-    [SerializeField] private float cameraSpeed = 0.5f;
-
-    private Vector3 _lastMouse;
-    private float _totalRun;
+    [SerializeField] private float cameraMoveSpeed;
+    [SerializeField] private float cameraMoveArea;
 
     private void Start()
     {
         _camera = Camera.main;
     }
-
-    private void Update()
+    
+    private void LateUpdate()
     {
-        if (Input.mousePosition.x < 0 || Input.mousePosition.y < 0)
-            _camera.transform.Translate(Input.mousePosition.normalized * Time.deltaTime * 0.5f);
-        if (Input.mousePosition.x < 0)
-            _camera.transform.Translate(Input.mousePosition.x * Time.deltaTime * cameraSpeed, 0, 0);
-        else if (Input.mousePosition.y < 0)
-            _camera.transform.Translate(0, Input.mousePosition.y * Time.deltaTime * cameraSpeed, 0);
-        // TODO : 카메라 이동 
+        CameraMove();
+    }
 
+    private void CameraMove()
+    {
+        var mousePosition = Input.mousePosition;
 
+        if (!(mousePosition.x > 0) || !(mousePosition.y > 0) || !(mousePosition.x < Screen.width) ||
+            !(mousePosition.y < Screen.height))
+            return;
+
+        float xRate = mousePosition.x / Screen.width;
+        float yRate = mousePosition.y / Screen.height;
+
+        if (xRate < cameraMoveArea)
+            _camera.transform.Translate(Vector2.left * (Time.deltaTime * cameraMoveSpeed));
+        if (xRate > 1 - cameraMoveArea) 
+            _camera.transform.Translate(Vector2.right * (Time.deltaTime * cameraMoveSpeed));
+
+        if (yRate < cameraMoveArea)
+            _camera.transform.Translate(Vector2.down * (Time.deltaTime * cameraMoveSpeed));
+        if (yRate > 1 - cameraMoveArea) 
+            _camera.transform.Translate(Vector2.up * (Time.deltaTime * cameraMoveSpeed));
     }
 }

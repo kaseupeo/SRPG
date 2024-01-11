@@ -33,8 +33,8 @@ public class Monster : NonPlayerCharacter
 
     private void Drop()
     {
-        Item dropItem = RandomDropItem();
-        Instantiate(dropItem.gameObject, transform.position, Quaternion.identity);
+        Item item = RandomItem();
+        Item dropItem = Instantiate(item.gameObject, transform.position, Quaternion.identity).GetComponent<Item>();
         dropItem.CurrentTile = currentTile;
         Managers.Game.FieldItems.Add(dropItem);
         foreach (PlayerCharacter playerCharacter in Managers.Game.PlayerCharacters)
@@ -43,7 +43,7 @@ public class Monster : NonPlayerCharacter
         }
     }
 
-    private Item RandomDropItem()
+    private Item RandomItem()
     {
         return dropItems[Random.Range(0, dropItems.Count)];
     }

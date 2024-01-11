@@ -7,9 +7,6 @@ using Random = UnityEngine.Random;
 
 public class GameScene : MonoBehaviour
 {
-    [SerializeField] private GameObject mapPrefab;
-
-    private Tilemap[] _tileMaps;
     private Tilemap _startTile;
     
     private void Awake()

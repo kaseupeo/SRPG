@@ -35,6 +35,14 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
             toggle.GetComponent<Toggle>().group = _toggleGroup;
             toggle.GetComponent<Toggle>().isOn = false;
         }
+        // INVENTORY
+        {
+            var toggle = Instantiate(togglePrefab, _toggleGroup.transform).gameObject.AddComponent<StateToggleUI>();
+            toggle.SetCharacterState(Define.State.Inventory);
+            _toggles.Add(toggle);
+            toggle.GetComponent<Toggle>().group = _toggleGroup;
+            toggle.GetComponent<Toggle>().isOn = false;
+        }
     }
 
     private void Update()
