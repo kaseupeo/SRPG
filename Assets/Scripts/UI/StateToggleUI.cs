@@ -12,6 +12,8 @@ public class StateToggleUI : MonoBehaviour, IPointerClickHandler
     private string _stateName;
     private Toggle _toggle;
     private Define.State _state;
+    
+    public Define.State State => _state;
 
     public void SetCharacterState(Define.State state)
     {
@@ -33,10 +35,10 @@ public class StateToggleUI : MonoBehaviour, IPointerClickHandler
         _text.text = $"{_stateName}";
         _state = state;
     }
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left) 
+        if (eventData.button == PointerEventData.InputButton.Left)
             Managers.Game.SelectedCharacter.State = _toggle.isOn ? _state : Define.State.Idle;
     }
 }

@@ -195,6 +195,7 @@ public class PlayerController : MonoBehaviour
         foreach (var monster in Managers.Game.Monsters.Where(monster => monster.CurrentTile == tile))
         {
             _selectedMonster = monster;
+            Managers.Game.Monster = _selectedMonster;
 
             // if (_selectedPlayerCharacter == null)
             // {

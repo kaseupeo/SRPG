@@ -32,18 +32,6 @@ public class CharacterSelectedPanelUI : MonoBehaviour
         }
     }
 
-    // private void Update()
-    // {
-    //     for (int i = 0; i < _toggles.Count; i++)
-    //     {
-    //         if (_toggles[i].GetComponent<Toggle>().isOn)
-    //         {
-    //             Managers.Game.SelectedCharacter = _playerCharacters[i];
-    //             break;
-    //         }
-    //     }
-    // }
-
     private void OnDisable()
     {
         foreach (CharacterToggleUI toggle in _toggles)

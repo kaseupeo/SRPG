@@ -37,8 +37,19 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
         }
     }
 
-    
-    
+    private void Update()
+    {
+        foreach (StateToggleUI toggle in _toggles)
+        {
+            if (Managers.Game.SelectedCharacter == null)
+            {
+                toggle.GetComponent<Toggle>().isOn = false;
+                continue;
+            }
+            toggle.GetComponent<Toggle>().isOn = Managers.Game.SelectedCharacter.State == toggle.State;
+        }
+    }
+
     private void OnDisable()
     {
         foreach (StateToggleUI toggle in _toggles)

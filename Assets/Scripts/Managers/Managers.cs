@@ -48,7 +48,6 @@ public class Managers : MonoBehaviour
     public static PoolManager Pool => Instance._pool;
     public static MapManager Map => Instance._map;
 
-
     private void Awake()
     {
         Init();
