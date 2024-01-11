@@ -50,13 +50,20 @@ public class PlayerCharacter : Creature
 
     private void GainItem(Tile tile)
     {
+        if (items.Count > 10)
+            return;
+        
         foreach (var item in Managers.Game.FieldItems)
         {
             if (item.CurrentTile == tile)
             {
                 items.Add(item);
-                Destroy(item.gameObject);
             }
+        }
+
+        foreach (Item item in items)
+        {
+            Managers.Game.FieldItems.Remove(item);
         }
     }
 

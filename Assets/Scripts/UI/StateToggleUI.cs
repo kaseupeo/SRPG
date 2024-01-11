@@ -49,10 +49,10 @@ public class StateToggleUI : MonoBehaviour, IPointerClickHandler
 
         if (_state == Define.State.Inventory)
         {
+            
             foreach (var item in Managers.Game.SelectedCharacter.Items)
             {
                 Debug.Log($"{item.Name}");
-
             }
         }
     }

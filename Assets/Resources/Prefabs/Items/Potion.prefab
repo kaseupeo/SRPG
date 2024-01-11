@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: "\uD3EC\uC158"
+  sprite: {fileID: -311297077, guid: 3f7136c83a4a8eb45a61652884907ba8, type: 3}
   leftTime: 1
 --- !u!212 &5533547265174939779
 SpriteRenderer:
