@@ -38,6 +38,9 @@ public class StateToggleUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (Managers.Game.SelectedCharacter == null)
+            return;
+
         if (eventData.button == PointerEventData.InputButton.Left)
             Managers.Game.SelectedCharacter.State = _toggle.isOn ? _state : Define.State.Idle;
     }

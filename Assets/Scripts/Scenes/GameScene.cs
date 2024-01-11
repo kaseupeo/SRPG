@@ -12,13 +12,17 @@ public class GameScene : MonoBehaviour
     private Tilemap[] _tileMaps;
     private Tilemap _startTile;
     
-    private void Start()
+    private void Awake()
     {
-        _tileMaps = mapPrefab.GetComponentsInChildren<Tilemap>();
         Managers.Game.Init();
-        Managers.Map.GenerateOverlayTile(_tileMaps);
+        Managers.Map.Init();
     }
 
+    public void Preparation()
+    {
+        Managers.Map.GenerateOverlayTile(Managers.Game.Map);
+    }
+    
     public void BattleStart()
     {
         Managers.Game.SelectedCharacter = null;
@@ -33,41 +37,5 @@ public class GameScene : MonoBehaviour
         
         Managers.Game.GameMode = Define.GameMode.MonsterTurn;
         StartCoroutine(Managers.Game.CoMovePath(Managers.Game.Monsters, Managers.Game.PlayerCharacters));
-
-        // foreach (Monster monster in Managers.Game.Monsters)
-        // {
-        //     StartCoroutine(Managers.Game.CoMovePath(monster, Managers.Game.PlayerCharacters));
-        //
-        // }
-
-        // int i = 0;
-        // while (true)
-        // {
-        //     // bool isIdle = true;
-        //     // foreach (Monster monster in Managers.Game.Monsters)
-        //     // {
-        //     //     if (monster.State != Define.State.Move)
-        //     //         continue;
-        //     //     isIdle = false;
-        //     //     break;
-        //     // }
-        //     
-        //     // var monster = Managers.Game.Monsters[i];
-        //     if (Managers.Game.MonsterState == Define.State.Idle)
-        //     {
-        //         StartCoroutine(Managers.Game.CoMovePath(Managers.Game.Monsters, Managers.Game.PlayerCharacters));
-        //         i++;
-        //     }
-        //
-        //     if (i == Managers.Game.Monsters.Count)
-        //         break;
-        // }
-    }
-
-    public void FinishMonsterTurn()
-    {
-        Managers.Game.GameMode = Define.GameMode.PlayerTurn;
-        
-        Managers.Game.ResetTurn();
     }
 }

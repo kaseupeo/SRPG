@@ -7,9 +7,12 @@ using UnityEngine.Tilemaps;
 public class MapManager
 {
     private GameObject _overlayTilePrefab;
+
+    private List<GameObject> _loadMaps;
     
     private Dictionary<Vector2Int, Tile> _mapTiles = new Dictionary<Vector2Int, Tile>();
     private Dictionary<Vector2Int, Tile> _updateMapTiles = new Dictionary<Vector2Int, Tile>();
+    public List<GameObject> LoadMaps => _loadMaps;
     public Dictionary<Vector2Int, Tile> MapTiles => _mapTiles;
     public Dictionary<Vector2Int, Tile> UpdateMapTiles
     {
@@ -28,7 +31,17 @@ public class MapManager
 
     public void Init()
     {
-        
+        LoadMapPrefabs();
+    }
+
+    private void LoadMapPrefabs()
+    {
+        _loadMaps = new List<GameObject>();
+
+        foreach (GameObject map in Resources.LoadAll("Prefabs/Map"))
+        {
+            _loadMaps.Add(map);
+        }
     }
     
     public void GenerateOverlayTile(Tilemap[] tileMaps)
@@ -39,6 +52,13 @@ public class MapManager
         {
             GenerateOverlayTile(tile);
         }
+    }
+
+    public void GenerateOverlayTile(GameObject go)
+    {
+        Tilemap[] tilemaps = GameObject.Instantiate(go).GetComponentsInChildren<Tilemap>();
+        
+        GenerateOverlayTile(tilemaps);
     }
     
     // 움직일수 있는 타일 생성

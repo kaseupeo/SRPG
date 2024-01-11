@@ -38,14 +38,6 @@ public class Define
         Weapon,
         
     }
-    
-    public enum SkillType
-    {
-        None,
-        Helmet,
-        Armor,
-        Shoes,
-    }
 
     public enum ArrowDirection
     {
