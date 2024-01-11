@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
                 break;
             case Define.State.Dead:
                 break;
+            case Define.State.Inventory:
+                break;
         }
     }
 
@@ -114,6 +116,8 @@ public class PlayerController : MonoBehaviour
                         MonsterCheck();
                         break;
                     case Define.State.Dead:
+                        break;
+                    case Define.State.Inventory:
                         break;
                 }
                 

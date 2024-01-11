@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class PlayerCharacterStatePanelUI : MonoBehaviour
 {
     [SerializeField] private Toggle togglePrefab;
-    [SerializeField] private GameObject inventory;
+    [SerializeField] private Inventory inventory;
     
     private ToggleGroup _toggleGroup;
     private List<StateToggleUI> _toggles;
@@ -56,10 +56,14 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
                 continue;
             }
             toggle.GetComponent<Toggle>().isOn = Managers.Game.SelectedCharacter.State == toggle.State;
+
+            if (toggle.State == Define.State.Inventory && toggle.GetComponent<Toggle>().isOn)
+                inventory.Open();
+            else
+                inventory.Close();
         }
 
-        if (Managers.Game.SelectedCharacter != null)
-            inventory.SetActive(Managers.Game.SelectedCharacter.State == Define.State.Inventory);
+        
     }
 
     private void OnDisable()

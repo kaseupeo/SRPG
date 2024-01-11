@@ -74,7 +74,7 @@ public abstract class Creature : MonoBehaviour
     {
         transform.position =
             new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
-        spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
+        spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder + 1;
         tile.IsBlocked = true;
         currentTile = tile;
     }

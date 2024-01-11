@@ -5,37 +5,60 @@ using UnityEngine.Serialization;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private Slot[] slots;
-    
+    [SerializeField] private Slot slotPrefab;
+
+    private List<Slot> _slots;
     private List<Item> _items;
 
-    private void OnEnable()
-    {
-        Open();
-    }
-
-    private void Open()
+    private void Start()
     {
         _items = new List<Item>();
-        _items = Managers.Game.SelectedCharacter.Items;
+        _slots = new List<Slot>();
         
-        int i = 0;
-        foreach (Slot slot in slots)
+        for (int i = 0; i < 10; i++)
         {
-            if (i >= _items.Count)
-                break;
-            
-            if (slot.Item == null)
-            {
-                slot.SetItem(_items[i]);
-                i++;
-            }
+            var go = Instantiate(slotPrefab, transform);
+            _slots.Add(go);
+        }
+    }
+
+    private void Update()
+    {
+        if (Managers.Game.SelectedCharacter == null && Managers.Game.SelectedCharacter.State != Define.State.Inventory)
+            gameObject.SetActive(false);
+    }
+
+    // private void OnEnable()
+    // {
+    //     Open();
+    // }
+    //
+    // private void OnDisable()
+    // {
+    //     Close();
+    // }
+
+    public void Open()
+    {
+        gameObject.SetActive(true);
+        
+        _items = Managers.Game.SelectedCharacter.Items;
+
+        for (int i = 0; i < _items.Count; i++)
+        {
+            _slots[i].SetItem(_items[i]);
         }
     }
 
     public void Close()
     {
+        if (_slots == null)
+            return;
         
+        foreach (var slot in _slots)
+            slot.Reset();
+
+        gameObject.SetActive(false);
     }
 
     public void Acquire(Item item)

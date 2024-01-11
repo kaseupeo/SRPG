@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         image.color = new Color(1, 1, 1, 1);
     }
 
+    public void Reset()
+    {
+        image.color = new Color(1, 1, 1, 0);
+        image.sprite = null;
+        _item = null;
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
