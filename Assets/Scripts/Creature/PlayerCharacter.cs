@@ -64,6 +64,8 @@ public class PlayerCharacter : Creature
         foreach (Item item in items)
         {
             Managers.Game.FieldItems.Remove(item);
+            item.CurrentTile = null;
+            item.gameObject.SetActive(false);
         }
     }
 

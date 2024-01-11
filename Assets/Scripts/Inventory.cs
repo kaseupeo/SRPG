@@ -11,6 +11,11 @@ public class Inventory : MonoBehaviour
 
     private void OnEnable()
     {
+        Open();
+    }
+
+    private void Open()
+    {
         _items = new List<Item>();
         _items = Managers.Game.SelectedCharacter.Items;
         

@@ -20,9 +20,4 @@ public class Item : MonoBehaviour
     {
         
     }
-
-    private void OnDestroy()
-    {
-        currentTile = null;
-    }
 }

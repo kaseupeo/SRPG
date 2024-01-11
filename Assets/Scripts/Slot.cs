@@ -13,6 +13,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void SetItem(Item item)
     {
+        if (_item != null)
+            return;
+        
         image.sprite = item.Sprite;
         _item = item;
         image.color = new Color(1, 1, 1, 1);
