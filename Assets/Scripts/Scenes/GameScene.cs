@@ -22,6 +22,9 @@ public class GameScene : MonoBehaviour
     
     public void BattleStart()
     {
+        if (Managers.Game.PlayerCharacters.Count == 0)
+            return;
+        
         Managers.Game.SelectedCharacter = null;
         Managers.Game.GameMode = Define.GameMode.PlayerTurn;
         Managers.Game.GenerateRandomMonster();
