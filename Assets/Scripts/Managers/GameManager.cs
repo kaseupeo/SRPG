@@ -7,6 +7,7 @@ public class GameManager
 {
     private Define.GameMode _gameMode;
     private GameObject _map;
+    private bool _pause;
     
     private List<PlayerCharacter> _loadPlayerCharacters;
     private List<PlayerCharacter> _playerCharacters;
@@ -22,6 +23,15 @@ public class GameManager
     
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
     public GameObject Map { get => _map; set => _map = value; }
+    public bool Pause
+    {
+        get => _pause;
+        set
+        {
+            _pause = value;
+            Time.timeScale = _pause ? 0 : 1;
+        }
+    }
     
     public List<PlayerCharacter> LoadPlayerCharacters { get => _loadPlayerCharacters; set => _loadPlayerCharacters = value; }
     public List<PlayerCharacter> PlayerCharacters { get => _playerCharacters; set => _playerCharacters = value; }
