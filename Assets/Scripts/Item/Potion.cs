@@ -13,7 +13,8 @@ public class Potion : Consumption
     {
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _speed = 0.2f;
+        itemType = Define.ItemType.Consumption;
+        _speed = 0.5f;
     }
 
     public override void Use()

@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
             case Define.State.Attack:
                 if (_selectedPlayerCharacter.CurrentAttackCost <= 0)
                     return;
-                _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter.CurrentTile, _selectedPlayerCharacter.Stats[_selectedPlayerCharacter.Level].MaxAttackRange, _selectedPlayerCharacter.Stats[_selectedPlayerCharacter.Level].MinAttackRange);
+                _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter.CurrentTile, _selectedPlayerCharacter.CurrentStat.MaxAttackRange, _selectedPlayerCharacter.CurrentStat.MinAttackRange);
                 _selectedPlayerCharacter.CurrentTile.HideTile();
                 Managers.Map.ShowTile(_rangeFindingTiles, Color.blue);
                 break;

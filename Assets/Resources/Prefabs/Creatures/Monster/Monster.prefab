@@ -110,7 +110,8 @@ MonoBehaviour:
     minAttackRange: 0
     maxAttackRange: 1
   dropItems:
-  - {fileID: 1973731090, guid: 6a63070d3fe289e46bc7b5022129fff6, type: 3}
+  - {fileID: -1298344013425119685, guid: 36b247c4eea5dac4cbb89f9aaa47852b, type: 3}
+  - {fileID: -7927981188621774325, guid: a88c6eda5951fed43b72c39953d1c120, type: 3}
 --- !u!95 &2989262492310327132
 Animator:
   serializedVersion: 5

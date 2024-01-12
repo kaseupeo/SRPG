@@ -33,7 +33,20 @@ public class Slot : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            
+            switch (_item.ItemType)
+            {
+                case Define.ItemType.Equipment:
+                    break;
+                case Define.ItemType.Consumption:
+                    Consumption consumption = _item as Consumption;
+                    consumption.Use();
+                    Debug.Log($"{_item}");
+                    Reset();
+                    Debug.Log($"{_item}");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

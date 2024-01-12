@@ -10,7 +10,13 @@ public class Inventory : MonoBehaviour
     private List<Slot> _slots;
     private List<Item> _items;
 
-    private void Start()
+    private void Update()
+    {
+        if (Managers.Game.SelectedCharacter == null && Managers.Game.SelectedCharacter.State != Define.State.Inventory)
+            gameObject.SetActive(false);
+    }
+
+    private void Init()
     {
         _items = new List<Item>();
         _slots = new List<Slot>();
@@ -22,26 +28,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Managers.Game.SelectedCharacter == null && Managers.Game.SelectedCharacter.State != Define.State.Inventory)
-            gameObject.SetActive(false);
-    }
-
-    // private void OnEnable()
-    // {
-    //     Open();
-    // }
-    //
-    // private void OnDisable()
-    // {
-    //     Close();
-    // }
-
     public void Open()
     {
         gameObject.SetActive(true);
-        
+
+        if (_slots == null || _slots.Count == 0) 
+            Init();
+
         _items = Managers.Game.SelectedCharacter.Items;
 
         for (int i = 0; i < _items.Count; i++)

@@ -6,8 +6,10 @@ using UnityEngine;
 public class GameManager
 {
     private Define.GameMode _gameMode;
-    private GameObject _map;
+    private float _gameSpeed;
     private bool _pause;
+    private GameObject _map;
+    
     
     private List<PlayerCharacter> _loadPlayerCharacters;
     private List<PlayerCharacter> _playerCharacters;
@@ -22,7 +24,7 @@ public class GameManager
     private List<Item> _items;
     
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
-    public GameObject Map { get => _map; set => _map = value; }
+    public float GameSpeed { get => _gameSpeed; set => _gameSpeed = value; }
     public bool Pause
     {
         get => _pause;
@@ -32,6 +34,8 @@ public class GameManager
             Time.timeScale = _pause ? 0 : 1;
         }
     }
+    
+    public GameObject Map { get => _map; set => _map = value; }
     
     public List<PlayerCharacter> LoadPlayerCharacters { get => _loadPlayerCharacters; set => _loadPlayerCharacters = value; }
     public List<PlayerCharacter> PlayerCharacters { get => _playerCharacters; set => _playerCharacters = value; }
@@ -47,6 +51,7 @@ public class GameManager
     public void Init()
     {
         _gameMode = Define.GameMode.Preparation;
+        _gameSpeed = 10;
         LoadCharacters();
         _playerCharacters = new List<PlayerCharacter>();
         _monsters = new List<Monster>();
@@ -162,7 +167,7 @@ public class GameManager
         
         foreach (PlayerCharacter playerCharacter in targets)
         {
-            attackRangeTiles = GetRangeTiles(playerCharacter.CurrentTile, monster.Stats[monster.Level].MaxAttackRange, monster.Stats[monster.Level].MinAttackRange);
+            attackRangeTiles = GetRangeTiles(playerCharacter.CurrentTile, monster.CurrentStat.MaxAttackRange, monster.CurrentStat.MinAttackRange);
             
             foreach (Tile attackRangeTile in attackRangeTiles)
             {
@@ -177,7 +182,7 @@ public class GameManager
                     shortestTiles = path;
                 }
 
-                if (shortestTiles.Count > path.Count && path.Count <= monster.Stats[monster.Level].TurnCost)
+                if (shortestTiles.Count > path.Count && path.Count <= monster.CurrentStat.TurnCost)
                 {
                     shortestTiles = path;
                 }
@@ -202,14 +207,14 @@ public class GameManager
             _monster = monster;
             monster.State = Define.State.Move;
             List<Tile> path = MonsterMovement(monster, targets);
-            int cost = monster.Stats[monster.Level].TurnCost;
+            int cost = monster.CurrentStat.TurnCost;
             while (true)
             {
                 yield return null;
                 
                 if (path.Count <= 0 || cost == 0)
                 {
-                    List<Tile> attackRangeTiles = PathFinding.GetAttackSurroundingTiles(monster.CurrentTile.Grid2DLocation, Managers.Map.MapTiles, monster.Stats[monster.Level].MaxAttackRange);
+                    List<Tile> attackRangeTiles = PathFinding.GetAttackSurroundingTiles(monster.CurrentTile.Grid2DLocation, Managers.Map.MapTiles, monster.CurrentStat.MaxAttackRange);
                     
                     monster.State = Define.State.Idle;
                     foreach (Tile tile in attackRangeTiles)

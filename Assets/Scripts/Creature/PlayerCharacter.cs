@@ -19,15 +19,14 @@ public class PlayerCharacter : Creature
     
     public override void Init()
     { 
-        ResetTurnCost();
-    
         base.Init();
+        ResetTurnCost();
     }
 
     public void ResetTurnCost()
     {
-        currentTurnCost = stats[level].TurnCost;
-        currentAttackCost = stats[level].AttackCost;
+        currentTurnCost = currentStat.TurnCost;
+        currentAttackCost = currentStat.AttackCost;
         items = new List<Item>();
     }
     

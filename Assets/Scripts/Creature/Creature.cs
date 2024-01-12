@@ -10,16 +10,16 @@ public abstract class Creature : MonoBehaviour
     [SerializeField]
     protected string name;
     protected int level;
-    protected float moveSpeed;
     [SerializeField]
     protected List<Stat> stats;
+    protected Stat currentStat;
     protected Define.State state;
     protected Tile currentTile;
     
     public string Name { get => name; set => name = value; }
     public int Level { get => level; set => level = value; }
-    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-    public List<Stat> Stats { get => stats; set => stats = value; }
+    public List<Stat> Stats => stats;
+    public Stat CurrentStat { get => currentStat; set => currentStat = value; }
     public Define.State State { get => state; set => state = value; }
     public Tile CurrentTile { get => currentTile; set => currentTile = value; }
     
@@ -37,8 +37,9 @@ public abstract class Creature : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
+        currentStat = new Stat(stats[level]);
+        // currentStat = stats[level];
         state = Define.State.Idle;
-        moveSpeed = 1;
         gameObject.name = name;
     }
     
@@ -48,7 +49,7 @@ public abstract class Creature : MonoBehaviour
      */
     public void Move(Tile targetTile)
     {
-        float step = moveSpeed * Time.deltaTime;
+        float step = Managers.Game.GameSpeed * Time.deltaTime;
         float zIndex = targetTile.transform.position.z;
         currentTile.IsBlocked = false;
         
@@ -89,17 +90,32 @@ public abstract class Creature : MonoBehaviour
 
         animator.SetTrigger("Slash");
 
-        int damage = stats[level].Attack - target.Stats[target.level].Defence;
+        int damage = currentStat.Attack - target.CurrentStat.Defence;
 
         damage = damage > 0 ? damage : 0;
 
-        target.stats[target.level].HealthPoint -= damage;
-        Debug.Log($"{target.name} take damage : {damage}\nremaining hp : {target.stats[level].HealthPoint}");
+        target.currentStat.HealthPoint -= damage;
+        Debug.Log($"{target.name} take damage : {damage}\nremaining hp : {target.currentStat.HealthPoint}");
 
-        if (target.stats[target.level].HealthPoint <= 0)
+        if (target.currentStat.HealthPoint <= 0)
         {
+            target.currentStat.HealthPoint = 0;
             StartCoroutine(target.Dead());
         }
+    }
+
+    public void Healing(int point)
+    {
+        currentStat.HealthPoint += point;
+        if (currentStat.HealthPoint > stats[level].HealthPoint)
+        {
+            currentStat.HealthPoint = stats[level].HealthPoint;
+        }
+    }
+
+    public void AttackRankUp(float rate)
+    {
+        currentStat.Attack = (int)(currentStat.Attack * (rate / 100 + 1));
     }
 
     protected virtual IEnumerator Dead()
@@ -138,4 +154,16 @@ public class Stat
     public int AttackCost { get => attackCost; set => attackCost = value; }
     public int MinAttackRange { get => minAttackRange; set => minAttackRange = value; }
     public int MaxAttackRange { get => maxAttackRange; set => maxAttackRange = value; }
+
+    public Stat(Stat stat)
+    {
+        level = stat.level;
+        healthPoint = stat.healthPoint;
+        attack = stat.attack;
+        defence = stat.defence;
+        turnCost = stat.turnCost;
+        attackCost = stat.attackCost;
+        minAttackRange = stat.minAttackRange;
+        maxAttackRange = stat.maxAttackRange;
+    }
 }
