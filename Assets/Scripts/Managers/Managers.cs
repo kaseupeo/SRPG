@@ -55,6 +55,9 @@ public class Managers : MonoBehaviour
 
     public static void Clear()
     {
-        
+        Scene.Clear();
+        Game.Clear();
+        Pool.Clear();
+        Map.Clear();
     }
 }

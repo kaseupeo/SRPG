@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuUI : MonoBehaviour
+public class SettingsMenuUI : MonoBehaviour
 {
     private void OnEnable()
     {

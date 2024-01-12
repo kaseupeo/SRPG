@@ -279,6 +279,18 @@ public class GameManager
     
     public void Clear()
     {
-        _loadPlayerCharacters.Clear();
+        _loadPlayerCharacters?.Clear();
+    }
+    
+    
+    public void GameQuit()
+    {
+        Managers.Clear();
+        
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
