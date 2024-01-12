@@ -20,6 +20,7 @@ public class PlayerCharacter : Creature
     public override void Init()
     { 
         base.Init();
+        items = new List<Item>();
         ResetTurnCost();
     }
 
@@ -27,7 +28,6 @@ public class PlayerCharacter : Creature
     {
         currentTurnCost = currentStat.TurnCost;
         currentAttackCost = currentStat.AttackCost;
-        items = new List<Item>();
     }
     
     public override void CharacterPositionOnTile(Tile tile)

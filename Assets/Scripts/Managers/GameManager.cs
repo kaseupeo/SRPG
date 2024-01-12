@@ -19,7 +19,8 @@ public class GameManager
     private List<Monster> _loadMonsters;
     private List<Monster> _monsters;
     private Monster _monster;
-
+    private int _monsterRate;
+    
     private List<Item> _fieldItems;
     private List<Item> _items;
     
@@ -45,6 +46,7 @@ public class GameManager
     public List<Monster> LoadMonsters { get => _loadMonsters; set => _loadMonsters = value; }
     public List<Monster> Monsters { get => _monsters; set => _monsters = value; }
     public Monster Monster { get => _monster; set => _monster = value; }
+    public int MonsterRate { get => _monsterRate; set => _monsterRate = value; }
     
     public List<Item> FieldItems { get => _fieldItems; set => _fieldItems = value; }
     
@@ -58,6 +60,7 @@ public class GameManager
         _fieldItems = new List<Item>();
         
         _maxPlayerCharacter = 3;
+        _monsterRate = 1;
     }
     
     // 플레이어캐릭터 & 몬스터 프리팹 로드 메소드
@@ -101,8 +104,17 @@ public class GameManager
         _playerCharacters.Add(pc);
     }
 
+    // 몬스터 생성 * 몬스터 생성 배율
+    public void GenerateMonster()
+    {
+        for (int i = 0; i < _monsterRate; i++)
+        {
+            GenerateRandomMonster();
+        }
+    }
+    
     // 몬스터 랜덤 위치에 생성
-    public void GenerateRandomMonster()
+    private void GenerateRandomMonster()
     {
         List<Tile> tiles = new List<Tile>(Managers.Map.UpdateMapTiles.Values);
         

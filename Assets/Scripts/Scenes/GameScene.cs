@@ -14,11 +14,6 @@ public class GameScene : MonoBehaviour
         Managers.Game.Init();
         Managers.Map.Init();
     }
-
-    public void Preparation()
-    {
-        Managers.Map.GenerateOverlayTile(Managers.Game.Map);
-    }
     
     public void BattleStart()
     {
@@ -27,7 +22,7 @@ public class GameScene : MonoBehaviour
         
         Managers.Game.SelectedCharacter = null;
         Managers.Game.GameMode = Define.GameMode.PlayerTurn;
-        Managers.Game.GenerateRandomMonster();
+        Managers.Game.GenerateMonster();
     }
 
     public void FinishedPlayerTurn()

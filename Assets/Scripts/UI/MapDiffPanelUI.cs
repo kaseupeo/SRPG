@@ -17,21 +17,13 @@ public class MapDiffPanelUI : MonoBehaviour
         _toggleGroup = GetComponent<ToggleGroup>();
         _toggles = new List<MapDiffToggleUI>();
         _map = Managers.Map.LoadMaps;
-
+        
         foreach (GameObject map in _map)
         {
             var toggle = Instantiate(togglePrefab, _toggleGroup.transform).gameObject.AddComponent<MapDiffToggleUI>();
             toggle.SetMap(map);
             _toggles.Add(toggle);
             toggle.GetComponent<Toggle>().group = _toggleGroup;
-        }
-    }
-
-    private void OnDisable()
-    {
-        foreach (MapDiffToggleUI toggle in _toggles)
-        {
-            Destroy(toggle.gameObject);
         }
     }
 }

@@ -46,14 +46,5 @@ public class StateToggleUI : MonoBehaviour, IPointerClickHandler
 
         if (eventData.button == PointerEventData.InputButton.Left)
             Managers.Game.SelectedCharacter.State = _toggle.isOn ? _state : Define.State.Idle;
-
-        if (_state == Define.State.Inventory)
-        {
-            
-            foreach (var item in Managers.Game.SelectedCharacter.Items)
-            {
-                Debug.Log($"{item.Name}");
-            }
-        }
     }
 }

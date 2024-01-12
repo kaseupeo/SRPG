@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour
         {
             _slots[i].SetItem(_items[i]);
         }
+
     }
 
     public void Close()

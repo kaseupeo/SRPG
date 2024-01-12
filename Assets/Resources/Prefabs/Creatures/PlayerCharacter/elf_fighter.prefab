@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04266a3b00a24dc0850a553f5afd7b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: elf
+  name: "\uC5D8\uD504"
   stats:
   - level: 0
     healthPoint: 100
