@@ -11,7 +11,15 @@ public class PlayerCharacter : Creature
     protected int currentAttackCost;
     protected List<Item> items;
 
-    public int Exp { get => exp; set => exp = value; }
+    public int Exp
+    {
+        get => exp;
+        set
+        {
+            exp = value;
+        }
+    }
+
     public List<Equipment> Equipments { get => equipments; set => equipments = value; }
     public int CurrentTurnCost { get => currentTurnCost; set => currentTurnCost = value; }
     public int CurrentAttackCost { get => currentAttackCost; set => currentAttackCost = value; }
@@ -36,6 +44,24 @@ public class PlayerCharacter : Creature
         currentTurnCost--;
 
         GainItem(tile);
+    }
+
+    public void LevelUpCheck()
+    {
+        int lv = this.exp / 2;
+
+        if (level == lv) 
+            return;
+
+        level++;
+        if (stats.Count <= level)
+        {
+            level = stats.Count - 1;
+            return;
+        }
+        
+        currentStat = new Stat(stats[level]);
+        Debug.Log($"{name} lv.{level} up");
     }
 
     public override void Attack(Creature target)

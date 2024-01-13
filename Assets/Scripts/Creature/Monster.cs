@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Monster : NonPlayerCharacter
 {
+    [SerializeField]
     protected int dropExp;
     [SerializeField]
     protected List<Item> dropItems;

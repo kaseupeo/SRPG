@@ -58,6 +58,14 @@ MonoBehaviour:
     attackCost: 1
     minAttackRange: 0
     maxAttackRange: 1
+  - level: 1
+    healthPoint: 60
+    attack: 20
+    defence: 10
+    turnCost: 7
+    attackCost: 1
+    minAttackRange: 0
+    maxAttackRange: 1
 --- !u!212 &2989262492310327135
 SpriteRenderer:
   m_ObjectHideFlags: 0

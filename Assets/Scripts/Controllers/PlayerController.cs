@@ -36,6 +36,14 @@ public class PlayerController : MonoBehaviour
         _isAttack = false;
     }
 
+    private void Update()
+    {
+        foreach (PlayerCharacter playerCharacter in Managers.Game.PlayerCharacters)
+        {
+            playerCharacter.LevelUpCheck();
+        }
+    }
+
     private void LateUpdate()
     {
         _focusTile = GetMousePositionOnTile();
