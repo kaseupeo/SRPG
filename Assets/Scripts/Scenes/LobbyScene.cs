@@ -7,14 +7,4 @@ public class LobbyScene : MonoBehaviour
     {
         
     }
-
-    public void StartGame()
-    {
-        Managers.Scene.LoadScene(Define.SceneType.GameScene);
-    }
-
-    public void GameQuit()
-    {
-        Managers.Game.GameQuit();   
-    }
 }

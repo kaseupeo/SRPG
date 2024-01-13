@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour
     // 찾은 경로 보여주기
     private void ShowFindPath(Tile focusTile, PlayerCharacter playerCharacter)
     {
-        if (_rangeFindingTiles.Contains(focusTile) && !_isMoving && playerCharacter != null)
+        if (focusTile != null && _rangeFindingTiles.Contains(focusTile) && !_isMoving && playerCharacter != null)
         {
             _path.Clear();
             _path = PathFinding.FindPath(playerCharacter.CurrentTile, focusTile, _rangeFindingTiles);

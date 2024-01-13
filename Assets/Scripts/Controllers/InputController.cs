@@ -20,9 +20,13 @@ public class InputController : MonoBehaviour
 
     private void OpenMenu()
     {
-        Debug.Log("setting");
+        if (!menu.activeSelf)
+            menu.SetActive(true);
+        else
+            menu.GetComponent<MenuPanelUI>().PlayGame();
         
-        menu.SetActive(!menu.activeSelf);
+        // menu.SetActive(!menu.activeSelf);
+        Managers.Game.Pause = menu.activeSelf;
     }
     
     private void OnEnable()

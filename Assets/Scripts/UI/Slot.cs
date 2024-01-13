@@ -22,7 +22,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
         image.color = new Color(1, 1, 1, 1);
     }
 
-    public void Reset()
+    public void ResetSlot()
     {
         image.color = new Color(1, 1, 1, 0);
         image.sprite = null;
@@ -41,7 +41,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
                     Consumption consumption = _item as Consumption;
                     consumption.Use();
                     Debug.Log($"{_item}");
-                    Reset();
+                    ResetSlot();
                     Debug.Log($"{_item}");
                     break;
                 default:

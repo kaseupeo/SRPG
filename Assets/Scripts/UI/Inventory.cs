@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
             return;
         
         foreach (var slot in _slots)
-            slot.Reset();
+            slot.ResetSlot();
 
         gameObject.SetActive(false);
     }

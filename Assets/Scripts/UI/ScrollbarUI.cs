@@ -31,7 +31,6 @@ public class ScrollbarUI : MonoBehaviour
         }
         
         _scrollbar.onValueChanged.AddListener(FindIndex);
-
     }
 
     private void Update()
@@ -60,5 +59,10 @@ public class ScrollbarUI : MonoBehaviour
     private void FindIndex(float value)
     {
         _index = Mathf.RoundToInt(value * (_step - 1));
+    }
+
+    public float FindValue(int index)
+    {
+        return (float)index / (_step - 1);
     }
 }

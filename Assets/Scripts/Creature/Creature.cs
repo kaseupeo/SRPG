@@ -38,7 +38,6 @@ public abstract class Creature : MonoBehaviour
         animator = GetComponent<Animator>();
 
         currentStat = new Stat(stats[level]);
-        // currentStat = stats[level];
         state = Define.State.Idle;
         gameObject.name = name;
     }

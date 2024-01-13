@@ -95,6 +95,9 @@ public class MapManager
 
     public void ShowTile(List<Tile> rangeTile, Color color)
     {
+        if (rangeTile == null)
+            return;
+        
         foreach (Tile tile in rangeTile)
             tile.ShowTile(color);
     }

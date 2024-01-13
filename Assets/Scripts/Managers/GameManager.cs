@@ -8,6 +8,7 @@ public class GameManager
     private Define.GameMode _gameMode;
     private float _gameSpeed;
     private bool _pause;
+    private bool _isFullScreenMode = true;
     private GameObject _map;
     
     
@@ -35,7 +36,15 @@ public class GameManager
             Time.timeScale = _pause ? 0 : 1;
         }
     }
-    
+    public bool IsFullScreenMode
+    {
+        get => _isFullScreenMode;
+        set
+        { 
+            _isFullScreenMode = value;
+            Screen.fullScreen = _isFullScreenMode;
+        }
+    }
     public GameObject Map { get => _map; set => _map = value; }
     
     public List<PlayerCharacter> LoadPlayerCharacters { get => _loadPlayerCharacters; set => _loadPlayerCharacters = value; }
@@ -53,7 +62,8 @@ public class GameManager
     public void Init()
     {
         _gameMode = Define.GameMode.Preparation;
-        _gameSpeed = 10;
+        _gameSpeed = 1;
+        Pause = false;
         LoadCharacters();
         _playerCharacters = new List<PlayerCharacter>();
         _monsters = new List<Monster>();
@@ -134,8 +144,12 @@ public class GameManager
             return null;
 
         List<Tile> rangeFindingTiles = GetTilesInRange(startTile.Grid2DLocation, maxRange);
+        List<Tile> dontRangeFindingTiles = GetTilesInRange(startTile.Grid2DLocation, minRange);
 
-        foreach (Tile tile in GetTilesInRange(startTile.Grid2DLocation, minRange))
+        if (rangeFindingTiles == null || dontRangeFindingTiles == null)
+            return null;
+
+        foreach (Tile tile in dontRangeFindingTiles)
             rangeFindingTiles.Remove(tile);
         
         rangeFindingTiles.Add(startTile);
@@ -145,6 +159,9 @@ public class GameManager
 
     private List<Tile> GetTilesInRange(Vector2Int location, int range)
     {
+        if (!Managers.Map.MapTiles.ContainsKey(location))
+            return null;
+        
         Tile startTile = Managers.Map.MapTiles[location];
         List<Tile> inRangeTile = new List<Tile>();
         List<Tile> tilesForPreviousStep = new List<Tile>();
@@ -233,8 +250,6 @@ public class GameManager
                     {
                         foreach (PlayerCharacter target in _playerCharacters)
                         {
-                            Debug.Log($"{target.name} takedamege {target.CurrentTile.name}");
-                            Debug.Log($"{tile.name}");
                             if (tile == target.CurrentTile)
                             {
                                 Debug.Log($"{monster.name} attack");
@@ -281,7 +296,6 @@ public class GameManager
     {
         _loadPlayerCharacters?.Clear();
     }
-    
     
     public void GameQuit()
     {
