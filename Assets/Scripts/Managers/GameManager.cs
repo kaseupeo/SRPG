@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager
 {
     private Define.GameMode _gameMode;
-    private float _gameSpeed;
+    private float _gameSpeed = 1;
     private bool _pause;
     private bool _isFullScreenMode = true;
     private GameObject _map;
@@ -62,7 +62,6 @@ public class GameManager
     public void Init()
     {
         _gameMode = Define.GameMode.Preparation;
-        _gameSpeed = 1;
         Pause = false;
         LoadCharacters();
         _playerCharacters = new List<PlayerCharacter>();
