@@ -41,7 +41,7 @@ public class PathFinding
             
             foreach (Tile tile in GetSurroundingTiles(currentTile.Grid2DLocation, _searchableTiles))
             {
-                if (closedList.Contains(tile) || IsCheckToPassTile(currentTile, tile, 1))
+                if (closedList.Contains(tile) || IsCheckToPassTile(currentTile, tile, Define.Height))
                     continue;
                 
                 tile.G = GetManhattanDistance(start, tile);
@@ -106,19 +106,19 @@ public class PathFinding
         List<Tile> surroundingTiles = new List<Tile>();
         
         Vector2Int tileToCheck = new Vector2Int(originTile.x + 1, originTile.y);
-        if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], 1))
+        if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], Define.Height))
             surroundingTiles.Add(mapTiles[tileToCheck]);
 
         tileToCheck = new Vector2Int(originTile.x - 1, originTile.y);
-        if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], 1))
+        if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], Define.Height))
             surroundingTiles.Add(mapTiles[tileToCheck]);
 
         tileToCheck = new Vector2Int(originTile.x, originTile.y + 1);
-        if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], 1))
+        if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], Define.Height))
             surroundingTiles.Add(mapTiles[tileToCheck]);
 
         tileToCheck = new Vector2Int(originTile.x, originTile.y - 1);
-        if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], 1))
+        if (mapTiles.ContainsKey(tileToCheck) && !IsCheckToPassTile(mapTiles[originTile], mapTiles[tileToCheck], Define.Height))
             surroundingTiles.Add(mapTiles[tileToCheck]);
         
         return surroundingTiles;

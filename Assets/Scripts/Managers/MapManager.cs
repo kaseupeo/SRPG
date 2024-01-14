@@ -82,7 +82,8 @@ public class MapManager
                         Vector3 cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
 
                         overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z);
-                        overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
+                        overlayTile.GetComponent<SpriteRenderer>().sortingOrder =
+                            tileMap.GetComponent<TilemapRenderer>().sortingOrder + 1;
                         overlayTile.GetComponent<Tile>().GridLocation = new Vector3Int(x, y, z);
                         overlayTile.name = $"{overlayTile.GetComponent<Tile>().Grid2DLocation}";
 
@@ -124,11 +125,6 @@ public class MapManager
             surroundingTiles.Add(_mapTiles[tileToCheck]);
 
         return surroundingTiles;
-    }
-
-    public void UpdateTileInfo(Tile tile)
-    {
-        _mapTiles[tile.Grid2DLocation].GridLocation = tile.GridLocation;
     }
     
     public void Clear()

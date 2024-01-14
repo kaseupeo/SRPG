@@ -87,7 +87,15 @@ public abstract class Creature : MonoBehaviour
         animator.SetFloat("X", dir.x);
         animator.SetFloat("Y", dir.y);
 
-        animator.SetTrigger("Slash");
+        if (dir.magnitude > 1)
+        {
+            animator.SetTrigger("Bow");
+        }
+        else
+        {
+            animator.SetTrigger("Slash");
+        }
+
 
         int damage = currentStat.Attack - target.CurrentStat.Defence;
 
@@ -100,6 +108,12 @@ public abstract class Creature : MonoBehaviour
         {
             target.currentStat.HealthPoint = 0;
             StartCoroutine(target.Dead());
+        }
+        else
+        {
+            target.animator.SetFloat("X", -dir.x);
+            target.animator.SetFloat("Y", -dir.y);
+            target.animator.SetTrigger("Damage");
         }
     }
 
@@ -120,6 +134,7 @@ public abstract class Creature : MonoBehaviour
     protected virtual IEnumerator Dead()
     {
         state = Define.State.Dead;
+        yield return new WaitForSeconds(0.5f);
         animator.SetTrigger("Dead");
         Vector2 currentPosition = transform.position;
         transform.position = new Vector2(currentPosition.x, currentPosition.y -0.12f);

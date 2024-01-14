@@ -94,7 +94,17 @@ public class PlayerCharacter : Creature
         }
     }
 
-    // protected override IEnumerator Dead() { }
+    protected override IEnumerator Dead()
+    {
+        StartCoroutine(base.Dead());
+        
+        for (var i = 0; i < 64; i++)
+        {
+            yield return null;
+        }
+
+        Managers.Game.PlayerCharacters.Remove(this);
+    }
 
     private void OnDestroy()
     {

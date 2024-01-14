@@ -875,7 +875,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -24, y: -22, z: 0}
   m_Size: {x: 44, y: 49, z: 3}
-  m_TileAnchor: {x: 0, y: 0, z: 1}
+  m_TileAnchor: {x: 0, y: 0, z: 2}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -1203,7 +1203,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -24, y: -22, z: 0}
   m_Size: {x: 44, y: 49, z: 3}
-  m_TileAnchor: {x: 0, y: 0, z: 2}
+  m_TileAnchor: {x: 0, y: 0, z: 4}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1

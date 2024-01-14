@@ -2,7 +2,7 @@
 
 public class Define
 {
-    public const int Height = 1;
+    public const int Height = 2;
     
     public enum GameMode
     {
