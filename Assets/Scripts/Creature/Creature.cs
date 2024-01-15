@@ -56,18 +56,14 @@ public abstract class Creature : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, targetTile.transform.position, step);
         transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
 
-        Vector2 dir = targetTile.transform.position - transform.position;
-        
-        // 이동 애니메이션
+        // Vector2 dir = targetTile.transform.position - transform.position;
+        Vector2 dir = targetTile.Grid2DLocation - currentTile.Grid2DLocation;
+        Debug.Log($"{dir}, {targetTile.Grid2DLocation}, {currentTile.Grid2DLocation}");
         if (dir.x != 0 || dir.y != 0)
         {
             animator.SetFloat("X", dir.x);
             animator.SetFloat("Y", dir.y);
             animator.SetBool("Walk", true);
-        }
-        else
-        {
-            animator.SetBool("Walk", false);
         }
     }
     

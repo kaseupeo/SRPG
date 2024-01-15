@@ -275,6 +275,11 @@ public class GameManager
                     path.RemoveAt(0);
                     cost--;
                 }
+
+                if (cost == 0 || path.Count == 0)
+                {
+                    monster.GetComponent<Animator>().SetBool("Walk", false);
+                }
             }
 
             _monster = null;
