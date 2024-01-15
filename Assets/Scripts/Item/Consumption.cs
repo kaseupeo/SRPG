@@ -14,9 +14,4 @@ public class Consumption : Item
         Managers.Game.SelectedCharacter.Items.Remove(this);
         gameObject.SetActive(true);
     }
-
-    public void GetItem()
-    {
-        
-    }
 }

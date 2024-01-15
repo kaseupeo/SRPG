@@ -7,16 +7,16 @@ using UnityEngine.Serialization;
 // TODO
 public abstract class Creature : MonoBehaviour
 {
-    [SerializeField]
-    protected string name;
+    [SerializeField] protected string name;
+    [SerializeField] protected Sprite icon;
     protected int level;
-    [SerializeField]
-    protected List<Stat> stats;
+    [SerializeField] protected List<Stat> stats;
     protected Stat currentStat;
     protected Define.State state;
     protected Tile currentTile;
     
     public string Name { get => name; set => name = value; }
+    public Sprite Icon { get => icon; set => icon = value; }
     public int Level { get => level; set => level = value; }
     public List<Stat> Stats => stats;
     public Stat CurrentStat { get => currentStat; set => currentStat = value; }
@@ -40,7 +40,6 @@ public abstract class Creature : MonoBehaviour
         currentStat = new Stat(stats[level]);
         state = Define.State.Idle;
         gameObject.name = name;
-        Debug.Log($"{currentStat.MeleeAttack} , {currentStat.LongRangeAttack}");
     }
     
     /*

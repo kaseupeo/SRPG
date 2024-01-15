@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2989262492310327133}
   - component: {fileID: 2989262492310327122}
   m_Layer: 0
-  m_Name: elf_fighter
+  m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,25 +48,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04266a3b00a24dc0850a553f5afd7b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\uC5D8\uD504"
+  name: "\uAD81\uC218"
+  icon: {fileID: 21300000, guid: bd120ef7c357848d7918c90174417f70, type: 3}
   stats:
   - level: 0
-    healthPoint: 100
-    meleeAttack: 100
-    longRangeAttack: 100
+    healthPoint: 50
+    meleeAttack: 0
+    longRangeAttack: 10
     defence: 0
-    turnCost: 7
-    attackCost: 2
-    minAttackRange: 2
-    maxAttackRange: 3
+    turnCost: 6
+    attackCost: 1
+    minAttackRange: 1
+    maxAttackRange: 2
   - level: 1
-    healthPoint: 110
-    meleeAttack: 100
-    longRangeAttack: 100
+    healthPoint: 60
+    meleeAttack: 0
+    longRangeAttack: 15
+    defence: 0
+    turnCost: 6
+    attackCost: 2
+    minAttackRange: 1
+    maxAttackRange: 2
+  - level: 2
+    healthPoint: 65
+    meleeAttack: 5
+    longRangeAttack: 20
+    defence: 0
+    turnCost: 6
+    attackCost: 2
+    minAttackRange: 0
+    maxAttackRange: 2
+  - level: 3
+    healthPoint: 65
+    meleeAttack: 5
+    longRangeAttack: 20
+    defence: 0
+    turnCost: 6
+    attackCost: 2
+    minAttackRange: 0
+    maxAttackRange: 2
+  - level: 4
+    healthPoint: 70
+    meleeAttack: 5
+    longRangeAttack: 20
     defence: 0
     turnCost: 7
     attackCost: 2
-    minAttackRange: 2
+    minAttackRange: 0
     maxAttackRange: 3
 --- !u!212 &2989262492310327135
 SpriteRenderer:
@@ -110,7 +138,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 1959512401, guid: 7465ef4f8274330419bdc1abe808b291, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6876232, g: 1, b: 0.5896226, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

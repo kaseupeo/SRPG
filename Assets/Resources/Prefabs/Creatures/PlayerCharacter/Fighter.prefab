@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2989262492310327134}
-  - component: {fileID: 68084750101588136}
+  - component: {fileID: -7206206582548247551}
   - component: {fileID: 2989262492310327135}
   - component: {fileID: 2989262492310327132}
   - component: {fileID: 2989262492310327133}
+  - component: {fileID: 2989262492310327122}
   m_Layer: 0
-  m_Name: Monster 1
+  m_Name: Fighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &68084750101588136
+--- !u!114 &-7206206582548247551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,24 +45,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 2989262492310327123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 767ad7a34664483fabbd07922e9de2db, type: 3}
+  m_Script: {fileID: 11500000, guid: 04266a3b00a24dc0850a553f5afd7b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: mon
+  name: "\uD30C\uC774\uD130"
+  icon: {fileID: 21300000, guid: a6a888db0af154cdc9b87bd1175768a3, type: 3}
   stats:
   - level: 0
-    healthPoint: 10
-    meleeAttack: 10
-    longRangeAttack: 20
+    healthPoint: 100
+    meleeAttack: 20
+    longRangeAttack: 0
     defence: 10
-    turnCost: 3
+    turnCost: 5
     attackCost: 1
     minAttackRange: 0
     maxAttackRange: 1
-  dropExp: 2
-  dropItems:
-  - {fileID: -1298344013425119685, guid: 36b247c4eea5dac4cbb89f9aaa47852b, type: 3}
-  - {fileID: -7927981188621774325, guid: a88c6eda5951fed43b72c39953d1c120, type: 3}
+  - level: 1
+    healthPoint: 110
+    meleeAttack: 20
+    longRangeAttack: 0
+    defence: 15
+    turnCost: 5
+    attackCost: 1
+    minAttackRange: 0
+    maxAttackRange: 1
+  - level: 2
+    healthPoint: 110
+    meleeAttack: 20
+    longRangeAttack: 0
+    defence: 15
+    turnCost: 6
+    attackCost: 1
+    minAttackRange: 0
+    maxAttackRange: 1
+  - level: 3
+    healthPoint: 110
+    meleeAttack: 25
+    longRangeAttack: 0
+    defence: 15
+    turnCost: 6
+    attackCost: 1
+    minAttackRange: 0
+    maxAttackRange: 1
+  - level: 4
+    healthPoint: 110
+    meleeAttack: 30
+    longRangeAttack: 0
+    defence: 20
+    turnCost: 6
+    attackCost: 1
+    minAttackRange: 0
+    maxAttackRange: 1
 --- !u!212 &2989262492310327135
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -102,9 +136,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1959512401, guid: 7465ef4f8274330419bdc1abe808b291, type: 3}
-  m_Color: {r: 0.9622642, g: 0.6166568, b: 0.27687788, a: 0.4745098}
+  m_Color: {r: 0.6084906, g: 0.90650517, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -156,3 +190,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2989262492310327122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2989262492310327123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fcaf2ea21c8918408c5e15ca19baee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItenPoint: {fileID: 0}
+  ShotPoint: {fileID: 0}
+  ItemPrefab: {fileID: 0}
+  ThrowPrefab: {fileID: 0}
+  BowPrefab: {fileID: 0}
+  moveSpeed: 3
+  shotPointTransform: {fileID: 0}

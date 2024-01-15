@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2989262492310327132}
   - component: {fileID: 2989262492310327133}
   m_Layer: 0
-  m_Name: Monster
+  m_Name: Monster Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,18 +47,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767ad7a34664483fabbd07922e9de2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Monster
+  name: "\uAD81\uC218"
+  icon: {fileID: 21300000, guid: f4fe5647cf05a402ebecf4bd69d04590, type: 3}
   stats:
   - level: 0
-    healthPoint: 100
-    meleeAttack: 20
-    longRangeAttack: 10
-    defence: 0
+    healthPoint: 10
+    meleeAttack: 10
+    longRangeAttack: 20
+    defence: 10
     turnCost: 3
     attackCost: 1
     minAttackRange: 0
     maxAttackRange: 1
-  dropExp: 1
+  dropExp: 2
   dropItems:
   - {fileID: -1298344013425119685, guid: 36b247c4eea5dac4cbb89f9aaa47852b, type: 3}
   - {fileID: -7927981188621774325, guid: a88c6eda5951fed43b72c39953d1c120, type: 3}
@@ -104,7 +105,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 1959512401, guid: 7465ef4f8274330419bdc1abe808b291, type: 3}
-  m_Color: {r: 1, g: 0.24545771, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.06774902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

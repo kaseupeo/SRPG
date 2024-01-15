@@ -7,6 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8849285144675077730, guid: 1c336dd8e32c0ec49aab5c20187ce216, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: df10b93f93ce5d4468fb8e3c26994b28, type: 2}
+    - target: {fileID: 8849285144675077730, guid: 1c336dd8e32c0ec49aab5c20187ce216, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8213251707392375237, guid: df10b93f93ce5d4468fb8e3c26994b28, type: 2}
+    - target: {fileID: 8849285145021875199, guid: 1c336dd8e32c0ec49aab5c20187ce216, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: df10b93f93ce5d4468fb8e3c26994b28, type: 2}
+    - target: {fileID: 8849285145021875199, guid: 1c336dd8e32c0ec49aab5c20187ce216, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8213251707392375237, guid: df10b93f93ce5d4468fb8e3c26994b28, type: 2}
     - target: {fileID: 8849285146176936323, guid: 1c336dd8e32c0ec49aab5c20187ce216, type: 3}
       propertyPath: m_Sprite
       value: 
