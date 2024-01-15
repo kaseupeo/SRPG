@@ -61,8 +61,8 @@ MonoBehaviour:
     maxAttackRange: 1
   - level: 1
     healthPoint: 60
-    meleeAttack: 0
-    longRangeAttack: 0
+    meleeAttack: 10
+    longRangeAttack: 10
     defence: 10
     turnCost: 7
     attackCost: 1

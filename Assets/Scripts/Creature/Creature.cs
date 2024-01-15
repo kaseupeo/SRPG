@@ -40,6 +40,7 @@ public abstract class Creature : MonoBehaviour
         currentStat = new Stat(stats[level]);
         state = Define.State.Idle;
         gameObject.name = name;
+        Debug.Log($"{currentStat.MeleeAttack} , {currentStat.LongRangeAttack}");
     }
     
     /*
@@ -82,12 +83,13 @@ public abstract class Creature : MonoBehaviour
     public virtual void Attack(Creature target)
     {
         // TODO : 공격
-        Vector2 dir = target.currentTile.transform.position - transform.position;
+        Vector2 dir = target.currentTile.Grid2DLocation - currentTile.Grid2DLocation;
 
         animator.SetFloat("X", dir.x);
         animator.SetFloat("Y", dir.y);
         int damage = 0;
 
+        
         // 원거리
         if (dir.magnitude > 1)
         {
@@ -97,10 +99,12 @@ public abstract class Creature : MonoBehaviour
         // 근접
         else
         {
-            damage += currentStat.MeleeAttack - target.CurrentStat.Defence;
+            damage = currentStat.MeleeAttack - target.CurrentStat.Defence;
             animator.SetTrigger("Slash");
+            Debug.Log($"{dir.magnitude}, target : {target.currentTile.Grid2DLocation}, player : {currentTile.Grid2DLocation}");
         }
         
+
         damage = damage > 0 ? damage : 0;
 
         target.currentStat.HealthPoint -= damage;
@@ -114,7 +118,7 @@ public abstract class Creature : MonoBehaviour
         else
         {
             target.animator.SetFloat("X", -dir.x);
-            target.animator.SetFloat("Y", -dir.y);
+            target.animator.SetFloat("Y", dir.y);
             target.animator.SetTrigger("Damage");
         }
     }
