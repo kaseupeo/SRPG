@@ -125,7 +125,11 @@ public class GameManager
     // 몬스터 랜덤 위치에 생성
     private void GenerateRandomMonster()
     {
-        List<Tile> tiles = new List<Tile>(Managers.Map.UpdateMapTiles.Values);
+        List<Tile> tiles =
+            new List<Tile>(Managers.Map.UpdateMapTiles.Values.Where(tile =>
+                tile.transform.parent.CompareTag("MonsterGround")));
+        
+        
         
         foreach (Monster loadMonster in _loadMonsters)
         {
@@ -133,6 +137,27 @@ public class GameManager
             monster.Init();
             monster.CharacterPositionOnTile(tiles[Random.Range(0, tiles.Count)]);
             _monsters.Add(monster);
+        }
+    }
+
+    public void ShowStartTile()
+    {
+        GameObject startGround = GameObject.FindWithTag("StartGround");
+        if (startGround == null)
+            return;
+
+        foreach (SpriteRenderer spriteRenderer in startGround.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.color = new Color(0, 0, 1, 0.5f);
+        }
+
+        GameObject monsterGround = GameObject.FindWithTag("MonsterGround");
+        if (monsterGround == null)
+            return;
+
+        foreach (SpriteRenderer spriteRenderer in monsterGround.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.color = new Color(1, 0, 0, 0.5f);
         }
     }
     

@@ -100,7 +100,10 @@ public class PlayerController : MonoBehaviour
         switch (Managers.Game.GameMode)
         {
             case Define.GameMode.Preparation:
-                Managers.Game.GeneratePlayerCharacter(_focusTile);
+                if (_focusTile != null && _focusTile.transform.parent.CompareTag("StartGround"))
+                {
+                    Managers.Game.GeneratePlayerCharacter(_focusTile);
+                }
                 break;
             case Define.GameMode.PlayerTurn:
                 

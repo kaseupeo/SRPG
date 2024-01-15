@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class ModePanelUI : MonoBehaviour
@@ -50,6 +51,7 @@ public class ModePanelUI : MonoBehaviour
             gameObject.SetActive(false);
             panel.SetActive(true);
             Managers.Map.GenerateOverlayTile(Managers.Game.Map);
+            Managers.Game.ShowStartTile();
             return;
         }
 

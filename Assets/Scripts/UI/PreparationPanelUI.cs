@@ -19,8 +19,8 @@ public class PreparationPanelUI : MonoBehaviour
     {
         playerCharacterInfo.UpdateInfo(Managers.Game.SelectedCharacter);
     }
-    
-    public void BattleStart()
+
+    private void BattleStart()
     {
         if (Managers.Game.PlayerCharacters.Count == 0)
             return;
@@ -28,5 +28,27 @@ public class PreparationPanelUI : MonoBehaviour
         Managers.Game.SelectedCharacter = null;
         Managers.Game.GameMode = Define.GameMode.PlayerTurn;
         Managers.Game.GenerateMonster();
+        HideMapTile();
+    }
+
+    private void HideMapTile()
+    {
+        GameObject startGround = GameObject.FindWithTag("StartGround");
+        if (startGround == null)
+            return;
+
+        foreach (SpriteRenderer spriteRenderer in startGround.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.color = new Color(1, 1, 1, 0);
+        }
+
+        GameObject monsterGround = GameObject.FindWithTag("MonsterGround");
+        if (monsterGround == null)
+            return;
+
+        foreach (SpriteRenderer spriteRenderer in monsterGround.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.color = new Color(1, 1, 1, 0);
+        }
     }
 }

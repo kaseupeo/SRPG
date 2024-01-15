@@ -11,6 +11,7 @@ public class MapManager
     private List<GameObject> _loadMaps;
     
     private Dictionary<Vector2Int, Tile> _mapTiles = new Dictionary<Vector2Int, Tile>();
+    private Dictionary<Vector2Int, Tile> _startMapTiles = new Dictionary<Vector2Int, Tile>();
     private Dictionary<Vector2Int, Tile> _updateMapTiles = new Dictionary<Vector2Int, Tile>();
     public List<GameObject> LoadMaps => _loadMaps;
     public Dictionary<Vector2Int, Tile> MapTiles => _mapTiles;
