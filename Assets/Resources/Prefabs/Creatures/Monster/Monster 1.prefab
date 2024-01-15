@@ -51,7 +51,8 @@ MonoBehaviour:
   stats:
   - level: 0
     healthPoint: 10
-    attack: 10
+    meleeAttack: 10
+    longRangeAttack: 20
     defence: 10
     turnCost: 3
     attackCost: 1

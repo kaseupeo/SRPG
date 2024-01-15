@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c130266bbb6b410a816e917b6af4d158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\uACF5\uACA9\uB825\uC5C5\uD3EC\uC158"
+  name: "\uACF5\uACA9\uB825\uC99D\uAC00\uD3EC\uC158"
   sprite: {fileID: 21300000, guid: 3ff4955ef06ef4debab9e7255f043f0d, type: 3}
+  description: "\uACF5\uACA9\uB825 50\uD37C \uC99D\uAC00"
   leftTime: 1
   rankUpRate: 50
 --- !u!212 &5533547265174939779
@@ -92,8 +93,8 @@ SpriteRenderer:
   m_SortingLayerID: -1833629585
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -311297077, guid: 3f7136c83a4a8eb45a61652884907ba8, type: 3}
-  m_Color: {r: 0, g: 0, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 3ff4955ef06ef4debab9e7255f043f0d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

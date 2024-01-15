@@ -22,7 +22,6 @@ public class ClearPanelUI : MonoBehaviour
         replayButton.onClick.AddListener(Replay);
         lobbyButton.onClick.AddListener(() => Managers.Scene.LoadScene(Define.SceneType.LobbyScene));
         quitButton.onClick.AddListener(() => Managers.Game.GameQuit());
-
     }
 
     public void OnEnable()
@@ -31,6 +30,7 @@ public class ClearPanelUI : MonoBehaviour
         
         if (Managers.Game.Monsters.Count == 0)
         {
+            _image.color = new Color(1, 1, 1, 1);
             childImage.sprite = clearSprite;
         }
 

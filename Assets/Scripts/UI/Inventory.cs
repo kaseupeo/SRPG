@@ -6,9 +6,11 @@ using UnityEngine.Serialization;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private Slot slotPrefab;
-
+    [SerializeField] private ToolTipUI toolTipPrefab;
     private List<Slot> _slots;
     private List<Item> _items;
+
+    public ToolTipUI ToolTip;
 
     private void Update()
     {
@@ -26,6 +28,9 @@ public class Inventory : MonoBehaviour
             var go = Instantiate(slotPrefab, transform);
             _slots.Add(go);
         }
+
+        ToolTip = Instantiate(toolTipPrefab, transform.parent);
+        ToolTip.gameObject.SetActive(false);
     }
 
     public void Open()

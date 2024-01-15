@@ -37,6 +37,7 @@ public class Monster : NonPlayerCharacter
         Item item = RandomItem();
         Item dropItem = Instantiate(item.gameObject, transform.position, Quaternion.identity).GetComponent<Item>();
         dropItem.CurrentTile = currentTile;
+        dropItem.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
         Managers.Game.FieldItems.Add(dropItem);
         foreach (PlayerCharacter playerCharacter in Managers.Game.PlayerCharacters)
         {

@@ -23,6 +23,6 @@ public class InfoPanelUI : MonoBehaviour
         image.color = new Color(1, 1, 1, 1);
         image = image;
         text1.text = $"이름 : {creature.Name}\n이동력 : {creature.CurrentStat.TurnCost}\n공격횟수 : {creature.CurrentStat.AttackCost}";
-        text2.text = $"체력 : {creature.CurrentStat.HealthPoint}/{creature.Stats[level].HealthPoint}\n공격력 : {creature.CurrentStat.Attack}\n방어력 : {creature.CurrentStat.Defence}";
+        text2.text = $"체력 : {creature.CurrentStat.HealthPoint}/{creature.Stats[level].HealthPoint}\n공격력 : {creature.CurrentStat.MeleeAttack}\n방어력 : {creature.CurrentStat.Defence}";
     }
 }

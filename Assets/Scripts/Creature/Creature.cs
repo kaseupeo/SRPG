@@ -86,19 +86,21 @@ public abstract class Creature : MonoBehaviour
 
         animator.SetFloat("X", dir.x);
         animator.SetFloat("Y", dir.y);
+        int damage = 0;
 
+        // 원거리
         if (dir.magnitude > 1)
         {
+            damage = currentStat.LongRangeAttack - target.CurrentStat.Defence;
             animator.SetTrigger("Bow");
         }
+        // 근접
         else
         {
+            damage += currentStat.MeleeAttack - target.CurrentStat.Defence;
             animator.SetTrigger("Slash");
         }
-
-
-        int damage = currentStat.Attack - target.CurrentStat.Defence;
-
+        
         damage = damage > 0 ? damage : 0;
 
         target.currentStat.HealthPoint -= damage;
@@ -128,7 +130,8 @@ public abstract class Creature : MonoBehaviour
 
     public void AttackRankUp(float rate)
     {
-        currentStat.Attack = (int)(currentStat.Attack * (rate / 100 + 1));
+        currentStat.MeleeAttack = (int)(currentStat.MeleeAttack * (rate / 100 + 1));
+        currentStat.LongRangeAttack = (int)(currentStat.LongRangeAttack * (rate / 100 + 1));
     }
 
     protected virtual IEnumerator Dead()
@@ -153,7 +156,8 @@ public class Stat
 {
     [SerializeField] private int level;
     [SerializeField] private int healthPoint;
-    [SerializeField] private int attack;
+    [SerializeField] private int meleeAttack;
+    [SerializeField] private int longRangeAttack;
     [SerializeField] private int defence;
     [SerializeField] private int turnCost;
     [SerializeField] private int attackCost;
@@ -162,7 +166,8 @@ public class Stat
 
     public int Level { get => level; set => level = value; }
     public int HealthPoint { get => healthPoint; set => healthPoint = value; }
-    public int Attack { get => attack; set => attack = value; }
+    public int MeleeAttack { get => meleeAttack; set => meleeAttack = value; }
+    public int LongRangeAttack  { get => longRangeAttack; set => longRangeAttack = value; }
     public int Defence { get => defence; set => defence = value; }
     public int TurnCost { get => turnCost; set => turnCost = value; }
     public int AttackCost { get => attackCost; set => attackCost = value; }
@@ -173,7 +178,8 @@ public class Stat
     {
         level = stat.level;
         healthPoint = stat.healthPoint;
-        attack = stat.attack;
+        meleeAttack = stat.meleeAttack;
+        LongRangeAttack = stat.LongRangeAttack;
         defence = stat.defence;
         turnCost = stat.turnCost;
         attackCost = stat.attackCost;

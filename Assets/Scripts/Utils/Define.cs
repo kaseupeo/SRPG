@@ -36,8 +36,8 @@ public class Define
     
     public enum EquipType
     {
-        Weapon,
-        
+        MeleeWeapon,
+        LongRangeWeapon,
     }
 
     public enum ArrowDirection
