@@ -113,7 +113,7 @@ public abstract class Creature : MonoBehaviour
         else
         {
             target.animator.SetFloat("X", -dir.x);
-            target.animator.SetFloat("Y", dir.y);
+            target.animator.SetFloat("Y", -dir.y);
             target.animator.SetTrigger("Damage");
         }
     }
