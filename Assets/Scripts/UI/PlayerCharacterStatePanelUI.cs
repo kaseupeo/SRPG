@@ -62,8 +62,6 @@ public class PlayerCharacterStatePanelUI : MonoBehaviour
             else
                 inventory.Close();
         }
-
-        
     }
 
     private void OnDisable()

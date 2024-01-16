@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
         
         switch (_selectedPlayerCharacter.State)
         {
+            case Define.State.Idle:
+                break;
             case Define.State.Move:
                 _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter.CurrentTile, _selectedPlayerCharacter.CurrentTurnCost);
                 Managers.Map.ShowTile(_rangeFindingTiles, new Color(1, 1, 1, 0.5f));
@@ -132,10 +134,8 @@ public class PlayerController : MonoBehaviour
                     case Define.State.Inventory:
                         break;
                 }
-                
                 break;
             case Define.GameMode.MonsterTurn:
-
                 break;
         }
     }
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
     // 찾은 경로 보여주기
     private void ShowFindPath(Tile focusTile, PlayerCharacter playerCharacter)
     {
-        if (focusTile != null && playerCharacter != null && _rangeFindingTiles.Contains(focusTile) && !_isMoving)
+        if (focusTile != null && playerCharacter != null && _rangeFindingTiles != null && _rangeFindingTiles.Contains(focusTile) && !_isMoving)
         {
             _path.Clear();
             _path = PathFinding.FindPath(playerCharacter.CurrentTile, focusTile, _rangeFindingTiles);
@@ -208,11 +208,6 @@ public class PlayerController : MonoBehaviour
         {
             _selectedMonster = monster;
             Managers.Game.Monster = _selectedMonster;
-
-            // if (_selectedPlayerCharacter == null)
-            // {
-            //     Managers.Map.ShowTile(Managers.Game.GetRangeTiles(monster.CurrentTile, monster.Stats[monster.Level].TurnCost), Color.red);
-            // }
         }
     }
     

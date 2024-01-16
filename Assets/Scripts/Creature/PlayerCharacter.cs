@@ -10,15 +10,7 @@ public class PlayerCharacter : Creature
     protected int currentAttackCost;
     protected List<Item> items;
 
-    public int Exp
-    {
-        get => exp;
-        set
-        {
-            exp = value;
-        }
-    }
-
+    public int Exp { get => exp; set => exp = value; }
     public int CurrentTurnCost { get => currentTurnCost; set => currentTurnCost = value; }
     public int CurrentAttackCost { get => currentAttackCost; set => currentAttackCost = value; }
     public List<Item> Items { get => items; set => items = value; }
@@ -95,7 +87,6 @@ public class PlayerCharacter : Creature
     protected override IEnumerator Dead()
     {
         yield return StartCoroutine(base.Dead());
-
         
         Managers.Game.PlayerCharacters.Remove(this);
     }

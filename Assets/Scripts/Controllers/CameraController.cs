@@ -13,8 +13,6 @@ public class CameraController : MonoBehaviour
     
     [SerializeField] private float cameraMoveSpeed;
     [SerializeField] private float cameraMoveArea;
-
-    
     
     private void Awake()
     {
@@ -26,6 +24,7 @@ public class CameraController : MonoBehaviour
         _camera = Camera.main;
         _playerActions.Camera.MousePosition.performed += cameraPos => _cameraPosition = CameraMoveByMouse(cameraPos.ReadValue<Vector2>());
         _playerActions.Camera.KeyBoardPosition.performed += cameraPos => _cameraPosition = CameraMoveByKeyboard(cameraPos.ReadValue<Vector2>());
+        _playerActions.Camera.CharacterPosition.performed += _ => _camera.transform.position = FocusSelectedCharacter();
     }
     
     private void LateUpdate()
@@ -82,7 +81,17 @@ public class CameraController : MonoBehaviour
     {
         return cameraPos;
     }
-        
+
+    private Vector3 FocusSelectedCharacter()
+    {
+        if (Managers.Game.SelectedCharacter == null)
+        {
+            return _camera.transform.position;
+        }
+        var focusPos = Managers.Game.SelectedCharacter.transform.position;
+        return new Vector3(focusPos.x, focusPos.y, -10);
+    }
+    
     private void OnEnable()
     {
         _playerActions.Enable();

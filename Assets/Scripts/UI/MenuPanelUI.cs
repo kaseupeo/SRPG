@@ -13,12 +13,13 @@ public class MenuPanelUI : MonoBehaviour
     [SerializeField] private Button quitButton;
 
     [SerializeField] private GameObject settingsMenu;
+    
     private void Start()
     {
         playGameButton.onClick.AddListener(PlayGame);
         replayButton.onClick.AddListener(Replay);
         settingsButton.onClick.AddListener(() => settingsMenu.SetActive(!settingsMenu.activeSelf));
-        lobbyButton.onClick.AddListener(() => Managers.Scene.LoadScene(Define.SceneType.LobbyScene));
+        lobbyButton.onClick.AddListener(Lobby);
         quitButton.onClick.AddListener(() => Managers.Game.GameQuit());
     }
 
@@ -35,5 +36,12 @@ public class MenuPanelUI : MonoBehaviour
         Managers.Game.Init();
         Managers.Map.Init();
         Managers.Scene.LoadScene(Define.SceneType.GameScene);
+    }
+
+    private void Lobby()
+    {
+        Managers.Game.Clear();
+        Managers.Map.Clear();
+        Managers.Scene.LoadScene(Define.SceneType.LobbyScene);
     }
 }

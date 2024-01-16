@@ -26,7 +26,6 @@ public class InfoPanelUI : MonoBehaviour
             image.sprite = creature.Icon;
             text1.text = $"이름 : {creature.Name}\n레벨 : {creature.Level}\n이동력 : {creature.Stats[level].TurnCost}\n공격횟수 : {creature.Stats[level].AttackCost}";
             text2.text = $"체력 : {creature.Stats[level].HealthPoint}\n근접 공격력 : {creature.Stats[level].MeleeAttack}\n원거리 공격력 : {creature.Stats[level].LongRangeAttack}\n방어력 : {creature.Stats[level].Defence}";
-
         }
         else
         {

@@ -1,7 +1,7 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class MapDiffToggleUI : MonoBehaviour, IPointerClickHandler
@@ -17,9 +17,15 @@ public class MapDiffToggleUI : MonoBehaviour, IPointerClickHandler
         _text.text = $"{go.name}";
         _gameObject = go;
 
-        if (_toggle.isOn) Managers.Game.Map = _gameObject;
+        if (_toggle.isOn) 
+            Managers.Game.Map = _gameObject;
     }
-    
+
+    private void Update()
+    {
+        _text.color = _toggle.isOn ? Color.red : Color.white;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

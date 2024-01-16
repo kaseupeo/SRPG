@@ -28,11 +28,7 @@ public class GameManager
     
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
     public float GameSpeed { get => _gameSpeed; set => _gameSpeed = value; }
-    public Define.CameraMode CameraMode
-    {
-        get => _cameraMode;
-        set => _cameraMode = value;
-    }
+    public Define.CameraMode CameraMode { get => _cameraMode; set => _cameraMode = value; }
 
     public bool Pause
     {
@@ -134,8 +130,6 @@ public class GameManager
         List<Tile> tiles =
             new List<Tile>(Managers.Map.UpdateMapTiles.Values.Where(tile =>
                 tile.transform.parent.CompareTag("MonsterGround")));
-        
-        
         
         foreach (Monster loadMonster in _loadMonsters)
         {

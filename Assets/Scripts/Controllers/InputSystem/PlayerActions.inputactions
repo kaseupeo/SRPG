@@ -98,6 +98,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "CharacterPosition",
+                    "type": "Button",
+                    "id": "4d93f417-9d0b-4fa5-8246-2258d459cbad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -166,6 +175,17 @@
                     "action": "KeyBoardPosition",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "172d8fff-9400-4017-923b-3eb891d3f2c1",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CharacterPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

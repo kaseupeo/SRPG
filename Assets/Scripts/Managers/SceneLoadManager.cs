@@ -10,6 +10,5 @@ public class SceneLoadManager
 
     public void Clear()
     {
-        
     }
 }

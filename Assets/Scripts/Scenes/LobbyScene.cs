@@ -5,6 +5,5 @@ public class LobbyScene : MonoBehaviour
 {
     private void Awake()
     {
-        
     }
 }

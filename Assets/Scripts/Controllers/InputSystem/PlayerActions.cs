@@ -120,6 +120,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CharacterPosition"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d93f417-9d0b-4fa5-8246-2258d459cbad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -188,6 +197,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""KeyBoardPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""172d8fff-9400-4017-923b-3eb891d3f2c1"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CharacterPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -205,6 +225,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_MousePosition = m_Camera.FindAction("MousePosition", throwIfNotFound: true);
         m_Camera_KeyBoardPosition = m_Camera.FindAction("KeyBoardPosition", throwIfNotFound: true);
+        m_Camera_CharacterPosition = m_Camera.FindAction("CharacterPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -368,12 +389,14 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
     private readonly InputAction m_Camera_MousePosition;
     private readonly InputAction m_Camera_KeyBoardPosition;
+    private readonly InputAction m_Camera_CharacterPosition;
     public struct CameraActions
     {
         private @PlayerActions m_Wrapper;
         public CameraActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @MousePosition => m_Wrapper.m_Camera_MousePosition;
         public InputAction @KeyBoardPosition => m_Wrapper.m_Camera_KeyBoardPosition;
+        public InputAction @CharacterPosition => m_Wrapper.m_Camera_CharacterPosition;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -389,6 +412,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @KeyBoardPosition.started += instance.OnKeyBoardPosition;
             @KeyBoardPosition.performed += instance.OnKeyBoardPosition;
             @KeyBoardPosition.canceled += instance.OnKeyBoardPosition;
+            @CharacterPosition.started += instance.OnCharacterPosition;
+            @CharacterPosition.performed += instance.OnCharacterPosition;
+            @CharacterPosition.canceled += instance.OnCharacterPosition;
         }
 
         private void UnregisterCallbacks(ICameraActions instance)
@@ -399,6 +425,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @KeyBoardPosition.started -= instance.OnKeyBoardPosition;
             @KeyBoardPosition.performed -= instance.OnKeyBoardPosition;
             @KeyBoardPosition.canceled -= instance.OnKeyBoardPosition;
+            @CharacterPosition.started -= instance.OnCharacterPosition;
+            @CharacterPosition.performed -= instance.OnCharacterPosition;
+            @CharacterPosition.canceled -= instance.OnCharacterPosition;
         }
 
         public void RemoveCallbacks(ICameraActions instance)
@@ -429,5 +458,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     {
         void OnMousePosition(InputAction.CallbackContext context);
         void OnKeyBoardPosition(InputAction.CallbackContext context);
+        void OnCharacterPosition(InputAction.CallbackContext context);
     }
 }

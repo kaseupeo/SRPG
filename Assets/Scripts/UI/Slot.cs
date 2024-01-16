@@ -59,6 +59,5 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         GetComponentInParent<Inventory>().ToolTip.gameObject.SetActive(false);
-        
     }
 }

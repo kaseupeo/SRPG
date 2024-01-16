@@ -10,7 +10,6 @@ public class Tile : MonoBehaviour
     public int G { get; set; }
     public int H { get; set; }
     public int F => G + H;
-    // public bool IsBlocked { get; set; }
     public Tile Previous { get; set; }
     public Vector3Int GridLocation { get; set; }
     public Vector2Int Grid2DLocation => new Vector2Int(GridLocation.x, GridLocation.y);

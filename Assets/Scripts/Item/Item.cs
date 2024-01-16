@@ -10,7 +10,6 @@ public class Item : MonoBehaviour
     protected Define.ItemType itemType;
     protected Tile currentTile;
     
-
     public int ID { get => id; set => id = value; }
     public string Name { get => name; set => name = value; }
     public Sprite Sprite { get => sprite; set => sprite = value; }
