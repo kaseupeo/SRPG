@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerCharacter : Creature
 {
     protected int exp;
-    protected List<Equipment> equipments;
     protected int currentTurnCost;
     protected int currentAttackCost;
     protected List<Item> items;
@@ -20,7 +19,6 @@ public class PlayerCharacter : Creature
         }
     }
 
-    public List<Equipment> Equipments { get => equipments; set => equipments = value; }
     public int CurrentTurnCost { get => currentTurnCost; set => currentTurnCost = value; }
     public int CurrentAttackCost { get => currentAttackCost; set => currentAttackCost = value; }
     public List<Item> Items { get => items; set => items = value; }
@@ -96,13 +94,9 @@ public class PlayerCharacter : Creature
 
     protected override IEnumerator Dead()
     {
-        StartCoroutine(base.Dead());
-        
-        for (var i = 0; i < 64; i++)
-        {
-            yield return null;
-        }
+        yield return StartCoroutine(base.Dead());
 
+        
         Managers.Game.PlayerCharacters.Remove(this);
     }
 

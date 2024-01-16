@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,16 @@ public class GamePanelUI : MonoBehaviour
     {
         playerCharacterInfo.UpdateInfo(Managers.Game.SelectedCharacter);
         monsterInfo.UpdateInfo(Managers.Game.Monster);
+        if (Managers.Game.GameMode == Define.GameMode.PlayerTurn)
+        {
+            finishedPlayerTurnButton.GetComponentInChildren<TextMeshProUGUI>().text = "다음 턴";
+            finishedPlayerTurnButton.interactable = true;
+        }
+        else
+        {
+            finishedPlayerTurnButton.GetComponentInChildren<TextMeshProUGUI>().text = "잠시만\n기다리십시오.";
+            finishedPlayerTurnButton.interactable = false;
+        }
     }
 
     private void FinishedPlayerTurn()
@@ -31,8 +42,10 @@ public class GamePanelUI : MonoBehaviour
             clearPanelUI.gameObject.SetActive(true);
             return;
         }
-        
-        
+
+        if (Managers.Game.GameMode == Define.GameMode.MonsterTurn)
+            return;
+
         foreach (PlayerCharacter playerCharacter in Managers.Game.PlayerCharacters) 
             playerCharacter.State = Define.State.Idle;
         

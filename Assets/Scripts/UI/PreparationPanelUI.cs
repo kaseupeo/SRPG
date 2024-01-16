@@ -18,13 +18,12 @@ public class PreparationPanelUI : MonoBehaviour
     private void Update()
     {
         playerCharacterInfo.UpdateInfo(Managers.Game.SelectedCharacter);
+
+        battleStartButton.interactable = Managers.Game.PlayerCharacters.Count != 0;
     }
 
     private void BattleStart()
     {
-        if (Managers.Game.PlayerCharacters.Count == 0)
-            return;
-        
         Managers.Game.SelectedCharacter = null;
         Managers.Game.GameMode = Define.GameMode.PlayerTurn;
         Managers.Game.GenerateMonster();

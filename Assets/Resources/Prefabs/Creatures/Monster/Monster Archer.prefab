@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767ad7a34664483fabbd07922e9de2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\uAD81\uC218"
+  name: "\uAD81\uC218 \uBAAC\uC2A4\uD130"
   icon: {fileID: 21300000, guid: f4fe5647cf05a402ebecf4bd69d04590, type: 3}
   stats:
   - level: 0

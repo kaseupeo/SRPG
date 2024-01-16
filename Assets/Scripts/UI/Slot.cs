@@ -39,8 +39,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
         {
             switch (_item.ItemType)
             {
-                case Define.ItemType.Equipment:
-                    break;
                 case Define.ItemType.Consumption:
                     Consumption consumption = _item as Consumption;
                     consumption.Use();

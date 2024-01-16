@@ -47,7 +47,7 @@ public class MapManager
     
     public void GenerateOverlayTile(Tilemap[] tileMaps)
     {
-        _overlayTilePrefab = Resources.Load("Prefabs/UI/OverlayTile") as GameObject;
+        _overlayTilePrefab = Resources.Load("Prefabs/UI/Tile") as GameObject;
         
         foreach (Tilemap tile in tileMaps)
         {
@@ -84,7 +84,8 @@ public class MapManager
 
                         overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z);
                         overlayTile.GetComponent<SpriteRenderer>().sortingOrder =
-                            tileMap.GetComponent<TilemapRenderer>().sortingOrder + 1;
+                            tileMap.GetComponent<TilemapRenderer>().sortingOrder/* + 1*/;
+                        overlayTile.transform.position += new Vector3(0, 0, 2);
                         overlayTile.GetComponent<Tile>().GridLocation = new Vector3Int(x, y, z);
                         overlayTile.name = $"{overlayTile.GetComponent<Tile>().Grid2DLocation}";
 

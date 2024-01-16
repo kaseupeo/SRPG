@@ -48,12 +48,13 @@ public abstract class Creature : MonoBehaviour
      */
     public void Move(Tile targetTile)
     {
+        // spriteRenderer.sortingOrder = 1;
         float step = Managers.Game.GameSpeed * Time.deltaTime;
         float zIndex = targetTile.transform.position.z;
         currentTile.IsBlocked = false;
         
         transform.position = Vector2.MoveTowards(transform.position, targetTile.transform.position, step);
-        transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
+        transform.position = new Vector3(transform.position.x, transform.position.y, zIndex + 0.5f);
 
         Vector2 dir = targetTile.Grid2DLocation - currentTile.Grid2DLocation;
         if (dir.x != 0 || dir.y != 0)
@@ -62,13 +63,14 @@ public abstract class Creature : MonoBehaviour
             animator.SetFloat("Y", dir.y);
             animator.SetBool("Walk", true);
         }
+        // spriteRenderer.sortingOrder = 0;
     }
     
     public virtual void CharacterPositionOnTile(Tile tile)
     {
         transform.position =
             new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
-        spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
         tile.IsBlocked = true;
         currentTile = tile;
     }
@@ -133,11 +135,10 @@ public abstract class Creature : MonoBehaviour
 
     protected virtual IEnumerator Dead()
     {
-        state = Define.State.Dead;
         yield return new WaitForSeconds(0.5f);
         animator.SetTrigger("Dead");
-        Vector2 currentPosition = transform.position;
-        transform.position = new Vector2(currentPosition.x, currentPosition.y -0.12f);
+        Vector3 currentPosition = transform.position;
+        transform.position = new Vector3(currentPosition.x, currentPosition.y -0.12f, currentPosition.z);
         
         for (var i = 0; i < 64; i++)
         {
@@ -145,6 +146,7 @@ public abstract class Creature : MonoBehaviour
         }
 
         transform.position = currentPosition;
+        state = Define.State.Dead;
     }
 }
 

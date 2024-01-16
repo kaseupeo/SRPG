@@ -99,7 +99,6 @@ public class GameManager
         {
             var gameObject = GameObject.Find(find.Name);
             _playerCharacters.Remove(gameObject.GetComponent<PlayerCharacter>());
-            // Debug.Log($"{gameObject}");
             GameObject.Destroy(gameObject);
         }
         
@@ -109,7 +108,7 @@ public class GameManager
         PlayerCharacter pc = GameObject.Instantiate(_selectedCharacter.gameObject).GetComponent<PlayerCharacter>();
         pc.Init();
         pc.CharacterPositionOnTile(tile);
-        
+        pc.transform.position += new Vector3(0, 0, 1);
         _playerCharacters.Add(pc);
     }
 

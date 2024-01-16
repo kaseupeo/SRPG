@@ -39,6 +39,11 @@ public class StateToggleUI : MonoBehaviour, IPointerClickHandler
         _state = state;
     }
 
+    private void Update()
+    {
+        _text.color = _toggle.isOn ? Color.red : Color.blue;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (Managers.Game.SelectedCharacter == null)

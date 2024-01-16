@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : NonPlayerCharacter
+public class Monster : Creature
 {
     [SerializeField]
     protected int dropExp;
@@ -19,13 +19,8 @@ public class Monster : NonPlayerCharacter
 
     protected override IEnumerator Dead()
     {
-        StartCoroutine(base.Dead());
-        
-        for (var i = 0; i < 64; i++)
-        {
-            yield return null;
-        }
-
+        yield return StartCoroutine(base.Dead());
+        yield return new WaitForSeconds(0.5f);
         Managers.Game.Monsters.Remove(this);
         currentTile.IsBlocked = false;
         Drop();

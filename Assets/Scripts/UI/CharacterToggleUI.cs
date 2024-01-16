@@ -19,9 +19,15 @@ public class CharacterToggleUI : MonoBehaviour, IPointerClickHandler
         _playerCharacter = playerCharacter;
     }
 
+    private void Update()
+    {
+        _text.color = _toggle.isOn ? Color.red : Color.blue;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left) 
             Managers.Game.SelectedCharacter = _toggle.isOn ? _playerCharacter : null;
+        
     }
 }

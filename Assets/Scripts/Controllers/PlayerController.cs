@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         {
             case Define.State.Move:
                 _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter.CurrentTile, _selectedPlayerCharacter.CurrentTurnCost);
-                Managers.Map.ShowTile(_rangeFindingTiles, Color.white);
+                Managers.Map.ShowTile(_rangeFindingTiles, new Color(1, 1, 1, 0.5f));
                 _selectedPlayerCharacter.CurrentTile.HideTile();
                 ShowFindPath(_focusTile, _selectedPlayerCharacter);
                 break;
@@ -66,10 +66,11 @@ public class PlayerController : MonoBehaviour
                 if (_selectedPlayerCharacter.CurrentAttackCost <= 0)
                     return;
                 _rangeFindingTiles = Managers.Game.GetRangeTiles(_selectedPlayerCharacter.CurrentTile, _selectedPlayerCharacter.CurrentStat.MaxAttackRange, _selectedPlayerCharacter.CurrentStat.MinAttackRange);
-                Managers.Map.ShowTile(_rangeFindingTiles, Color.blue);
+                Managers.Map.ShowTile(_rangeFindingTiles, new Color(0, 0, 1, 0.5f));
                 _selectedPlayerCharacter.CurrentTile.HideTile();
                 break;
             case Define.State.Dead:
+                _selectedPlayerCharacter = null;
                 break;
             case Define.State.Inventory:
                 break;
@@ -162,17 +163,16 @@ public class PlayerController : MonoBehaviour
             _cursor.HideCursor();
             return;
         }
-        
+
         _cursor.transform.position = focusTile.transform.position;
         _cursor.GetComponent<SpriteRenderer>().sortingOrder = focusTile.GetComponent<SpriteRenderer>().sortingOrder;
         _cursor.ShowCursor();
-        
     }
     
     // 찾은 경로 보여주기
     private void ShowFindPath(Tile focusTile, PlayerCharacter playerCharacter)
     {
-        if (focusTile != null && _rangeFindingTiles.Contains(focusTile) && !_isMoving && playerCharacter != null)
+        if (focusTile != null && playerCharacter != null && _rangeFindingTiles.Contains(focusTile) && !_isMoving)
         {
             _path.Clear();
             _path = PathFinding.FindPath(playerCharacter.CurrentTile, focusTile, _rangeFindingTiles);
@@ -255,6 +255,7 @@ public class PlayerController : MonoBehaviour
             if (_path.Count <= 0 || !_isMoving)
             {
                 _path.Clear();
+                playerCharacter.GetComponent<Animator>().SetBool("Walk", false);
                 yield break;
             }
         }

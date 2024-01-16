@@ -9,6 +9,7 @@ public class MenuPanelUI : MonoBehaviour
     [SerializeField] private Button playGameButton;
     [SerializeField] private Button replayButton;
     [SerializeField] private Button settingsButton;
+    [SerializeField] private Button lobbyButton;
     [SerializeField] private Button quitButton;
 
     [SerializeField] private GameObject settingsMenu;
@@ -17,6 +18,7 @@ public class MenuPanelUI : MonoBehaviour
         playGameButton.onClick.AddListener(PlayGame);
         replayButton.onClick.AddListener(Replay);
         settingsButton.onClick.AddListener(() => settingsMenu.SetActive(!settingsMenu.activeSelf));
+        lobbyButton.onClick.AddListener(() => Managers.Scene.LoadScene(Define.SceneType.LobbyScene));
         quitButton.onClick.AddListener(() => Managers.Game.GameQuit());
     }
 

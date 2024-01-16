@@ -2,14 +2,14 @@
 
 public class Define
 {
-    public const int Height = 2;
+    // 크리처가 이동할 수 있는 높이
+    public const int Height = 1;
     
     public enum GameMode
     {
         Preparation,
         PlayerTurn,
         MonsterTurn,
-        PedestrianTurn,
     }
     
     public enum State
@@ -24,20 +24,12 @@ public class Define
     public enum SceneType
     {
         LobbyScene,
-        GenerateCharacterScene,
         GameScene,
     }
     
     public enum ItemType
     {
-        Equipment,
         Consumption,
-    }
-    
-    public enum EquipType
-    {
-        MeleeWeapon,
-        LongRangeWeapon,
     }
 
     public enum ArrowDirection
