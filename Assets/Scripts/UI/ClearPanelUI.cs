@@ -20,7 +20,7 @@ public class ClearPanelUI : MonoBehaviour
     private void Start()
     {
         replayButton.onClick.AddListener(Replay);
-        lobbyButton.onClick.AddListener(() => Managers.Scene.LoadScene(Define.SceneType.LobbyScene));
+        lobbyButton.onClick.AddListener(Lobby);
         quitButton.onClick.AddListener(() => Managers.Game.GameQuit());
     }
 
@@ -52,6 +52,13 @@ public class ClearPanelUI : MonoBehaviour
         Managers.Scene.LoadScene(Define.SceneType.GameScene);
     }
 
+    private void Lobby()
+    {
+        Managers.Game.Clear();
+        Managers.Map.Clear();
+        Managers.Scene.LoadScene(Define.SceneType.LobbyScene);
+    }
+    
     private IEnumerator OnButton()
     {
         yield return new WaitForSeconds(2f);
