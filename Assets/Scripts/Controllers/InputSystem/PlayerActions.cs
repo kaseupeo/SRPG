@@ -98,6 +98,98 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""d67d32dc-df45-4266-affa-9c74676a7299"",
+            ""actions"": [
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""7424fbc7-956b-4a37-acad-13ffbb9c9e14"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""KeyBoardPosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""4f0a016b-b2b2-4588-90b0-2e3a49f4113e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f0253009-2eaf-42bf-9cf9-dc869b8c3099"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""076e557c-deb1-4b32-9e03-72ce372f3da9"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyBoardPosition"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""9d57f163-123d-4e7d-bd59-cd44f4033d0b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyBoardPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""86d98b9a-7e08-4f01-8d38-1a169e9a6dbf"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyBoardPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""9420915e-62fc-4fe1-a00d-3ce13429a9ea"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyBoardPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d11f555a-e51f-4427-908f-dabfda55ed10"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyBoardPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -109,6 +201,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_SettingsMenu = m_Keyboard.FindAction("SettingsMenu", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_MousePosition = m_Camera.FindAction("MousePosition", throwIfNotFound: true);
+        m_Camera_KeyBoardPosition = m_Camera.FindAction("KeyBoardPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -266,6 +362,60 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         }
     }
     public KeyboardActions @Keyboard => new KeyboardActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_MousePosition;
+    private readonly InputAction m_Camera_KeyBoardPosition;
+    public struct CameraActions
+    {
+        private @PlayerActions m_Wrapper;
+        public CameraActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MousePosition => m_Wrapper.m_Camera_MousePosition;
+        public InputAction @KeyBoardPosition => m_Wrapper.m_Camera_KeyBoardPosition;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+            @KeyBoardPosition.started += instance.OnKeyBoardPosition;
+            @KeyBoardPosition.performed += instance.OnKeyBoardPosition;
+            @KeyBoardPosition.canceled += instance.OnKeyBoardPosition;
+        }
+
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+            @KeyBoardPosition.started -= instance.OnKeyBoardPosition;
+            @KeyBoardPosition.performed -= instance.OnKeyBoardPosition;
+            @KeyBoardPosition.canceled -= instance.OnKeyBoardPosition;
+        }
+
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     public interface IMouseActions
     {
         void OnPosition(InputAction.CallbackContext context);
@@ -274,5 +424,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     public interface IKeyboardActions
     {
         void OnSettingsMenu(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnMousePosition(InputAction.CallbackContext context);
+        void OnKeyBoardPosition(InputAction.CallbackContext context);
     }
 }

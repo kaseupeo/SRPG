@@ -7,6 +7,7 @@ public class GameManager
 {
     private Define.GameMode _gameMode;
     private float _gameSpeed = 1;
+    private Define.CameraMode _cameraMode = Define.CameraMode.Both;
     private bool _pause;
     private bool _isFullScreenMode = true;
     private GameObject _map;
@@ -27,6 +28,12 @@ public class GameManager
     
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
     public float GameSpeed { get => _gameSpeed; set => _gameSpeed = value; }
+    public Define.CameraMode CameraMode
+    {
+        get => _cameraMode;
+        set => _cameraMode = value;
+    }
+
     public bool Pause
     {
         get => _pause;

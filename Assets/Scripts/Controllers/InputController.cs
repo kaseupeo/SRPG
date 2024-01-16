@@ -25,7 +25,6 @@ public class InputController : MonoBehaviour
         else
             menu.GetComponent<MenuPanelUI>().PlayGame();
         
-        // menu.SetActive(!menu.activeSelf);
         Managers.Game.Pause = menu.activeSelf;
     }
     
@@ -38,5 +37,4 @@ public class InputController : MonoBehaviour
     {
         _playerActions.Disable();
     }
-    
 }

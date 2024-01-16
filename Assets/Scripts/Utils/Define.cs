@@ -12,6 +12,13 @@ public class Define
         MonsterTurn,
     }
     
+    public enum CameraMode
+    {
+        Both,
+        Mouse,
+        Keyboard,
+    }
+    
     public enum State
     {
         Idle,

@@ -1,44 +1,95 @@
 ﻿using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class CameraController : MonoBehaviour
 {
     private Camera _camera;
-
+    private PlayerActions _playerActions;
+    private Vector2 _cameraPosition;
+    private Define.CameraMode _cameraMode;
+    
     [SerializeField] private float cameraMoveSpeed;
     [SerializeField] private float cameraMoveArea;
 
+    
+    
+    private void Awake()
+    {
+        _playerActions = new PlayerActions();
+    }
+    
     private void Start()
     {
         _camera = Camera.main;
+        _playerActions.Camera.MousePosition.performed += cameraPos => _cameraPosition = CameraMoveByMouse(cameraPos.ReadValue<Vector2>());
+        _playerActions.Camera.KeyBoardPosition.performed += cameraPos => _cameraPosition = CameraMoveByKeyboard(cameraPos.ReadValue<Vector2>());
     }
     
     private void LateUpdate()
     {
-        CameraMove();
-    }
+        _camera.transform.Translate(_cameraPosition * (Time.deltaTime * cameraMoveSpeed));
 
-    private void CameraMove()
-    {
-        var mousePosition = Input.mousePosition;
-
-        if (!(mousePosition.x > 0) || !(mousePosition.y > 0) || !(mousePosition.x < Screen.width) ||
-            !(mousePosition.y < Screen.height))
+        if (_cameraMode == Managers.Game.CameraMode)
             return;
 
-        float xRate = mousePosition.x / Screen.width;
-        float yRate = mousePosition.y / Screen.height;
+        switch (Managers.Game.CameraMode)
+        {
+            case Define.CameraMode.Both:
+                _playerActions.Camera.MousePosition.Enable();
+                _playerActions.Camera.KeyBoardPosition.Enable();
+                _cameraMode = Define.CameraMode.Both;
+                break;
+            case Define.CameraMode.Mouse:
+                _playerActions.Camera.MousePosition.Enable();
+                _playerActions.Camera.KeyBoardPosition.Disable();
+                _cameraMode = Define.CameraMode.Mouse;
+                break;
+            case Define.CameraMode.Keyboard:
+                _playerActions.Camera.MousePosition.Disable();
+                _playerActions.Camera.KeyBoardPosition.Enable();
+                _cameraMode = Define.CameraMode.Keyboard;
+                break;
+        }
+    }
+    
+    private Vector2 CameraMoveByMouse(Vector2 cameraPos)
+    {
+        Vector2 position = Vector2.zero;
+
+        if (!Managers.Game.IsFullScreenMode && (!(cameraPos.x > 0) || !(cameraPos.y > 0) || !(cameraPos.x < Screen.width) ||
+             !(cameraPos.y < Screen.height)))
+            return Vector2.zero;
+
+        float xRate = cameraPos.x / Screen.width;
+        float yRate = cameraPos.y / Screen.height;
 
         if (xRate < cameraMoveArea)
-            _camera.transform.Translate(Vector2.left * (Time.deltaTime * cameraMoveSpeed));
+            position += Vector2.left;
         if (xRate > 1 - cameraMoveArea) 
-            _camera.transform.Translate(Vector2.right * (Time.deltaTime * cameraMoveSpeed));
-
+            position += Vector2.right;
         if (yRate < cameraMoveArea)
-            _camera.transform.Translate(Vector2.down * (Time.deltaTime * cameraMoveSpeed));
+            position += Vector2.down;
         if (yRate > 1 - cameraMoveArea) 
-            _camera.transform.Translate(Vector2.up * (Time.deltaTime * cameraMoveSpeed));
+            position += Vector2.up;
+
+        return position;
+    }
+
+    private Vector2 CameraMoveByKeyboard(Vector2 cameraPos)
+    {
+        return cameraPos;
+    }
+        
+    private void OnEnable()
+    {
+        _playerActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerActions.Disable();
     }
 }

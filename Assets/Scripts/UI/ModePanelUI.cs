@@ -52,6 +52,7 @@ public class ModePanelUI : MonoBehaviour
             panel.SetActive(true);
             Managers.Map.GenerateOverlayTile(Managers.Game.Map);
             Managers.Game.ShowStartTile();
+            Camera.main.transform.position = new Vector3(0, 0, -10);
             return;
         }
 
