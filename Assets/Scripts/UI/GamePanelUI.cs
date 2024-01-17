@@ -33,6 +33,14 @@ public class GamePanelUI : MonoBehaviour
             finishedPlayerTurnButton.GetComponentInChildren<TextMeshProUGUI>().text = "잠시만\n기다리십시오.";
             finishedPlayerTurnButton.interactable = false;
         }
+        
+        foreach (Monster monster in Managers.Game.Monsters)
+        {
+            if (monster.State != Define.State.Idle)
+            {
+                finishedPlayerTurnButton.interactable = false;
+            }
+        }
     }
 
     private void FinishedPlayerTurn()
@@ -45,7 +53,7 @@ public class GamePanelUI : MonoBehaviour
 
         if (Managers.Game.GameMode == Define.GameMode.MonsterTurn)
             return;
-
+        
         foreach (PlayerCharacter playerCharacter in Managers.Game.PlayerCharacters) 
             playerCharacter.State = Define.State.Idle;
         

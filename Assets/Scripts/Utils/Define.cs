@@ -40,11 +40,6 @@ public class Define
         LobbyScene,
         GameScene,
     }
-    
-    public enum ItemType
-    {
-        Consumption,
-    }
 
     public enum ArrowDirection
     {

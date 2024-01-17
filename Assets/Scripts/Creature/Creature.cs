@@ -48,7 +48,6 @@ public abstract class Creature : MonoBehaviour
      */
     public void Move(Tile targetTile)
     {
-        // spriteRenderer.sortingOrder = 1;
         float step = Managers.Game.GameSpeed * Time.deltaTime;
         float zIndex = targetTile.transform.position.z;
         currentTile.IsBlocked = false;
@@ -63,13 +62,12 @@ public abstract class Creature : MonoBehaviour
             animator.SetFloat("Y", dir.y);
             animator.SetBool("Walk", true);
         }
-        // spriteRenderer.sortingOrder = 0;
     }
     
     public virtual void CharacterPositionOnTile(Tile tile)
     {
         transform.position =
-            new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z);
+            new Vector3(tile.transform.position.x, tile.transform.position.y, tile.transform.position.z + 0.5f);
         spriteRenderer.sortingOrder = tile.GetComponent<SpriteRenderer>().sortingOrder;
         tile.IsBlocked = true;
         currentTile = tile;
@@ -83,7 +81,6 @@ public abstract class Creature : MonoBehaviour
         animator.SetFloat("X", dir.x);
         animator.SetFloat("Y", dir.y);
         int damage = 0;
-
         
         // 원거리
         if (dir.magnitude > 1)
@@ -135,6 +132,7 @@ public abstract class Creature : MonoBehaviour
 
     protected virtual IEnumerator Dead()
     {
+        state = Define.State.Dead;
         yield return new WaitForSeconds(0.5f);
         animator.SetTrigger("Dead");
         Vector3 currentPosition = transform.position;
@@ -146,7 +144,6 @@ public abstract class Creature : MonoBehaviour
         }
 
         transform.position = currentPosition;
-        state = Define.State.Dead;
     }
 }
 

@@ -42,7 +42,9 @@ public class Tile : MonoBehaviour
     public void SetSprite(ArrowDirection dir)
     {
         if (dir == ArrowDirection.None)
+        {
             _childSpriteRenderer.color = new Color(1, 1, 1, 0);
+        }
         else
         {
             _childSpriteRenderer.color = new Color(1, 1, 1, 1);

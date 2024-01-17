@@ -38,7 +38,7 @@ public class PlayerCharacter : Creature
 
     public void LevelUpCheck()
     {
-        int lv = this._exp / 2;
+        int lv = _exp / 2;
 
         if (level == lv) 
             return;

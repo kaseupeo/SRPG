@@ -25,6 +25,7 @@ public class CameraController : MonoBehaviour
         _playerActions.Camera.MousePosition.performed += cameraPos => _cameraPosition = CameraMoveByMouse(cameraPos.ReadValue<Vector2>());
         _playerActions.Camera.KeyBoardPosition.performed += cameraPos => _cameraPosition = CameraMoveByKeyboard(cameraPos.ReadValue<Vector2>());
         _playerActions.Camera.CharacterPosition.performed += _ => _camera.transform.position = FocusSelectedCharacter();
+        _playerActions.Camera.MouseScroll.performed += scroll => CameraZoom(scroll.ReadValue<float>() * 0.0002f);
     }
     
     private void LateUpdate()
@@ -90,6 +91,28 @@ public class CameraController : MonoBehaviour
         }
         var focusPos = Managers.Game.SelectedCharacter.transform.position;
         return new Vector3(focusPos.x, focusPos.y, -10);
+    }
+
+    private void CameraZoom(float scroll)
+    {
+        float zoomY = 0.1f;
+        if (scroll > 0)
+        {
+            _camera.orthographicSize += -zoomY;
+        }
+        else if (scroll < 0)
+        {
+            _camera.orthographicSize += zoomY;
+        }
+        
+        if (_camera.orthographicSize < 1)
+        {
+            _camera.orthographicSize = 1;
+        }
+        else if (_camera.orthographicSize > 10)
+        {
+            _camera.orthographicSize = 10;
+        }
     }
     
     private void OnEnable()

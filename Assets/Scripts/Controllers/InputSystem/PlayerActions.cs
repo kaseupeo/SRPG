@@ -129,6 +129,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseScroll"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""eb673d16-3354-4058-ad22-0d465b3773cc"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -208,6 +217,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""CharacterPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bd4ffc3-1802-4a56-a8d0-cc79c4d56d45"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseScroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -226,6 +246,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Camera_MousePosition = m_Camera.FindAction("MousePosition", throwIfNotFound: true);
         m_Camera_KeyBoardPosition = m_Camera.FindAction("KeyBoardPosition", throwIfNotFound: true);
         m_Camera_CharacterPosition = m_Camera.FindAction("CharacterPosition", throwIfNotFound: true);
+        m_Camera_MouseScroll = m_Camera.FindAction("MouseScroll", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -390,6 +411,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Camera_MousePosition;
     private readonly InputAction m_Camera_KeyBoardPosition;
     private readonly InputAction m_Camera_CharacterPosition;
+    private readonly InputAction m_Camera_MouseScroll;
     public struct CameraActions
     {
         private @PlayerActions m_Wrapper;
@@ -397,6 +419,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_Camera_MousePosition;
         public InputAction @KeyBoardPosition => m_Wrapper.m_Camera_KeyBoardPosition;
         public InputAction @CharacterPosition => m_Wrapper.m_Camera_CharacterPosition;
+        public InputAction @MouseScroll => m_Wrapper.m_Camera_MouseScroll;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -415,6 +438,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @CharacterPosition.started += instance.OnCharacterPosition;
             @CharacterPosition.performed += instance.OnCharacterPosition;
             @CharacterPosition.canceled += instance.OnCharacterPosition;
+            @MouseScroll.started += instance.OnMouseScroll;
+            @MouseScroll.performed += instance.OnMouseScroll;
+            @MouseScroll.canceled += instance.OnMouseScroll;
         }
 
         private void UnregisterCallbacks(ICameraActions instance)
@@ -428,6 +454,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @CharacterPosition.started -= instance.OnCharacterPosition;
             @CharacterPosition.performed -= instance.OnCharacterPosition;
             @CharacterPosition.canceled -= instance.OnCharacterPosition;
+            @MouseScroll.started -= instance.OnMouseScroll;
+            @MouseScroll.performed -= instance.OnMouseScroll;
+            @MouseScroll.canceled -= instance.OnMouseScroll;
         }
 
         public void RemoveCallbacks(ICameraActions instance)
@@ -459,5 +488,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnKeyBoardPosition(InputAction.CallbackContext context);
         void OnCharacterPosition(InputAction.CallbackContext context);
+        void OnMouseScroll(InputAction.CallbackContext context);
     }
 }

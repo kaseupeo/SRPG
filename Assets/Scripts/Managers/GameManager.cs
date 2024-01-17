@@ -50,9 +50,7 @@ public class GameManager
             return _gameSpeed;
         }
     }
-
     public Define.CameraMode CameraMode { get => _cameraMode; set => _cameraMode = value; }
-
     public bool Pause
     {
         get => _pause;

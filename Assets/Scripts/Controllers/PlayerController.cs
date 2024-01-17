@@ -17,10 +17,9 @@ public class PlayerController : MonoBehaviour
     private List<Tile> _path;
     private List<Tile> _rangeFindingTiles;
     private bool _isMoving;
-    private bool _isAttack;
     private PlayerCharacter _selectedPlayerCharacter;
     private Monster _selectedMonster;
-
+    
     private void Awake()
     {
         _playerActions = new PlayerActions();
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour
         _path = new List<Tile>();
         _rangeFindingTiles = new List<Tile>();
         _isMoving = false;
-        _isAttack = false;
     }
 
     private void Update()
@@ -223,7 +221,6 @@ public class PlayerController : MonoBehaviour
         }
         
         HideRangeTiles();
-        // _selectedPlayerCharacter = null;
     }
     
     // 캐릭터 이동 메소드
@@ -241,14 +238,9 @@ public class PlayerController : MonoBehaviour
                 _path.RemoveAt(0);
             }
 
-            if (_path.Count == 0)
+            if (_path.Count <= 0)
             {
-                // _selectedPlayerCharacter = null;
                 _isMoving = false;
-            }
-
-            if (_path.Count <= 0 || !_isMoving)
-            {
                 _path.Clear();
                 playerCharacter.GetComponent<Animator>().SetBool("Walk", false);
                 yield break;
@@ -261,7 +253,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_selectedPlayerCharacter == null || _selectedMonster == null || _focusTile == _selectedPlayerCharacter.CurrentTile || _rangeFindingTiles == null)
             return;
-        
+
         foreach (var tile in _rangeFindingTiles.Where(tile => tile == _selectedMonster.CurrentTile))
         {
             _selectedPlayerCharacter.Attack(_selectedMonster);

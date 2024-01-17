@@ -50,7 +50,7 @@ public class Managers : MonoBehaviour
 
     private void Awake()
     {
-        Screen.SetResolution(1920, 1080, true);
+        Screen.SetResolution(1920, 1080, Game.IsFullScreenMode);
         Init();
     }
     

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Potion : Consumption
+public class Potion : Item
 {
     [SerializeField] private float leftTime;
     
@@ -13,13 +13,15 @@ public class Potion : Consumption
     {
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        itemType = Define.ItemType.Consumption;
         _speed = 0.5f;
     }
 
-    public override void Use()
+    public virtual void Use()
     {
-        base.Use();
+        transform.position = Managers.Game.SelectedCharacter.transform.position;
+        gameObject.GetComponent<SpriteRenderer>().sortingOrder = Managers.Game.SelectedCharacter.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        Managers.Game.SelectedCharacter.Items.Remove(this);
+        gameObject.SetActive(true);
         _animator.SetTrigger("Use");
         _rigidbody2D.velocity = transform.up * _speed;
         Destroy(gameObject, leftTime);

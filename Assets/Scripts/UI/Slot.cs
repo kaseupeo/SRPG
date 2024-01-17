@@ -38,21 +38,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
         
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            switch (_item.ItemType)
-            {
-                case Define.ItemType.Consumption:
-                    Consumption consumption = _item as Consumption;
-                    consumption.Use();
-                    ResetSlot();
-                    break;
-            }
+            Potion potion = _item as Potion;
+            potion.Use();
+            ResetSlot();
         }
         
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             GetComponentInParent<Inventory>().ToolTip.gameObject.SetActive(true);
             GetComponentInParent<Inventory>().ToolTip.gameObject.transform.position = transform.position ;
-            var text = GetComponentInParent<Inventory>().ToolTip.GetComponent<TextMeshProUGUI>(); 
+            var text = GetComponentInParent<Inventory>().ToolTip.GetComponentInChildren<TextMeshProUGUI>(); 
             text.text = $"{_item.Name}\n\n{_item.Description}";
         }
     }
@@ -61,7 +56,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
     {
         if (eventData != null)
         {
-            GetComponentInParent<Inventory>().gameObject.SetActive(false);
+            GetComponentInParent<Inventory>().ToolTip.gameObject.SetActive(false);
         }
     }
 }
