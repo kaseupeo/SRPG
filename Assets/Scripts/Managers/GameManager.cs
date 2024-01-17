@@ -12,7 +12,6 @@ public class GameManager
     private bool _isFullScreenMode = true;
     private GameObject _map;
     
-    
     private List<PlayerCharacter> _loadPlayerCharacters;
     private List<PlayerCharacter> _playerCharacters;
     private PlayerCharacter _selectedCharacter;
@@ -312,8 +311,8 @@ public class GameManager
         
         Managers.Game.GameMode = Define.GameMode.PlayerTurn;
     }
-    
-    public void ResetTurn()
+
+    private void ResetTurn()
     {
         foreach (PlayerCharacter playerCharacter in _playerCharacters)
         {

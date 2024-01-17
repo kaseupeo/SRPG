@@ -4681,7 +4681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 4521069749588743554, guid: 01805aa08e16a434ab66447f4da780e4, type: 3}
-  toolTipPrefab: {fileID: 7814279926915577090, guid: da6be0ac5ebcf3e4cb1a5036df604d0b, type: 3}
+  toolTipPrefab: {fileID: 2020353544079428344, guid: da6be0ac5ebcf3e4cb1a5036df604d0b, type: 3}
   ToolTip: {fileID: 0}
 --- !u!1 &1413226601
 GameObject:

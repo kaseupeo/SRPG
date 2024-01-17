@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -51,13 +52,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
         {
             GetComponentInParent<Inventory>().ToolTip.gameObject.SetActive(true);
             GetComponentInParent<Inventory>().ToolTip.gameObject.transform.position = transform.position ;
-            var text = GetComponentInParent<Inventory>().ToolTip.Text; 
+            var text = GetComponentInParent<Inventory>().ToolTip.GetComponent<TextMeshProUGUI>(); 
             text.text = $"{_item.Name}\n\n{_item.Description}";
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GetComponentInParent<Inventory>().ToolTip.gameObject.SetActive(false);
+        if (eventData != null)
+        {
+            GetComponentInParent<Inventory>().gameObject.SetActive(false);
+        }
     }
 }

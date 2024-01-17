@@ -5,9 +5,9 @@ using UnityEngine;
 public class Monster : Creature
 {
     [SerializeField]
-    protected int dropExp;
+    private int dropExp;
     [SerializeField]
-    protected List<Item> dropItems;
+    private List<Item> dropItems;
     
     public int DropExp { get => dropExp; set => dropExp = value; }
     public List<Item> DropItems { get => dropItems; set => dropItems = value; }
@@ -30,7 +30,7 @@ public class Monster : Creature
     private void Drop()
     {
         Item item = RandomItem();
-        Item dropItem = Instantiate(item.gameObject, transform.position, Quaternion.identity).GetComponent<Item>();
+        Item dropItem = Instantiate(item.gameObject, transform.position + new Vector3(0, 0, -0.25f), Quaternion.identity).GetComponent<Item>();
         dropItem.CurrentTile = currentTile;
         dropItem.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder;
         Managers.Game.FieldItems.Add(dropItem);

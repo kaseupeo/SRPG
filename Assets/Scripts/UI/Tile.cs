@@ -21,8 +21,6 @@ public class Tile : MonoBehaviour
     private SpriteRenderer _childSpriteRenderer;
 
     public bool IsBlocked { get; set; }
-
-    private int _saveZ;
     
     private void Start()
     {
