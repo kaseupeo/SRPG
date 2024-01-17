@@ -12,6 +12,13 @@ public class Define
         MonsterTurn,
     }
     
+    public enum GameSpeedMode
+    {
+        Slow,
+        Normal,
+        Fast,
+    }
+    
     public enum CameraMode
     {
         Both,

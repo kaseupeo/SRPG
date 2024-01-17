@@ -14,7 +14,7 @@ public class SettingsMenuUI : MonoBehaviour
     private void OnEnable()
     {
         screenMode.GetComponent<Scrollbar>().value = screenMode.FindValue(Managers.Game.IsFullScreenMode ? 0 : 1);
-        gameSpeedMode.GetComponent<Scrollbar>().value = gameSpeedMode.FindValue((int)Managers.Game.GameSpeed / 5);
+        gameSpeedMode.GetComponent<Scrollbar>().value = gameSpeedMode.FindValue((int)Managers.Game.GameSpeedMode);
         cameraMoveMode.GetComponent<Scrollbar>().value = cameraMoveMode.FindValue((int)Managers.Game.CameraMode);
         Managers.Game.Pause = true;
     }
@@ -43,14 +43,14 @@ public class SettingsMenuUI : MonoBehaviour
     public void SaveSettings()
     {
         Managers.Game.IsFullScreenMode = screenMode.Index == 0;
-        Managers.Game.GameSpeed = gameSpeedMode.Index * 5 == 0 ? 0 : gameSpeedMode.Index * 5;
+        Managers.Game.GameSpeedMode = (Define.GameSpeedMode)gameSpeedMode.Index;
         Managers.Game.CameraMode = (Define.CameraMode)cameraMoveMode.Index;
     }
 
-    public void CheckSettings()
+    private void CheckSettings()
     {
         screenMode.GetComponent<Scrollbar>().value = screenMode.FindValue(Managers.Game.IsFullScreenMode ? 0 : 1);
-        gameSpeedMode.GetComponent<Scrollbar>().value = gameSpeedMode.FindValue((int)Managers.Game.GameSpeed / 5);
+        gameSpeedMode.GetComponent<Scrollbar>().value = gameSpeedMode.FindValue((int)Managers.Game.GameSpeedMode);
         cameraMoveMode.GetComponent<Scrollbar>().value = cameraMoveMode.FindValue((int)Managers.Game.CameraMode);
     }
 }

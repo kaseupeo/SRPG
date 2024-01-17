@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager
 {
     private Define.GameMode _gameMode;
-    private float _gameSpeed = 1;
+    private Define.GameSpeedMode _gameSpeedMode = Define.GameSpeedMode.Normal;
+    private float _gameSpeed;
     private Define.CameraMode _cameraMode = Define.CameraMode.Both;
     private bool _pause;
     private bool _isFullScreenMode = true;
@@ -26,7 +29,28 @@ public class GameManager
     private List<Item> _items;
     
     public Define.GameMode GameMode { get => _gameMode; set => _gameMode = value; }
-    public float GameSpeed { get => _gameSpeed; set => _gameSpeed = value; }
+    public Define.GameSpeedMode GameSpeedMode { get => _gameSpeedMode; set => _gameSpeedMode = value; }
+    public float GameSpeed
+    {
+        get
+        {
+            switch (_gameSpeedMode)
+            {
+                case Define.GameSpeedMode.Slow:
+                    _gameSpeed = 1f;
+                    break;
+                case Define.GameSpeedMode.Normal:
+                    _gameSpeed = 5f;
+                    break;
+                case Define.GameSpeedMode.Fast:
+                    _gameSpeed = 10f;
+                    break;
+            }
+            
+            return _gameSpeed;
+        }
+    }
+
     public Define.CameraMode CameraMode { get => _cameraMode; set => _cameraMode = value; }
 
     public bool Pause
@@ -278,10 +302,12 @@ public class GameManager
                                 Debug.Log($"{monster.name} attack");
                                 monster.State = Define.State.Attack;
                                 monster.Attack(target);
-                                monster.State = Define.State.Idle;
                                 break;
                             }
                         }
+
+                        if (monster.State == Define.State.Attack)
+                            break;
                     }
                     
                     Debug.Log($"{monster.name} idle");
