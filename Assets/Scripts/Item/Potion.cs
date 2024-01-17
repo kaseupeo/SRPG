@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Potion : Item
+public abstract class Potion : Item
 {
     [SerializeField] private float leftTime;
     

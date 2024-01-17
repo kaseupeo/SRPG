@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
     [SerializeField] protected string name;
     [SerializeField] protected Sprite sprite;
