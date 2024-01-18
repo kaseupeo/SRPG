@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,14 +12,6 @@ public class InfoPanelUI : MonoBehaviour
 
     public void UpdateInfo(Creature creature)
     {
-        if (creature == null || creature.Name == null || creature.CurrentStat == null)
-        {
-            image.color = new Color(1, 1, 1, 0);
-            text1.text = "이름 : \n이동력 : \n공격횟수 : ";
-            text2.text = "체력 : \n공격력 : \n방어력 : ";
-            return;
-        }
-
         if (Managers.Game.GameMode == Define.GameMode.Preparation)
         {
             int level = creature.Level;

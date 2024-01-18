@@ -21,8 +21,11 @@ public class GamePanelUI : MonoBehaviour
 
     private void Update()
     {
-        playerCharacterInfo.UpdateInfo(Managers.Game.SelectedCharacter);
-        monsterInfo.UpdateInfo(Managers.Game.Monster);
+        if (Managers.Game.SelectedCharacter != null) 
+            playerCharacterInfo.UpdateInfo(Managers.Game.SelectedCharacter);
+        if (Managers.Game.Monster != null) 
+            monsterInfo.UpdateInfo(Managers.Game.Monster);
+        
         if (Managers.Game.GameMode == Define.GameMode.PlayerTurn)
         {
             finishedPlayerTurnButton.GetComponentInChildren<TextMeshProUGUI>().text = "다음 턴";

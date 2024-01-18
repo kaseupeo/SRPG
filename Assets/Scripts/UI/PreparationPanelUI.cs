@@ -17,7 +17,10 @@ public class PreparationPanelUI : MonoBehaviour
 
     private void Update()
     {
-        playerCharacterInfo.UpdateInfo(Managers.Game.SelectedCharacter);
+        if (Managers.Game.SelectedCharacter != null)
+        {
+            playerCharacterInfo.UpdateInfo(Managers.Game.SelectedCharacter);
+        }
         battleStartButton.interactable = Managers.Game.PlayerCharacters.Count != 0;
     }
 
