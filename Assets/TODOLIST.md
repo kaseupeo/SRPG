@@ -1,4 +1,9 @@
-﻿# TODOLIST
+﻿빌드 로그 파일 위치
+C:\Users\플밍\AppData\LocalLow\DefaultCompany\SRPG
+
+
+
+# TODOLIST
 
 
 
@@ -49,3 +54,4 @@
   - [x] 화면 설정이 창화면임에도 씬 이동시 전체화면으로 나오는 오류
   - [x] 인벤토리 오류
   - [x] 캐릭터 idle 상태일때만 다음턴 버튼 활성화 하기 => move일땐 해결못함
+
