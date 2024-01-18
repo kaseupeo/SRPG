@@ -57,8 +57,8 @@ MonoBehaviour:
     defence: 10
     turnCost: 3
     attackCost: 1
-    minAttackRange: 0
-    maxAttackRange: 1
+    minAttackRange: 1
+    maxAttackRange: 2
   dropExp: 2
   dropItems:
   - {fileID: -1298344013425119685, guid: 36b247c4eea5dac4cbb89f9aaa47852b, type: 3}
